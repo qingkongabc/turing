@@ -60,7 +60,10 @@
             <input id="cc" name="TSPDepart.id" value="${depart.TSPDepart.id}">
         </div>
         <div class="form">
-            <input type="hidden" name="orgCode" value="${depart.orgCode }">
+            <label class="Validform_label"> <t:mutiLang langKey="common.org.code"/>: </label>
+            <input name="orgCode" class="inputxt" value="${depart.orgCode }">
+        </div>
+        <div class="form">
             <label class="Validform_label"> <t:mutiLang langKey="common.org.type"/>: </label>
             <select name="orgType" id="orgType">
                 <option value="1" <c:if test="${orgType=='1'}">selected="selected"</c:if>><t:mutiLang langKey="common.company"/></option>

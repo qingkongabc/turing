@@ -148,8 +148,6 @@ public class SystemController extends BaseController {
 	/**
 	 *
 	 * @param request
-	 * @param comboTree
-	 * @param code
 	 * @return
 	 */
 	@RequestMapping(params = "formTree")
@@ -597,14 +595,14 @@ public class SystemController extends BaseController {
 //	      update-start--Author:zhoujf  Date:20150615 for：组织机构管理编码规则生成
 //			String orgCode = systemService.generateOrgCode(depart.getId(), pid);
 //			depart.setOrgCode(orgCode);
-			if(oConvertUtils.isNotEmpty(pid)){
+			/*if(oConvertUtils.isNotEmpty(pid)){
 				TSDepart paretDept = systemService.findUniqueByProperty(TSDepart.class, "id", pid);
 				String localMaxCode  = getMaxLocalCode(paretDept.getOrgCode());
 				depart.setOrgCode(YouBianCodeUtil.getSubYouBianCode(paretDept.getOrgCode(), localMaxCode));
 			}else{
 				String localMaxCode  = getMaxLocalCode(null);
 				depart.setOrgCode(YouBianCodeUtil.getNextYouBianCode(localMaxCode));
-			}
+			}*/
 //	      update-start--Author:zhoujf  Date:20150615 for：组织机构管理编码规则生成
 			userService.save(depart);
             message = MutiLangUtil.paramAddSuccess("common.department");

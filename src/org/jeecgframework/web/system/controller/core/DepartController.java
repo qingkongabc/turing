@@ -577,7 +577,7 @@ public class DepartController extends BaseController {
 
 						}*/
 						String orgcode = tsDepart.getOrgCode();
-						String parentOrgCode = orgcode.substring(0,orgcode.length()-3);
+                        String parentOrgCode = orgcode.substring(0,orgcode.length()-4);
 						TSDepart parentDept = (TSDepart) systemService.getSession().createSQLQuery("select * from t_s_depart where ORG_CODE = :parentOrgCode")
 								.addEntity(TSDepart.class)
 								.setString("parentOrgCode",parentOrgCode)
