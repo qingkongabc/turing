@@ -2,3 +2,7 @@ WebRoot/WEB-INF/classes/
 .idea/
 jeecg.iml
 out/
+.settings/
+.classpath
+.mymetadata
+.project
