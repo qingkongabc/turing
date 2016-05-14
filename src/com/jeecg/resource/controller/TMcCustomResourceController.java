@@ -1,11 +1,10 @@
-package com.jeecg.mcredit.resource.controller;
-import com.jeecg.mcredit.resource.entity.TMcCustomResourceEntity;
-import com.jeecg.mcredit.resource.service.TMcCustomResourceServiceI;
-import com.jeecg.mcredit.resource.page.TMcCustomResourcePage;
-import com.jeecg.mcredit.resource.entity.TMcCustomResourceProblemEntity;
+package com.jeecg.resource.controller;
+import com.jeecg.resource.entity.TMcCustomResourceEntity;
+import com.jeecg.resource.service.TMcCustomResourceServiceI;
+import com.jeecg.resource.page.TMcCustomResourcePage;
+import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,7 +27,6 @@ import org.jeecgframework.core.util.ExceptionUtil;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -42,12 +40,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -63,7 +57,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @Title: Controller
  * @Description: 客户资产
  * @author onlineGenerator
- * @date 2016-05-09 18:35:26
+ * @date 2016-05-10 20:20:52
  * @version V1.0   
  *
  */
@@ -90,7 +84,7 @@ public class TMcCustomResourceController extends BaseController {
 	 */
 	@RequestMapping(params = "list")
 	public ModelAndView list(HttpServletRequest request) {
-		return new ModelAndView("com/jeecg/mcredit.resource/tMcCustomResourceList");
+		return new ModelAndView("com/jeecg/resource/tMcCustomResourceList");
 	}
 
 	/**
@@ -225,7 +219,7 @@ public class TMcCustomResourceController extends BaseController {
 			tMcCustomResource = tMcCustomResourceService.getEntity(TMcCustomResourceEntity.class, tMcCustomResource.getId());
 			req.setAttribute("tMcCustomResourcePage", tMcCustomResource);
 		}
-		return new ModelAndView("com/jeecg/mcredit.resource/tMcCustomResource-add");
+		return new ModelAndView("com/jeecg/resource/tMcCustomResource-add");
 	}
 	
 	/**
@@ -254,16 +248,19 @@ public class TMcCustomResourceController extends BaseController {
 		//===================================================================================
 		//获取参数
 		Object id0 = tMcCustomResource.getId();
+		Object cREATE_MONTH0 = tMcCustomResource.getCreateMonth();
+		Object cUSTOM_CODE0 = tMcCustomResource.getCustomCode();
+		Object cUSTOM_NAME0 = tMcCustomResource.getCustomName();
 		//===================================================================================
 		//查询-问题记录
-	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ? ";
+	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?  AND cREATE_MONTH = ?  AND cUSTOM_CODE = ?  AND cUSTOM_NAME = ? ";
 	    try{
-	    	List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0);
+	    	List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0,cREATE_MONTH0,cUSTOM_CODE0,cUSTOM_NAME0);
 			req.setAttribute("tMcCustomResourceProblemList", tMcCustomResourceProblemEntityList);
 		}catch(Exception e){
 			logger.info(e.getMessage());
 		}
-		return new ModelAndView("com/jeecg/mcredit.resource/tMcCustomResourceProblemList");
+		return new ModelAndView("com/jeecg/resource/tMcCustomResourceProblemList");
 	}
 
     /**
@@ -291,8 +288,11 @@ public class TMcCustomResourceController extends BaseController {
         		TMcCustomResourcePage page=new TMcCustomResourcePage();
         		   MyBeanUtils.copyBeanNotNull2Bean(entity,page);
             	    Object id0 = entity.getId();
-				    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ? ";
-        	        List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0);
+           		    Object cREATE_MONTH0 = entity.getCreateMonth();
+           		    Object cUSTOM_CODE0 = entity.getCustomCode();
+           		    Object cUSTOM_NAME0 = entity.getCustomName();
+				    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?  AND cREATE_MONTH = ?  AND cUSTOM_CODE = ?  AND cUSTOM_NAME = ? ";
+        	        List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0,cREATE_MONTH0,cUSTOM_CODE0,cUSTOM_NAME0);
             		page.setTMcCustomResourceProblemList(tMcCustomResourceProblemEntityList);
             		pageList.add(page);
             	}catch(Exception e){

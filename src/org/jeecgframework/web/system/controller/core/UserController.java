@@ -1079,6 +1079,12 @@ public class UserController extends BaseController {
 					String username = tsUser.getUserName();
 					String roleCodes = tsUser.getUserKey();
 					String deptCodes = tsUser.getDepartid();
+					String email = tsUser.getEmail();
+					String mobilePhone = tsUser.getMobilePhone();
+					String officePhone = tsUser.getOfficePhone();
+					tsUser.setEmail(StringUtils.equals("未知",email)?"":email);
+					tsUser.setMobilePhone(StringUtils.equals("未知",mobilePhone)?"":mobilePhone);
+					tsUser.setOfficePhone(StringUtils.equals("未知",officePhone)?"":officePhone);
 
 					if(username==null||username.equals("")){
 						j.setMsg("用户名为必填字段，导入失败");
@@ -1121,6 +1127,7 @@ public class UserController extends BaseController {
 								TSUser user = users.get(0);
 								MyBeanUtils.copyBeanNotNull2Bean(tsUser,user);
 								user.setDepartid(null);
+								user.setPassword(PasswordUtil.encrypt(user.getUserName(), "123456", PasswordUtil.getStaticSalt()));
 								systemService.saveOrUpdate(user);
 
 								String id = user.getId();
@@ -1147,6 +1154,7 @@ public class UserController extends BaseController {
 								//不存在则保存
 								//TSUser user = users.get(0);
 								tsUser.setDepartid(null);
+								tsUser.setPassword(PasswordUtil.encrypt(tsUser.getUserName(), "123456", PasswordUtil.getStaticSalt()));
 								systemService.save(tsUser);
 								for(String roleCode:roles){
 									//根据角色编码得到roleid
@@ -1169,6 +1177,7 @@ public class UserController extends BaseController {
 							j.setMsg("文件导入成功！");
 						}else {
 							j.setMsg("组织机构编码和角色编码不能匹配");
+							logger.warn("组织机构编码和角色编码不能匹配"+deptCodes);
 						}
 					}
 				}

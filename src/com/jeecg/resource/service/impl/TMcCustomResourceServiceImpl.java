@@ -1,8 +1,8 @@
-package com.jeecg.mcredit.resource.service.impl;
-import com.jeecg.mcredit.resource.service.TMcCustomResourceServiceI;
+package com.jeecg.resource.service.impl;
+import com.jeecg.resource.service.TMcCustomResourceServiceI;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
-import com.jeecg.mcredit.resource.entity.TMcCustomResourceEntity;
-import com.jeecg.mcredit.resource.entity.TMcCustomResourceProblemEntity;
+import com.jeecg.resource.entity.TMcCustomResourceEntity;
+import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +36,12 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
 			for(TMcCustomResourceProblemEntity tMcCustomResourceProblem:tMcCustomResourceProblemList){
 				//外键设置
 				tMcCustomResourceProblem.setCustomResourceId(tMcCustomResource.getId());
+				//外键设置
+				tMcCustomResourceProblem.setCreateMonth(tMcCustomResource.getCreateMonth());
+				//外键设置
+				tMcCustomResourceProblem.setCustomCode(tMcCustomResource.getCustomCode());
+				//外键设置
+				tMcCustomResourceProblem.setCustomName(tMcCustomResource.getCustomName());
 				this.save(tMcCustomResourceProblem);
 			}
 			//执行新增操作配置的sql增强
@@ -50,10 +56,13 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
 		//===================================================================================
 		//获取参数
 		Object id0 = tMcCustomResource.getId();
+		Object cREATE_MONTH0 = tMcCustomResource.getCreateMonth();
+		Object cUSTOM_CODE0 = tMcCustomResource.getCustomCode();
+		Object cUSTOM_NAME0 = tMcCustomResource.getCustomName();
 		//===================================================================================
 		//1.查询出数据库的明细数据-问题记录
-	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ? ";
-	    List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0,id0);
+	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?  AND cREATE_MONTH = ?  AND cUSTOM_CODE = ?  AND cUSTOM_NAME = ? ";
+	    List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0,id0,cREATE_MONTH0,cUSTOM_CODE0,cUSTOM_NAME0);
 		//2.筛选更新明细数据-问题记录
 		if(tMcCustomResourceProblemList!=null&&tMcCustomResourceProblemList.size()>0){
 		for(TMcCustomResourceProblemEntity oldE:tMcCustomResourceProblemOldList){
@@ -83,6 +92,9 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
 				if(oConvertUtils.isEmpty(tMcCustomResourceProblem.getId())){
 					//外键设置
 					tMcCustomResourceProblem.setCustomResourceId(tMcCustomResource.getId());
+					tMcCustomResourceProblem.setCreateMonth(tMcCustomResource.getCreateMonth());
+					tMcCustomResourceProblem.setCustomCode(tMcCustomResource.getCustomCode());
+					tMcCustomResourceProblem.setCustomName(tMcCustomResource.getCustomName());
 					this.save(tMcCustomResourceProblem);
 				}
 			}
@@ -98,10 +110,13 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
 		//===================================================================================
 		//获取参数
 		Object id0 = tMcCustomResource.getId();
+		Object cREATE_MONTH0 = tMcCustomResource.getCreateMonth();
+		Object cUSTOM_CODE0 = tMcCustomResource.getCustomCode();
+		Object cUSTOM_NAME0 = tMcCustomResource.getCustomName();
 		//===================================================================================
 		//删除-问题记录
-	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ? ";
-	    List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0,id0);
+	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?  AND cREATE_MONTH = ?  AND cUSTOM_CODE = ?  AND cUSTOM_NAME = ? ";
+	    List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0,id0,cREATE_MONTH0,cUSTOM_CODE0,cUSTOM_NAME0);
 		this.deleteAllEntitie(tMcCustomResourceProblemOldList);
 	}
 	

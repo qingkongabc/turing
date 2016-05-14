@@ -1,6 +1,6 @@
-package com.jeecg.mcredit.resource.service;
-import com.jeecg.mcredit.resource.entity.TMcCustomResourceEntity;
-import com.jeecg.mcredit.resource.entity.TMcCustomResourceProblemEntity;
+package com.jeecg.resource.service;
+import com.jeecg.resource.entity.TMcCustomResourceEntity;
+import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
 
 import java.util.List;
 import org.jeecgframework.core.common.service.CommonService;

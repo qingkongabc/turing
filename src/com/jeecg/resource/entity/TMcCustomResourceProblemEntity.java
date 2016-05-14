@@ -1,4 +1,4 @@
-package com.jeecg.mcredit.resource.entity;
+package com.jeecg.resource.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,7 +22,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
  * @Title: Entity
  * @Description: 问题记录
  * @author onlineGenerator
- * @date 2016-05-09 18:35:25
+ * @date 2016-05-10 20:20:52
  * @version V1.0   
  *
  */
@@ -49,6 +49,12 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	/**其他处理请填写*/
 	@Excel(name="其他处理请填写")
 	private java.lang.String otherDeal;
+	/**月份*/
+	private java.lang.String createMonth;
+	/**客户代码*/
+	private java.lang.String customCode;
+	/**客户姓名*/
+	private java.lang.String customName;
 	
 	/**
 	 *方法: 取得java.lang.String
@@ -164,5 +170,53 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	 */
 	public void setOtherDeal(java.lang.String otherDeal){
 		this.otherDeal = otherDeal;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  月份
+	 */
+	@Column(name ="CREATE_MONTH",nullable=true,length=32)
+	public java.lang.String getCreateMonth(){
+		return this.createMonth;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  月份
+	 */
+	public void setCreateMonth(java.lang.String createMonth){
+		this.createMonth = createMonth;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  客户代码
+	 */
+	@Column(name ="CUSTOM_CODE",nullable=true,length=200)
+	public java.lang.String getCustomCode(){
+		return this.customCode;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  客户代码
+	 */
+	public void setCustomCode(java.lang.String customCode){
+		this.customCode = customCode;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  客户姓名
+	 */
+	@Column(name ="CUSTOM_NAME",nullable=true,length=200)
+	public java.lang.String getCustomName(){
+		return this.customName;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  客户姓名
+	 */
+	public void setCustomName(java.lang.String customName){
+		this.customName = customName;
 	}
 }

@@ -1,12 +1,13 @@
-package com.jeecg.mcredit.resource.entity;
+
+package com.jeecg.resource.page;
+import com.jeecg.resource.entity.TMcCustomResourceEntity;
+import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
+
 import java.math.BigDecimal;
 import java.util.Date;
-import java.lang.String;
-import java.lang.Double;
-import java.lang.Integer;
-import java.math.BigDecimal;
-import javax.xml.soap.Text;
-import java.sql.Blob;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,19 +17,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
+import org.jeecgframework.poi.excel.annotation.ExcelCollection;
 
 /**   
  * @Title: Entity
  * @Description: 客户资产
  * @author onlineGenerator
- * @date 2016-05-09 18:35:26
+ * @date 2016-05-10 20:20:52
  * @version V1.0   
  *
  */
-@Entity
-@Table(name = "t_mc_custom_resource", schema = "")
-@SuppressWarnings("serial")
-public class TMcCustomResourceEntity implements java.io.Serializable {
+public class TMcCustomResourcePage implements java.io.Serializable {
 	/**主键*/
 	private java.lang.String id;
 	/**机构号*/
@@ -40,8 +39,8 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	/**客户经理*/
     @Excel(name="客户经理")
 	private java.lang.String manager;
-	/**客户号*/
-    @Excel(name="客户号")
+	/**客户代码*/
+    @Excel(name="客户代码")
 	private java.lang.String customCode;
 	/**客户姓名*/
     @Excel(name="客户姓名")
@@ -108,11 +107,6 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
 	 */
-	@Id
-	@GeneratedValue(generator = "paymentableGenerator")
-	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	
-	@Column(name ="ID",nullable=false,length=36)
 	public java.lang.String getId(){
 		return this.id;
 	}
@@ -124,13 +118,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setId(java.lang.String id){
 		this.id = id;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  机构号
 	 */
-	
-	@Column(name ="BRANCH_CODE",nullable=true,length=200)
 	public java.lang.String getBranchCode(){
 		return this.branchCode;
 	}
@@ -142,13 +133,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setBranchCode(java.lang.String branchCode){
 		this.branchCode = branchCode;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  归属行部
 	 */
-	
-	@Column(name ="BRANCH_NAME",nullable=true,length=200)
 	public java.lang.String getBranchName(){
 		return this.branchName;
 	}
@@ -160,13 +148,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setBranchName(java.lang.String branchName){
 		this.branchName = branchName;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  客户经理
 	 */
-	
-	@Column(name ="MANAGER",nullable=true,length=200)
 	public java.lang.String getManager(){
 		return this.manager;
 	}
@@ -178,31 +163,25 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setManager(java.lang.String manager){
 		this.manager = manager;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  客户号
+	 *@return: java.lang.String  客户代码
 	 */
-	
-	@Column(name ="CUSTOM_CODE",nullable=true,length=200)
 	public java.lang.String getCustomCode(){
 		return this.customCode;
 	}
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  客户号
+	 *@param: java.lang.String  客户代码
 	 */
 	public void setCustomCode(java.lang.String customCode){
 		this.customCode = customCode;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  客户姓名
 	 */
-	
-	@Column(name ="CUSTOM_NAME",nullable=true,length=200)
 	public java.lang.String getCustomName(){
 		return this.customName;
 	}
@@ -214,13 +193,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setCustomName(java.lang.String customName){
 		this.customName = customName;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  身份证号码
 	 */
-	
-	@Column(name ="CUSTOM_IC",nullable=true,length=200)
 	public java.lang.String getCustomIc(){
 		return this.customIc;
 	}
@@ -232,13 +208,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setCustomIc(java.lang.String customIc){
 		this.customIc = customIc;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  产品类型
 	 */
-	
-	@Column(name ="PRODUCT_TYPE",nullable=true,length=32)
 	public java.lang.String getProductType(){
 		return this.productType;
 	}
@@ -250,13 +223,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setProductType(java.lang.String productType){
 		this.productType = productType;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否有房产
 	 */
-	
-	@Column(name ="OWN_HOUSE",nullable=true,length=200)
 	public java.lang.String getOwnHouse(){
 		return this.ownHouse;
 	}
@@ -268,13 +238,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setOwnHouse(java.lang.String ownHouse){
 		this.ownHouse = ownHouse;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  房产地址
 	 */
-	
-	@Column(name ="HOUSE_ADDRESS",nullable=true,length=200)
 	public java.lang.String getHouseAddress(){
 		return this.houseAddress;
 	}
@@ -286,13 +253,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setHouseAddress(java.lang.String houseAddress){
 		this.houseAddress = houseAddress;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否被他行抵押
 	 */
-	
-	@Column(name ="GUARANTY",nullable=true,length=32)
 	public java.lang.String getGuaranty(){
 		return this.guaranty;
 	}
@@ -304,13 +268,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setGuaranty(java.lang.String guaranty){
 		this.guaranty = guaranty;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否被他行资产保全
 	 */
-	
-	@Column(name ="HOUSE_PROTECT",nullable=true,length=32)
 	public java.lang.String getHouseProtect(){
 		return this.houseProtect;
 	}
@@ -322,13 +283,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setHouseProtect(java.lang.String houseProtect){
 		this.houseProtect = houseProtect;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否过户给他人
 	 */
-	
-	@Column(name ="TRANSFER_OTHER",nullable=true,length=32)
 	public java.lang.String getTransferOther(){
 		return this.transferOther;
 	}
@@ -340,13 +298,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setTransferOther(java.lang.String transferOther){
 		this.transferOther = transferOther;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  若过户给他人请填姓名
 	 */
-	
-	@Column(name ="OTHER_NAME",nullable=true,length=200)
 	public java.lang.String getOtherName(){
 		return this.otherName;
 	}
@@ -358,13 +313,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setOtherName(java.lang.String otherName){
 		this.otherName = otherName;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  房产证号
 	 */
-	
-	@Column(name ="HOUSE_NO",nullable=true,length=200)
 	public java.lang.String getHouseNo(){
 		return this.houseNo;
 	}
@@ -376,13 +328,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setHouseNo(java.lang.String houseNo){
 		this.houseNo = houseNo;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  配偶
 	 */
-	
-	@Column(name ="WIFE_NAME",nullable=true,length=200)
 	public java.lang.String getWifeName(){
 		return this.wifeName;
 	}
@@ -394,13 +343,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeName(java.lang.String wifeName){
 		this.wifeName = wifeName;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  配偶身份证号
 	 */
-	
-	@Column(name ="WIFE_IC",nullable=true,length=200)
 	public java.lang.String getWifeIc(){
 		return this.wifeIc;
 	}
@@ -412,13 +358,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeIc(java.lang.String wifeIc){
 		this.wifeIc = wifeIc;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否有房产
 	 */
-	
-	@Column(name ="WIFE_OWN_HOUSE",nullable=true,length=32)
 	public java.lang.String getWifeOwnHouse(){
 		return this.wifeOwnHouse;
 	}
@@ -430,13 +373,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeOwnHouse(java.lang.String wifeOwnHouse){
 		this.wifeOwnHouse = wifeOwnHouse;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  房产地址
 	 */
-	
-	@Column(name ="WIFE_HOUSE_ADDRESS",nullable=true,length=200)
 	public java.lang.String getWifeHouseAddress(){
 		return this.wifeHouseAddress;
 	}
@@ -448,13 +388,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeHouseAddress(java.lang.String wifeHouseAddress){
 		this.wifeHouseAddress = wifeHouseAddress;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否被他行抵押
 	 */
-	
-	@Column(name ="WIFE_GUARANTY",nullable=true,length=32)
 	public java.lang.String getWifeGuaranty(){
 		return this.wifeGuaranty;
 	}
@@ -466,13 +403,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeGuaranty(java.lang.String wifeGuaranty){
 		this.wifeGuaranty = wifeGuaranty;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否被他行资产保全
 	 */
-	
-	@Column(name ="WIFE_HOUSE_PROTECT",nullable=true,length=32)
 	public java.lang.String getWifeHouseProtect(){
 		return this.wifeHouseProtect;
 	}
@@ -484,13 +418,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeHouseProtect(java.lang.String wifeHouseProtect){
 		this.wifeHouseProtect = wifeHouseProtect;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  是否过户给他人
 	 */
-	
-	@Column(name ="WIFE_TRANSFER_OTHER",nullable=true,length=32)
 	public java.lang.String getWifeTransferOther(){
 		return this.wifeTransferOther;
 	}
@@ -502,13 +433,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeTransferOther(java.lang.String wifeTransferOther){
 		this.wifeTransferOther = wifeTransferOther;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  若过户给他人请填姓名
 	 */
-	
-	@Column(name ="WIFE_OTHER_NAME",nullable=true,length=200)
 	public java.lang.String getWifeOtherName(){
 		return this.wifeOtherName;
 	}
@@ -520,13 +448,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeOtherName(java.lang.String wifeOtherName){
 		this.wifeOtherName = wifeOtherName;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  房产证号
 	 */
-	
-	@Column(name ="WIFE_HOUSE_NO",nullable=true,length=200)
 	public java.lang.String getWifeHouseNo(){
 		return this.wifeHouseNo;
 	}
@@ -538,13 +463,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setWifeHouseNo(java.lang.String wifeHouseNo){
 		this.wifeHouseNo = wifeHouseNo;
 	}
-	
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  月份
 	 */
-	
-	@Column(name ="CREATE_MONTH",nullable=true,length=32)
 	public java.lang.String getCreateMonth(){
 		return this.createMonth;
 	}
@@ -556,5 +478,14 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	public void setCreateMonth(java.lang.String createMonth){
 		this.createMonth = createMonth;
 	}
-	
+
+	/**保存-问题记录*/
+    @ExcelCollection(name="问题记录")
+	private List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemList = new ArrayList<TMcCustomResourceProblemEntity>();
+		public List<TMcCustomResourceProblemEntity> getTMcCustomResourceProblemList() {
+		return tMcCustomResourceProblemList;
+		}
+		public void setTMcCustomResourceProblemList(List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemList) {
+		this.tMcCustomResourceProblemList = tMcCustomResourceProblemList;
+		}
 }
