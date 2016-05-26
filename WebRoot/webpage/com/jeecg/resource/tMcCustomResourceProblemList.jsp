@@ -21,58 +21,62 @@ $(document).ready(function(){
 				<tr>
 				  <td align="right">
 					<label class="Validform_label">
-										资产存在问题:
-									</label>
-					</td>
+						资产存在问题:
+					</label>
+				  </td>
 				  <td class="value">
-							<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="checkbox"
-										typeGroupCode="prob_type" defaultVal="${tMcCustomResourceProblemPage.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>     
+					<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="checkbox"
+								typeGroupCode="prob_type" defaultVal="${tMcCustomResourceProblemPage.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">资产存在问题</label>
-					</td>
-				  <td align="right">
-					<label class="Validform_label">
-										其他问题请填写:
-									</label>
-					</td>
-				  <td class="value">
-					       	<input name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000" 
-						  		type="text" class="inputxt"   >
-					  <label class="Validform_label" style="display: none;">其他问题请填写</label>
-					</td>
+				  </td>
 				</tr>
 				<tr>
 				  <td align="right">
 					<label class="Validform_label">
-										备注:
-									</label>
-					</td>
+						其他问题请填写:
+					</label>
+				  </td>
 				  <td class="value">
-					       	<input name="tMcCustomResourceProblemList[0].remark" maxlength="2000" 
-						  		type="text" class="inputxt"   >
-					  <label class="Validform_label" style="display: none;">备注</label>
-					</td>
+					  <textarea name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000" style="width: 70%;height: 100px;"
+								type="text" class="inputxt"></textarea>
+					  <label class="Validform_label" style="display: none;">其他问题请填写</label>
+				  </td>
+				</tr>
+				<tr>
 				  <td align="right">
 					<label class="Validform_label">
-										下一步处理流程:
-									</label>
-					</td>
+						备注:
+					</label>
+				  </td>
+				  <td class="value">
+					  <textarea name="tMcCustomResourceProblemList[0].remark" maxlength="2000" style="width: 70%;height: 100px;"
+								type="text" class="inputxt"></textarea>
+					  <label class="Validform_label" style="display: none;">备注</label>
+				  </td>
+				</tr>
+				<tr>
+				  <td align="right">
+					<label class="Validform_label">
+						下一步处理流程:
+					</label>
+				  </td>
 				  <td class="value">
 							<t:dictSelect field="tMcCustomResourceProblemList[0].deal" type="checkbox"
-										typeGroupCode="deal_type" defaultVal="${tMcCustomResourceProblemPage.deal}" hasLabel="false"  title="下一步处理流程"></t:dictSelect>     
+										typeGroupCode="deal_type" defaultVal="${tMcCustomResourceProblemPage.deal}" hasLabel="false"  title="下一步处理流程"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">下一步处理流程</label>
-					</td>
+				  </td>
 				</tr>
 				<tr>
 				  <td align="right">
 					<label class="Validform_label">
-										其他处理请填写:
-									</label>
-					</td>
+						其他处理请填写:
+					</label>
+				  </td>
 				  <td class="value">
-					       	<input name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000" 
-						  		type="text" class="inputxt"   >
+					  <textarea name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000" style="width: 70%;height: 100px;"
+								type="text" class="inputxt"></textarea>
 					  <label class="Validform_label" style="display: none;">其他处理请填写</label>
-					</td>
+				  </td>
 				</tr>
 	</c:if>
 	<c:if test="${fn:length(tMcCustomResourceProblemList)  > 0 }">
@@ -85,61 +89,65 @@ $(document).ready(function(){
 					<input name="tMcCustomResourceProblemList[0].customName" type="hidden" value="${poVal.customName}"/>
 			</tr>
 			<tr>
-				  <td align="right">
-					<label class="Validform_label">
-										资产存在问题:
-									</label>
-					</td>
-				  <td class="value">
-							<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="checkbox"
-										typeGroupCode="prob_type" defaultVal="${poVal.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>
-					  <label class="Validform_label" style="display: none;">资产存在问题</label>
-					</td>
-				  <td align="right">
-					<label class="Validform_label">
-										其他问题请填写:
-									</label>
-					</td>
-				  <td class="value">
-					       	<input name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000" 
-						  		type="text" class="inputxt"   value="${poVal.otherProblem }">
-					  <label class="Validform_label" style="display: none;">其他问题请填写</label>
-					</td>
-				</tr>
+			  <td align="right">
+				<label class="Validform_label">
+					资产存在问题:
+				</label>
+			  </td>
+			  <td class="value">
+						<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="checkbox"
+									typeGroupCode="prob_type" defaultVal="${poVal.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>
+				  <label class="Validform_label" style="display: none;">资产存在问题</label>
+			  </td>
+			</tr>
 			<tr>
-				  <td align="right">
-					<label class="Validform_label">
-										备注:
-									</label>
-					</td>
-				  <td class="value">
-					       	<input name="tMcCustomResourceProblemList[0].remark" maxlength="2000" 
-						  		type="text" class="inputxt"   value="${poVal.remark }">
-					  <label class="Validform_label" style="display: none;">备注</label>
-					</td>
-				  <td align="right">
-					<label class="Validform_label">
-										下一步处理流程:
-									</label>
-					</td>
-				  <td class="value">
-							<t:dictSelect field="tMcCustomResourceProblemList[0].deal" type="checkbox"
-										typeGroupCode="deal_type" defaultVal="${poVal.deal}" hasLabel="false"  title="下一步处理流程"></t:dictSelect>
-					  <label class="Validform_label" style="display: none;">下一步处理流程</label>
-					</td>
-				</tr>
+			  <td align="right">
+				<label class="Validform_label">
+					其他问题请填写:
+				</label>
+			  </td>
+			  <td class="value">
+				  <textarea name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000" style="width: 70%;height: 100px;"
+							type="text" class="inputxt">${poVal.otherProblem}</textarea>
+				  <label class="Validform_label" style="display: none;">其他问题请填写</label>
+			  </td>
+			</tr>
 			<tr>
-				  <td align="right">
-					<label class="Validform_label">
-										其他处理请填写:
-									</label>
-					</td>
-				  <td class="value">
-					       	<input name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000" 
-						  		type="text" class="inputxt"   value="${poVal.otherDeal }">
-					  <label class="Validform_label" style="display: none;">其他处理请填写</label>
-					</td>
-				</tr>
+			  <td align="right">
+				<label class="Validform_label">
+					备注:
+				</label>
+			  </td>
+			  <td class="value">
+				  <textarea name="tMcCustomResourceProblemList[0].remark" maxlength="2000" style="width: 70%;height: 100px;"
+							type="text" class="inputxt">${poVal.remark }</textarea>
+				  <label class="Validform_label" style="display: none;">备注</label>
+			  </td>
+			</tr>
+			<tr>
+			  <td align="right">
+				<label class="Validform_label">
+									下一步处理流程:
+								</label>
+			  </td>
+			  <td class="value">
+						<t:dictSelect field="tMcCustomResourceProblemList[0].deal" type="checkbox"
+									typeGroupCode="deal_type" defaultVal="${poVal.deal}" hasLabel="false"  title="下一步处理流程"></t:dictSelect>
+				  <label class="Validform_label" style="display: none;">下一步处理流程</label>
+			  </td>
+			</tr>
+			<tr>
+			  <td align="right">
+				<label class="Validform_label">
+					其他处理请填写:
+				</label>
+			  </td>
+			  <td class="value">
+				  <textarea name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000" style="width: 70%;height: 100px;"
+							type="text" class="inputxt">${poVal.otherDeal}</textarea>
+				  <label class="Validform_label" style="display: none;">其他处理请填写</label>
+			  </td>
+			</tr>
 		</c:forEach>
 	</c:if>	
 	</tbody>

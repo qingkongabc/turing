@@ -23,7 +23,7 @@ import org.jeecgframework.poi.excel.annotation.ExcelCollection;
  * @Title: Entity
  * @Description: 客户资产
  * @author onlineGenerator
- * @date 2016-05-10 20:20:52
+ * @date 2016-05-15 17:14:14
  * @version V1.0   
  *
  */
@@ -100,8 +100,8 @@ public class TMcCustomResourcePage implements java.io.Serializable {
     @Excel(name="房产证号")
 	private java.lang.String wifeHouseNo;
 	/**月份*/
-    @Excel(name="月份")
-	private java.lang.String createMonth;
+    @Excel(name="月份",format = "yyyy-MM")
+	private java.util.Date createMonth;
 	
 	/**
 	 *方法: 取得java.lang.String
@@ -464,18 +464,18 @@ public class TMcCustomResourcePage implements java.io.Serializable {
 		this.wifeHouseNo = wifeHouseNo;
 	}
 	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  月份
+	 *方法: 取得java.util.Date
+	 *@return: java.util.Date  月份
 	 */
-	public java.lang.String getCreateMonth(){
+	public java.util.Date getCreateMonth(){
 		return this.createMonth;
 	}
 
 	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  月份
+	 *方法: 设置java.util.Date
+	 *@param: java.util.Date  月份
 	 */
-	public void setCreateMonth(java.lang.String createMonth){
+	public void setCreateMonth(java.util.Date createMonth){
 		this.createMonth = createMonth;
 	}
 

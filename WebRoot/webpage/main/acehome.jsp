@@ -10,7 +10,7 @@
     <!--360浏览器优先以webkit内核解析-->
 
 
-    <title>Jeecg 微云快速开发平台</title>
+    <title>小微有贷客户电话回访系统</title>
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="plug-in-ui/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="plug-in-ui/hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
@@ -23,7 +23,7 @@
 
 <body class="gray-bg">
     <div class="row  border-bottom white-bg dashboard-header" style="height: 99%">
-    	<div style="font-size: larger;margin-top: 20%" align="center">welcome!</div>
+    	<div style="font-size: larger;margin-top: 20%" align="center"><img src="webpage/main/main.png"/></div>
     </div>
 
     <!-- 全局js -->

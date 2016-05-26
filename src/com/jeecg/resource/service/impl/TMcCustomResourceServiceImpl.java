@@ -1,5 +1,6 @@
 package com.jeecg.resource.service.impl;
 import com.jeecg.resource.service.TMcCustomResourceServiceI;
+import com.jeecg.workorder.entity.TMcWorkOrderEntity;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
 import com.jeecg.resource.entity.TMcCustomResourceEntity;
 import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
@@ -110,20 +111,20 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
 		//===================================================================================
 		//获取参数
 		Object id0 = tMcCustomResource.getId();
-		Object cREATE_MONTH0 = tMcCustomResource.getCreateMonth();
-		Object cUSTOM_CODE0 = tMcCustomResource.getCustomCode();
-		Object cUSTOM_NAME0 = tMcCustomResource.getCustomName();
 		//===================================================================================
 		//删除-问题记录
-	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?  AND cREATE_MONTH = ?  AND cUSTOM_CODE = ?  AND cUSTOM_NAME = ? ";
-	    List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0,id0,cREATE_MONTH0,cUSTOM_CODE0,cUSTOM_NAME0);
+	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?";
+	    List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0,id0);
 		this.deleteAllEntitie(tMcCustomResourceProblemOldList);
+		//删除-现场派单
+		String hql1 = "from TMcWorkOrderEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?";
+		List<TMcWorkOrderEntity> tMcWorkOrderEntityList = this.findHql(hql0,id0);
+		this.deleteAllEntitie(tMcWorkOrderEntityList);
 	}
 	
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
 	 * @return
 	 */
  	public boolean doAddSql(TMcCustomResourceEntity t){
@@ -131,7 +132,6 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
 	 * @return
 	 */
  	public boolean doUpdateSql(TMcCustomResourceEntity t){
@@ -139,7 +139,6 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
 	 * @return
 	 */
  	public boolean doDelSql(TMcCustomResourceEntity t){

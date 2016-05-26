@@ -3,11 +3,16 @@ import com.jeecg.resource.entity.TMcCustomResourceEntity;
 import com.jeecg.resource.service.TMcCustomResourceServiceI;
 import com.jeecg.resource.page.TMcCustomResourcePage;
 import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jeecg.workorder.entity.TMcWorkOrderEntity;
+import com.jeecg.workorder.service.TMcWorkOrderServiceI;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +32,7 @@ import org.jeecgframework.core.util.ExceptionUtil;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -37,16 +43,19 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.io.IOException;
-import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
-import java.util.Set;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.net.URI;
@@ -57,7 +66,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @Title: Controller
  * @Description: 客户资产
  * @author onlineGenerator
- * @date 2016-05-10 20:20:52
+ * @date 2016-05-15 17:14:14
  * @version V1.0   
  *
  */
@@ -76,6 +85,8 @@ public class TMcCustomResourceController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
+	@Autowired
+	private TMcWorkOrderServiceI tMcWorkOrderService;
 
 	/**
 	 * 客户资产列表 页面跳转
@@ -93,7 +104,6 @@ public class TMcCustomResourceController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
@@ -103,6 +113,14 @@ public class TMcCustomResourceController extends BaseController {
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResource);
 		try{
 		//自定义追加查询条件
+		String query_createMonth_begin = request.getParameter("createMonth_begin");
+		String query_createMonth_end = request.getParameter("createMonth_end");
+		if(StringUtil.isNotEmpty(query_createMonth_begin)){
+			cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
+		}
+		if(StringUtil.isNotEmpty(query_createMonth_end)){
+			cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
+		}
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}
@@ -164,7 +182,6 @@ public class TMcCustomResourceController extends BaseController {
 	/**
 	 * 添加客户资产
 	 * 
-	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -184,10 +201,10 @@ public class TMcCustomResourceController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
+
 	/**
 	 * 更新客户资产
 	 * 
-	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")
@@ -198,6 +215,24 @@ public class TMcCustomResourceController extends BaseController {
 		String message = "更新成功";
 		try{
 			tMcCustomResourceService.updateMain(tMcCustomResource, tMcCustomResourceProblemList);
+
+			TMcCustomResourceProblemEntity problem = tMcCustomResourceProblemList.get(0);
+			if(null != problem){
+				String deal = problem.getDeal();
+				if(StringUtils.isNotBlank(deal)){
+					TMcWorkOrderEntity tMcWorkOrder = new TMcWorkOrderEntity();
+					BeanUtils.copyProperties(tMcWorkOrder,tMcCustomResource);
+					tMcWorkOrder.setCreateDate(new Date());
+					tMcWorkOrder.setWorkOrderType("1");
+					tMcWorkOrder.setCustomResourceId(tMcCustomResource.getId());
+					String sql = "select count(*) from t_mc_work_order where custom_resource_id = '"+tMcCustomResource.getId()+"'";
+					long count = tMcWorkOrderService.getCountForJdbc(sql);
+					if(count == 0){
+						tMcWorkOrderService.save(tMcWorkOrder);
+					}
+				}
+			}
+
 			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -219,6 +254,7 @@ public class TMcCustomResourceController extends BaseController {
 			tMcCustomResource = tMcCustomResourceService.getEntity(TMcCustomResourceEntity.class, tMcCustomResource.getId());
 			req.setAttribute("tMcCustomResourcePage", tMcCustomResource);
 		}
+		req.setAttribute("createMonth", new Date());
 		return new ModelAndView("com/jeecg/resource/tMcCustomResource-add");
 	}
 	
@@ -233,7 +269,7 @@ public class TMcCustomResourceController extends BaseController {
 			tMcCustomResource = tMcCustomResourceService.getEntity(TMcCustomResourceEntity.class, tMcCustomResource.getId());
 			req.setAttribute("tMcCustomResourcePage", tMcCustomResource);
 		}
-		return new ModelAndView("com/jeecg/mcredit.resource/tMcCustomResource-update");
+		return new ModelAndView("com/jeecg/resource/tMcCustomResource-update");
 	}
 	
 	

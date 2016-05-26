@@ -12,8 +12,8 @@ $(document).ready(function(){
 	<tbody id="add_tMcCustomResourceProblem_table" >	
 	<c:if test="${fn:length(tMcCustomResourceProblemList)  <= 0 }">
 			<tr>
-					<input name="tMcCustomResourceProblemList[0].id" type="hidden"  value="${poVal.id}"/>
-					<input name="tMcCustomResourceProblemList[0].customResourceId" type="hidden"  value="${poVal.customResourceId}"/>
+				<input name="tMcCustomResourceProblemList[0].id" type="hidden"  value="${poVal.id}"/>
+				<input name="tMcCustomResourceProblemList[0].customResourceId" type="hidden"  value="${poVal.customResourceId}"/>
 			</tr>
 				<tr>
 				  <td align="right">

@@ -58,7 +58,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							TURING 微云快速开发平台
+							小微有贷客户电话回访系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -224,7 +224,7 @@
 										 <t:mutiLang langKey="common.profile"/>
 									</a>
 								</li>
-								<li>
+								<%--<li>
 									<a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')">
 										<i class="icon-cog"></i>
 										 <t:mutiLang langKey="common.ssms.getSysInfos"/>
@@ -235,7 +235,7 @@
 										<i class="icon-cog"></i>
 										 <t:mutiLang langKey="common.my.style"/>
 									</a>
-								</li>
+								</li>--%>
 
 								<li>
 									<a href="javascript:clearLocalstorage()">

@@ -17,11 +17,11 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 public class TSUser extends TSBaseUser implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String signatureFile;// 签名文件
-	@Excel(name = "手机")
+	@Excel(name = "手机(为空时填'未知')")
 	private String mobilePhone;// 手机
-	@Excel(name = "办公电话")
+	@Excel(name = "办公电话(为空时填'未知')")
 	private String officePhone;// 办公电话
-	@Excel(name = "邮箱")
+	@Excel(name = "邮箱(为空时填'未知')")
 	private String email;// 邮箱
 	/**创建时间*/
 	private java.util.Date createDate;

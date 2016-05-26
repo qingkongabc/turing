@@ -112,12 +112,12 @@
 		</tr>
 		<tr>
 			<td align="right">
-			<label class="Validform_label">房产地址:</label>
+				<label class="Validform_label">房产地址:</label>
 			</td>
 			<td class="value" colspan="3">
-			<input id="houseAddress" name="houseAddress" type="text" style="width: 450px" class="inputxt" value='${tMcCustomResourcePage.houseAddress}'>
-			<span class="Validform_checktip"></span>
-			<label class="Validform_label" style="display: none;">房产地址</label>
+				<input id="houseAddress" name="houseAddress" type="text" style="width: 450px" class="inputxt" value='${tMcCustomResourcePage.houseAddress}'>
+				<span class="Validform_checktip"></span>
+				<label class="Validform_label" style="display: none;">房产地址</label>
 			</td>
 			<td align="right">
 				<label class="Validform_label"></label>
@@ -271,7 +271,7 @@
 				<label class="Validform_label"></label>
 			</td>
 		</tr>
-			</table>
+	</table>
 			<div style="width: auto;height: 200px;">
 				<%-- 增加一个div，用于调节页面大小，否则默认太小 --%>
 				<div style="width:800px;height:1px;"></div>

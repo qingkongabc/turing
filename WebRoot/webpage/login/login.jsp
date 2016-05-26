@@ -47,12 +47,13 @@
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
         <div class="login-container">
-          <div class="center">
+          <div style="height: 60px;"></div>
+          <div class="center" style="width: 450px;margin-left: -30px;">
             <h1 id="id-text2" class="grey">
               <i class="ace-icon fa fa-leaf green"></i>
-               TURING 演示系统
+               小微有贷客户电话回访系统
             </h1>
-            <h4 class="blue" id="id-company-text">www.turing.org</h4>
+            <h4 style="height: 20px;"></h4>
           </div>
           <div class="space-6"></div>
           <div class="position-relative">
@@ -104,16 +105,16 @@
                 <div class="toolbar clearfix">
                   <div style="float: right">
                     <a href="#"  class="forgot-password-link">
-                    	  语言
+                      <%--语言
                       <i class="ace-icon fa fa-arrow-right"></i>
-                      <t:dictSelect id="langCode" field="langCode" typeGroupCode="lang" hasLabel="false" extendJson="{style:'padding:2px; width:80px;'}" defaultVal="zh-cn"></t:dictSelect>
+                      <t:dictSelect id="langCode" field="langCode" typeGroupCode="lang" hasLabel="false" extendJson="{style:'padding:2px; width:80px;'}" defaultVal="zh-cn"></t:dictSelect>--%>
                     </a>
                   </div>
                 </div>
                 </form>
               </div>
             </div>
-            <div class="center"><h4 class="blue" id="id-company-text">&copy; TURING版权所有 v_3.6.3</h4></div>
+            <div class="center"><h4 class="blue" id="id-company-text">&copy; 民生银行合肥分行版权所有 </h4></div>
             <div class="navbar-fixed-top align-right">
               <br />
               &nbsp;

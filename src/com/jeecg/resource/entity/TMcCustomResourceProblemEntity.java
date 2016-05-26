@@ -22,7 +22,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
  * @Title: Entity
  * @Description: 问题记录
  * @author onlineGenerator
- * @date 2016-05-10 20:20:52
+ * @date 2016-05-15 17:14:14
  * @version V1.0   
  *
  */
@@ -50,7 +50,7 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	@Excel(name="其他处理请填写")
 	private java.lang.String otherDeal;
 	/**月份*/
-	private java.lang.String createMonth;
+	private java.util.Date createMonth;
 	/**客户代码*/
 	private java.lang.String customCode;
 	/**客户姓名*/
@@ -172,19 +172,19 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 		this.otherDeal = otherDeal;
 	}
 	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  月份
+	 *方法: 取得java.util.Date
+	 *@return: java.util.Date  月份
 	 */
 	@Column(name ="CREATE_MONTH",nullable=true,length=32)
-	public java.lang.String getCreateMonth(){
+	public java.util.Date getCreateMonth(){
 		return this.createMonth;
 	}
 
 	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  月份
+	 *方法: 设置java.util.Date
+	 *@param: java.util.Date  月份
 	 */
-	public void setCreateMonth(java.lang.String createMonth){
+	public void setCreateMonth(java.util.Date createMonth){
 		this.createMonth = createMonth;
 	}
 	/**

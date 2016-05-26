@@ -14,10 +14,13 @@ public class DateConvertEditor extends PropertyEditorSupport {
 	private SimpleDateFormat datetimeFormat = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");	
+	private SimpleDateFormat monthFormat = new SimpleDateFormat("yyyy-MM");
 	public void setAsText(String text) throws IllegalArgumentException {
 		if (StringUtils.hasText(text)) {
 			try {
-				if (text.indexOf(":") == -1 && text.length() == 10) {
+				if (text.indexOf(":") == -1 && text.length() == 7) {
+					setValue(this.monthFormat.parse(text));
+				}else if (text.indexOf(":") == -1 && text.length() == 10) {
 					setValue(this.dateFormat.parse(text));
 				} else if (text.indexOf(":") > 0 && text.length() == 19) {
 					setValue(this.datetimeFormat.parse(text));

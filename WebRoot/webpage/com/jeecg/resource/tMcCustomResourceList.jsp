@@ -5,6 +5,7 @@
   <div region="center" style="padding:0px;border:0px">
   <t:datagrid name="tMcCustomResourceList" checkbox="true" fitColumns="false" title="客户资产" actionUrl="tMcCustomResourceController.do?datagrid" idField="id" fit="true" queryMode="group">
    <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="月份"  field="createMonth" formatter="yyyy-MM"  query="true" queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="机构号"  field="branchCode"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="归属行部"  field="branchName"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="客户经理"  field="manager"    queryMode="single"  width="120"></t:dgCol>
@@ -28,7 +29,6 @@
    <t:dgCol title="是否过户给他人"  field="wifeTransferOther"    queryMode="single" dictionary="sf_yn" width="120"></t:dgCol>
    <t:dgCol title="若过户给他人请填姓名"  field="wifeOtherName"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="房产证号"  field="wifeHouseNo"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="月份"  field="createMonth"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="删除" url="tMcCustomResourceController.do?doDel&id={id}" />
    <t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>
@@ -45,6 +45,8 @@
  <script type="text/javascript">
  $(document).ready(function(){
  		//给时间控件加上样式
+ 			$("#tMcCustomResourceListtb").find("input[name='createMonth_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM'});});
+ 			$("#tMcCustomResourceListtb").find("input[name='createMonth_end']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM'});});
  });
  
 //导入
