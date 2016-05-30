@@ -118,7 +118,7 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
 		this.deleteAllEntitie(tMcCustomResourceProblemOldList);
 		//删除-现场派单
 		String hql1 = "from TMcWorkOrderEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?";
-		List<TMcWorkOrderEntity> tMcWorkOrderEntityList = this.findHql(hql0,id0);
+		List<TMcWorkOrderEntity> tMcWorkOrderEntityList = this.findHql(hql1,id0);
 		this.deleteAllEntitie(tMcWorkOrderEntityList);
 	}
 	

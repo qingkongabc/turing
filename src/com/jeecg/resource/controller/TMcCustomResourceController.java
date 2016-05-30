@@ -284,14 +284,11 @@ public class TMcCustomResourceController extends BaseController {
 		//===================================================================================
 		//获取参数
 		Object id0 = tMcCustomResource.getId();
-		Object cREATE_MONTH0 = tMcCustomResource.getCreateMonth();
-		Object cUSTOM_CODE0 = tMcCustomResource.getCustomCode();
-		Object cUSTOM_NAME0 = tMcCustomResource.getCustomName();
 		//===================================================================================
 		//查询-问题记录
-	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?  AND cREATE_MONTH = ?  AND cUSTOM_CODE = ?  AND cUSTOM_NAME = ? ";
+	    String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ? ";
 	    try{
-	    	List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0,cREATE_MONTH0,cUSTOM_CODE0,cUSTOM_NAME0);
+	    	List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0);
 			req.setAttribute("tMcCustomResourceProblemList", tMcCustomResourceProblemEntityList);
 		}catch(Exception e){
 			logger.info(e.getMessage());
@@ -368,7 +365,7 @@ public class TMcCustomResourceController extends BaseController {
 				for (TMcCustomResourcePage page : list) {
 					entity1=new TMcCustomResourceEntity();
 					MyBeanUtils.copyBeanNotNull2Bean(page,entity1);
-		            tMcCustomResourceService.addMain(entity1, page.getTMcCustomResourceProblemList());
+		            tMcCustomResourceService.addMain(entity1, new ArrayList<TMcCustomResourceProblemEntity>());
 				}
 				j.setMsg("文件导入成功！");
 			} catch (Exception e) {

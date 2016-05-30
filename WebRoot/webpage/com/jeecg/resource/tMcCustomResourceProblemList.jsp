@@ -127,8 +127,8 @@ $(document).ready(function(){
 			<tr>
 			  <td align="right">
 				<label class="Validform_label">
-									下一步处理流程:
-								</label>
+					下一步处理流程:
+				</label>
 			  </td>
 			  <td class="value">
 						<t:dictSelect field="tMcCustomResourceProblemList[0].deal" type="checkbox"

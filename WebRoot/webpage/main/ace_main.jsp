@@ -57,7 +57,7 @@
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
 						<small>
-							<i class="icon-leaf"></i>
+							<img src="svg/ms-logo.svg" height="35" width="35" style="color: blue"/>
 							小微有贷客户电话回访系统
 						</small>
 					</a><!-- /.brand -->
