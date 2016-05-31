@@ -6,16 +6,11 @@ import java.lang.String;
 import java.lang.Double;
 import java.lang.Integer;
 import java.math.BigDecimal;
+import javax.persistence.*;
 import javax.xml.soap.Text;
 import java.sql.Blob;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**   
@@ -44,8 +39,9 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 	@Excel(name="客户姓名")
 	private java.lang.String customName;
 	/**资产存在问题*/
-	@Excel(name="资产存在问题")
 	private java.lang.String problem;
+	@Excel(name="资产存在问题")
+	private java.lang.String problemStr;
 	/**其他问题请填写*/
 	@Excel(name="其他问题请填写")
 	private java.lang.String otherProblem;
@@ -53,8 +49,9 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 	@Excel(name="备注")
 	private java.lang.String remark;
 	/**下一步处理流程*/
-	@Excel(name="下一步处理流程")
 	private java.lang.String deal;
+	@Excel(name="下一步处理流程")
+	private java.lang.String dealStr;
 	/**其他处理请填写*/
 	@Excel(name="其他处理请填写")
 	private java.lang.String otherDeal;
@@ -221,5 +218,23 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 	 */
 	public void setCustomName(java.lang.String customName){
 		this.customName = customName;
+	}
+
+	@Column(name ="PROBLEM_STR",nullable=true,length=200)
+	public String getProblemStr() {
+		return problemStr;
+	}
+
+	public void setProblemStr(String problemStr) {
+		this.problemStr = problemStr;
+	}
+
+	@Column(name ="DEAL_STR",nullable=true,length=200)
+	public String getDealStr() {
+		return dealStr;
+	}
+
+	public void setDealStr(String dealStr) {
+		this.dealStr = dealStr;
 	}
 }

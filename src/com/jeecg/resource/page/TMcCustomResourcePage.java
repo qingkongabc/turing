@@ -30,6 +30,9 @@ import org.jeecgframework.poi.excel.annotation.ExcelCollection;
 public class TMcCustomResourcePage implements java.io.Serializable {
 	/**主键*/
 	private java.lang.String id;
+	/**月份*/
+	@Excel(name="月份",format = "yyyy-MM")
+	private java.util.Date createMonth;
 	/**机构号*/
     @Excel(name="机构号")
 	private java.lang.String branchCode;
@@ -79,30 +82,27 @@ public class TMcCustomResourcePage implements java.io.Serializable {
     @Excel(name="配偶身份证号")
 	private java.lang.String wifeIc;
 	/**是否有房产*/
-    @Excel(name="是否有房产")
+    @Excel(name="是否有房产(配偶)")
 	private java.lang.String wifeOwnHouse;
 	/**房产地址*/
-    @Excel(name="房产地址")
+    @Excel(name="房产地址(配偶)")
 	private java.lang.String wifeHouseAddress;
 	/**是否被他行抵押*/
-    @Excel(name="是否被他行抵押")
+    @Excel(name="是否被他行抵押(配偶)")
 	private java.lang.String wifeGuaranty;
 	/**是否被他行资产保全*/
-    @Excel(name="是否被他行资产保全")
+    @Excel(name="是否被他行资产保全(配偶)")
 	private java.lang.String wifeHouseProtect;
 	/**是否过户给他人*/
-    @Excel(name="是否过户给他人")
+    @Excel(name="是否过户给他人(配偶)")
 	private java.lang.String wifeTransferOther;
 	/**若过户给他人请填姓名*/
-    @Excel(name="若过户给他人请填姓名")
+    @Excel(name="若过户给他人请填姓名(配偶)")
 	private java.lang.String wifeOtherName;
 	/**房产证号*/
-    @Excel(name="房产证号")
+    @Excel(name="房产证号(配偶)")
 	private java.lang.String wifeHouseNo;
-	/**月份*/
-    @Excel(name="月份",format = "yyyy-MM")
-	private java.util.Date createMonth;
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键

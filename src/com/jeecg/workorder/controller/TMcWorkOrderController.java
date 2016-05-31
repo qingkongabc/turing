@@ -312,7 +312,7 @@ public class TMcWorkOrderController extends BaseController {
 					typeVal += tsType.getTypename()+",";
 				}
 			}
-			workOrderEntity.setWorkOrderType(typeVal);
+			workOrderEntity.setWorkOrderTypeStr(typeVal);
 		}
 		modelMap.put(NormalExcelConstants.FILE_NAME,"现场派单");
 		modelMap.put(NormalExcelConstants.CLASS,TMcWorkOrderEntity.class);

@@ -57,8 +57,9 @@ public class TMcWorkOrderEntity implements java.io.Serializable {
 	@Excel(name="是否有房产")
 	private java.lang.String ownHouse;
 	/**派单类型*/
-	@Excel(name="派单类型")
 	private java.lang.String workOrderType;
+	@Excel(name="派单类型")
+	private java.lang.String workOrderTypeStr;
 	/**机构号*/
 	private java.lang.String branchCode;
 	/**客户资产id*/
@@ -258,5 +259,14 @@ public class TMcWorkOrderEntity implements java.io.Serializable {
 	 */
 	public void setCustomResourceId(java.lang.String customResourceId){
 		this.customResourceId = customResourceId;
+	}
+
+	@Column(name ="WORK_ORDER_TYPE_STR",nullable=true,length=200)
+	public String getWorkOrderTypeStr() {
+		return workOrderTypeStr;
+	}
+
+	public void setWorkOrderTypeStr(String workOrderTypeStr) {
+		this.workOrderTypeStr = workOrderTypeStr;
 	}
 }

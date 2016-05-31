@@ -335,7 +335,7 @@ public class TMcCustomResourceController extends BaseController {
         }
         map.put(NormalExcelConstants.FILE_NAME,"客户资产");
         map.put(NormalExcelConstants.CLASS,TMcCustomResourcePage.class);
-        map.put(NormalExcelConstants.PARAMS,new ExportParams("客户资产列表", "导出人:Jeecg",
+        map.put(NormalExcelConstants.PARAMS,new ExportParams("客户资产列表", "导出人:"+ ResourceUtil.getSessionUserName().getRealName(),
             "导出信息"));
         map.put(NormalExcelConstants.DATA_LIST,pageList);
         return NormalExcelConstants.JEECG_EXCEL_VIEW;

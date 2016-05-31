@@ -290,6 +290,7 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 	public String exportXls(TMcCustomResourceProblem1Entity tMcCustomResourceProblem1,HttpServletRequest request,HttpServletResponse response
 			, DataGrid dataGrid,ModelMap modelMap) {
 		CriteriaQuery cq = new CriteriaQuery(TMcCustomResourceProblem1Entity.class, dataGrid);
+		cq.isNotNull("problem");
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResourceProblem1, request.getParameterMap());
 		List<TMcCustomResourceProblem1Entity> tMcCustomResourceProblem1s = this.tMcCustomResourceProblem1Service.getListByCriteriaQuery(cq,false);
 		for(TMcCustomResourceProblem1Entity resourceProblem1Entity : tMcCustomResourceProblem1s){
@@ -302,7 +303,7 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 					problemVal += tsType.getTypename()+",";
 				}
 			}
-			resourceProblem1Entity.setProblem(problemVal);
+			resourceProblem1Entity.setProblemStr(problemVal);
 
 			String deal = resourceProblem1Entity.getDeal()+"";
 			String dealVal = "";
@@ -313,7 +314,7 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 					dealVal += tsType.getTypename()+",";
 				}
 			}
-			resourceProblem1Entity.setDeal(dealVal);
+			resourceProblem1Entity.setDealStr(dealVal);
 		}
 		modelMap.put(NormalExcelConstants.FILE_NAME,"客户资产问题记录");
 		modelMap.put(NormalExcelConstants.CLASS,TMcCustomResourceProblem1Entity.class);

@@ -29,9 +29,9 @@
    <t:dgCol title="是否过户给他人"  field="wifeTransferOther"    queryMode="single" dictionary="sf_yn" width="120"></t:dgCol>
    <t:dgCol title="若过户给他人请填姓名"  field="wifeOtherName"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="房产证号"  field="wifeHouseNo"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
+   <%--<t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="删除" url="tMcCustomResourceController.do?doDel&id={id}" />
-   <t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>
+   <t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>--%>
    <t:dgToolBar title="编辑" icon="icon-edit" url="tMcCustomResourceController.do?goUpdate" funname="update" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="tMcCustomResourceController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="tMcCustomResourceController.do?goUpdate" funname="detail" width="100%" height="100%"></t:dgToolBar>
