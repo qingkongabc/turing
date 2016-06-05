@@ -18,8 +18,17 @@
  </head>
  <body style="overflow-x: hidden;">
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" tiptype="1" action="tMcCustomResourceController.do?doUpdate" >
-					<input id="id" name="id" type="hidden" value="${tMcCustomResourcePage.id }">
-	  				<input id="branchCode" name="branchCode" type="hidden" value="${tMcCustomResourcePage.branchCode }">
+	  <input id="id" name="id" type="hidden" value="${tMcCustomResourcePage.id }">
+	  <input id="branchCode" name="branchCode" type="hidden" value="${tMcCustomResourcePage.branchCode }">
+	  <input id="createName" name="createName" type="hidden" value="${tMcCustomResourcePage.createName }">
+	  <input id="createBy" name="createBy" type="hidden" value="${tMcCustomResourcePage.createBy }">
+	  <input id="createDate" name="createDate" type="hidden" value="${tMcCustomResourcePage.createDate }">
+	  <input id="updateName" name="updateName" type="hidden" value="${tMcCustomResourcePage.updateName }">
+	  <input id="updateBy" name="updateBy" type="hidden" value="${tMcCustomResourcePage.updateBy }">
+	  <input id="updateDate" name="updateDate" type="hidden" value="${tMcCustomResourcePage.updateDate }">
+	  <input id="sysOrgCode" name="sysOrgCode" type="hidden" value="${tMcCustomResourcePage.sysOrgCode }">
+	  <input id="sysCompanyCode" name="sysCompanyCode" type="hidden" value="${tMcCustomResourcePage.sysCompanyCode }">
+	  <input id="bpmStatus" name="bpmStatus" type="hidden" value="${tMcCustomResourcePage.bpmStatus }">
 	<table cellpadding="0" cellspacing="1" class="formtable">
 		<tr>
 			<td align="right">

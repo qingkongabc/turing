@@ -133,7 +133,6 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 		if(StringUtil.isNotEmpty(query_createMonth_end)){
 			cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
 		}
-		    cq.isNotNull("problem");
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}
@@ -290,7 +289,6 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 	public String exportXls(TMcCustomResourceProblem1Entity tMcCustomResourceProblem1,HttpServletRequest request,HttpServletResponse response
 			, DataGrid dataGrid,ModelMap modelMap) {
 		CriteriaQuery cq = new CriteriaQuery(TMcCustomResourceProblem1Entity.class, dataGrid);
-		cq.isNotNull("problem");
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResourceProblem1, request.getParameterMap());
 		List<TMcCustomResourceProblem1Entity> tMcCustomResourceProblem1s = this.tMcCustomResourceProblem1Service.getListByCriteriaQuery(cq,false);
 		for(TMcCustomResourceProblem1Entity resourceProblem1Entity : tMcCustomResourceProblem1s){
