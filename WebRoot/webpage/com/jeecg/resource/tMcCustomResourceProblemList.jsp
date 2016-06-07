@@ -12,11 +12,20 @@ $(document).ready(function(){
 	<tbody id="add_tMcCustomResourceProblem_table" >	
 	<c:if test="${fn:length(tMcCustomResourceProblemList)  <= 0 }">
 			<tr>
-					<input name="tMcCustomResourceProblemList[0].id" type="hidden"  value="${poVal.id}"/>
-					<input name="tMcCustomResourceProblemList[0].customResourceId" type="hidden"  value="${poVal.customResourceId}"/>
-					<input name="tMcCustomResourceProblemList[0].createMonth" type="hidden"  value="${poVal.createMonth}"/>
-					<input name="tMcCustomResourceProblemList[0].customCode" type="hidden"  value="${poVal.customCode}"/>
-					<input name="tMcCustomResourceProblemList[0].customName" type="hidden"  value="${poVal.customName}"/>
+				<input name="tMcCustomResourceProblemList[0].id" type="hidden"  value="${poVal.id}"/>
+				<input name="tMcCustomResourceProblemList[0].customResourceId" type="hidden"  value="${poVal.customResourceId}"/>
+				<input name="tMcCustomResourceProblemList[0].createMonth" type="hidden"  value="${poVal.createMonth}"/>
+				<input name="tMcCustomResourceProblemList[0].customCode" type="hidden"  value="${poVal.customCode}"/>
+                <input name="tMcCustomResourceProblemList[0].customName" type="hidden"  value="${poVal.customName}"/>
+                <input name="tMcCustomResourceProblemList[0].createName" type="hidden"  value="${poVal.createName}"/>
+                <input name="tMcCustomResourceProblemList[0].createBy" type="hidden"  value="${poVal.createBy}"/>
+                <input name="tMcCustomResourceProblemList[0].createDate" type="hidden"  value="${poVal.createDate}"/>
+                <input name="tMcCustomResourceProblemList[0].updateName" type="hidden"  value="${poVal.updateName}"/>
+                <input name="tMcCustomResourceProblemList[0].updateBy" type="hidden"  value="${poVal.updateBy}"/>
+                <input name="tMcCustomResourceProblemList[0].updateDate" type="hidden"  value="${poVal.updateDate}"/>
+                <input name="tMcCustomResourceProblemList[0].sysOrgCode" type="hidden"  value="${poVal.sysOrgCode}"/>
+                <input name="tMcCustomResourceProblemList[0].sysCompanyCode" type="hidden"  value="${poVal.sysCompanyCode}"/>
+                <input name="tMcCustomResourceProblemList[0].bpmStatus" type="hidden"  value="${poVal.bpmStatus}"/>
 			</tr>
 				<tr>
 				  <td align="right">
@@ -82,11 +91,20 @@ $(document).ready(function(){
 	<c:if test="${fn:length(tMcCustomResourceProblemList)  > 0 }">
 		<c:forEach items="${tMcCustomResourceProblemList}" var="poVal" varStatus="stuts" begin="0" end="0">
 			<tr>
-					<input name="tMcCustomResourceProblemList[0].id" type="hidden" value="${poVal.id}"/>
-					<input name="tMcCustomResourceProblemList[0].customResourceId" type="hidden" value="${poVal.customResourceId}"/>
-					<input name="tMcCustomResourceProblemList[0].createMonth" type="hidden" value="${poVal.createMonth}"/>
-					<input name="tMcCustomResourceProblemList[0].customCode" type="hidden" value="${poVal.customCode}"/>
-					<input name="tMcCustomResourceProblemList[0].customName" type="hidden" value="${poVal.customName}"/>
+                <input name="tMcCustomResourceProblemList[0].id" type="hidden" value="${poVal.id}"/>
+                <input name="tMcCustomResourceProblemList[0].customResourceId" type="hidden" value="${poVal.customResourceId}"/>
+                <input name="tMcCustomResourceProblemList[0].createMonth" type="hidden" value="${poVal.createMonth}"/>
+                <input name="tMcCustomResourceProblemList[0].customCode" type="hidden" value="${poVal.customCode}"/>
+                <input name="tMcCustomResourceProblemList[0].customName" type="hidden" value="${poVal.customName}"/>
+                <input name="tMcCustomResourceProblemList[0].createName" type="hidden"  value="${poVal.createName}"/>
+                <input name="tMcCustomResourceProblemList[0].createBy" type="hidden"  value="${poVal.createBy}"/>
+                <input name="tMcCustomResourceProblemList[0].createDate" type="hidden"  value="${poVal.createDate}"/>
+                <input name="tMcCustomResourceProblemList[0].updateName" type="hidden"  value="${poVal.updateName}"/>
+                <input name="tMcCustomResourceProblemList[0].updateBy" type="hidden"  value="${poVal.updateBy}"/>
+                <input name="tMcCustomResourceProblemList[0].updateDate" type="hidden"  value="${poVal.updateDate}"/>
+                <input name="tMcCustomResourceProblemList[0].sysOrgCode" type="hidden"  value="${poVal.sysOrgCode}"/>
+                <input name="tMcCustomResourceProblemList[0].sysCompanyCode" type="hidden"  value="${poVal.sysCompanyCode}"/>
+                <input name="tMcCustomResourceProblemList[0].bpmStatus" type="hidden"  value="${poVal.bpmStatus}"/>
 			</tr>
 			<tr>
 			  <td align="right">

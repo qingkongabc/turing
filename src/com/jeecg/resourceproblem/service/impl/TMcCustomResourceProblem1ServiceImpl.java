@@ -72,6 +72,15 @@ public class TMcCustomResourceProblem1ServiceImpl extends CommonServiceImpl impl
  		sql  = sql.replace("#{create_month}",String.valueOf(t.getCreateMonth()));
  		sql  = sql.replace("#{custom_code}",String.valueOf(t.getCustomCode()));
  		sql  = sql.replace("#{custom_name}",String.valueOf(t.getCustomName()));
+		sql = sql.replace("#{create_name}",String.valueOf(t.getCreateName()));
+		sql = sql.replace("#{create_by}",String.valueOf(t.getCreateBy()));
+		sql = sql.replace("#{create_date}",String.valueOf(t.getCreateDate()));
+		sql = sql.replace("#{update_name}",String.valueOf(t.getUpdateName()));
+		sql = sql.replace("#{update_by}",String.valueOf(t.getUpdateBy()));
+		sql = sql.replace("#{update_date}",String.valueOf(t.getUpdateDate()));
+		sql = sql.replace("#{sys_org_code}",String.valueOf(t.getSysOrgCode()));
+		sql = sql.replace("#{sys_company_code}",String.valueOf(t.getSysCompanyCode()));
+		sql = sql.replace("#{bpm_status}",String.valueOf(t.getBpmStatus()));
  		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
  		return sql;
  	}

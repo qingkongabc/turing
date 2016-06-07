@@ -74,6 +74,14 @@ public class TMcWorkOrderServiceImpl extends CommonServiceImpl implements TMcWor
  		sql  = sql.replace("#{work_order_type}",String.valueOf(t.getWorkOrderType()));
  		sql  = sql.replace("#{branch_code}",String.valueOf(t.getBranchCode()));
  		sql  = sql.replace("#{custom_resource_id}",String.valueOf(t.getCustomResourceId()));
+		sql = sql.replace("#{create_name}",String.valueOf(t.getCreateName()));
+		sql = sql.replace("#{create_by}",String.valueOf(t.getCreateBy()));
+		sql = sql.replace("#{update_name}",String.valueOf(t.getUpdateName()));
+		sql = sql.replace("#{update_by}",String.valueOf(t.getUpdateBy()));
+		sql = sql.replace("#{update_date}",String.valueOf(t.getUpdateDate()));
+		sql = sql.replace("#{sys_org_code}",String.valueOf(t.getSysOrgCode()));
+		sql = sql.replace("#{sys_company_code}",String.valueOf(t.getSysCompanyCode()));
+		sql = sql.replace("#{bpm_status}",String.valueOf(t.getBpmStatus()));
  		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
  		return sql;
  	}
