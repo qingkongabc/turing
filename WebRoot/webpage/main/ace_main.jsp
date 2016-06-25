@@ -339,7 +339,7 @@
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
 
-				<div class="ace-settings-container" id="ace-settings-container">
+				<!--<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
 					</div>
@@ -385,8 +385,8 @@
 							</label>
 						</div>
 					</div>
-				</div><!-- /#ace-settings-container -->
-			</div><!-- /.main-container-inner -->
+				</div><!-- /#ace-settings-container
+			</div> /.main-container-inner -->
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="icon-double-angle-up icon-only bigger-110"></i>

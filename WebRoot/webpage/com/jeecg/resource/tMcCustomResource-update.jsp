@@ -59,12 +59,12 @@
 				<label class="Validform_label" style="display: none;">客户经理</label>
 			</td>
 			<td align="right">
-				<label class="Validform_label">客户代码:</label>
+				<label class="Validform_label">客户号:</label>
 			</td>
 			<td class="value">
 		     	 <input id="customCode" name="customCode" type="text" style="width: 150px" class="inputxt" value='${tMcCustomResourcePage.customCode}'>
 				<span class="Validform_checktip"></span>
-				<label class="Validform_label" style="display: none;">客户代码</label>
+				<label class="Validform_label" style="display: none;">客户号</label>
 			</td>
 		</tr>
 		<tr>
@@ -282,11 +282,13 @@
 			</td>
 		</tr>
 	</table>
-			<div style="width: auto;height: 200px;">
+	  <div style="width: auto;height: 400px;">
 				<%-- 增加一个div，用于调节页面大小，否则默认太小 --%>
 				<div style="width:800px;height:1px;"></div>
 				<t:tabs id="tt" iframe="false" tabPosition="top" fit="false">
-				 <t:tab href="tMcCustomResourceController.do?tMcCustomResourceProblemList&id=${tMcCustomResourcePage.id}&createMonth=${tMcCustomResourcePage.createMonth}&customCode=${tMcCustomResourcePage.customCode}&customName=${tMcCustomResourcePage.customName}" icon="icon-search" title="问题记录" id="tMcCustomResourceProblem"></t:tab>
+					<t:tab heigth="400px;"
+						   href="tMcCustomResourceController.do?tMcCustomResourceProblemList&id=${tMcCustomResourcePage.id}&createMonth=${tMcCustomResourcePage.createMonth}&customCode=${tMcCustomResourcePage.customCode}&customName=${tMcCustomResourcePage.customName}"
+						   icon="icon-search" title="问题记录" id="tMcCustomResourceProblem"></t:tab>
 				</t:tabs>
 			</div>
 			</t:formvalid>

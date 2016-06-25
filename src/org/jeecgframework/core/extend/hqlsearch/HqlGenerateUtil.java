@@ -94,6 +94,34 @@ public class HqlGenerateUtil {
 		cq.add();
 	}
 
+	public static void installHqlWithNoRule(CriteriaQuery cq, Object searchObj,
+											Map<String, String[]> parameterMap) {
+		installHqlJoinAlias(cq, searchObj, new HashMap<String, TSDataRule>(), parameterMap, "");
+//		--author：龙金波 ------start---date：20150422--------for：增加一个特殊sql参数处理----------------------------------
+		try {
+			String json = null;
+			if (StringUtil.isNotEmpty(cq.getDataGrid().getSqlbuilder())) {
+				json = cq.getDataGrid().getSqlbuilder();
+			} else if (parameterMap != null
+					&& StringUtil.isNotEmpty(parameterMap.get("sqlbuilder"))) {
+				json = parameterMap.get("sqlbuilder")[0];
+			}
+			if (StringUtil.isNotEmpty(json)) {
+				List<QueryCondition> list = JSONHelper.toList(
+						json
+						, QueryCondition.class);
+				String sql = getSql(list, "", searchObj.getClass());
+				System.out.println("DEBUG sqlbuilder:" + sql);
+				cq.add(Restrictions.sqlRestriction(sql));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//		--author：龙金波 ------start---date：201504022--------for：增加一个特殊sql参数处理----------------------------------
+
+		cq.add();
+	}
+
 	/**
 	 * 添加Alias别名的查询
 	 * 

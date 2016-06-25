@@ -1,5 +1,8 @@
 package com.jeecg.resourceproblem.service.impl;
+
+import com.jeecg.resource.entity.TMcCustomResourceEntity;
 import com.jeecg.resourceproblem.service.TMcCustomResourceProblem1ServiceI;
+import org.apache.commons.lang.StringUtils;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
 import com.jeecg.resourceproblem.entity.TMcCustomResourceProblem1Entity;
 import org.springframework.stereotype.Service;
@@ -26,14 +29,23 @@ public class TMcCustomResourceProblem1ServiceImpl extends CommonServiceImpl impl
  	}
  	
  	public <T> void saveOrUpdate(T entity) {
- 		super.saveOrUpdate(entity);
+		TMcCustomResourceProblem1Entity entity1 = (TMcCustomResourceProblem1Entity) entity;
+		String feedBack = entity1.getFeedback();
+		if (StringUtils.isNotBlank(feedBack)) {
+			entity1.setBpmStatus("3");
+		}
+		TMcCustomResourceEntity resourceEntity = super.findUniqueByProperty(TMcCustomResourceEntity.class, "id", entity1.getCustomResourceId());
+		resourceEntity.setBpmStatus("3");
+
+		super.saveOrUpdate(resourceEntity);
+
+		super.saveOrUpdate(entity1);
  		//执行更新操作配置的sql增强
- 		this.doUpdateSql((TMcCustomResourceProblem1Entity)entity);
+		this.doUpdateSql(entity1);
  	}
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
 	 * @return
 	 */
  	public boolean doAddSql(TMcCustomResourceProblem1Entity t){
@@ -41,7 +53,6 @@ public class TMcCustomResourceProblem1ServiceImpl extends CommonServiceImpl impl
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
 	 * @return
 	 */
  	public boolean doUpdateSql(TMcCustomResourceProblem1Entity t){
@@ -49,7 +60,6 @@ public class TMcCustomResourceProblem1ServiceImpl extends CommonServiceImpl impl
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
 	 * @return
 	 */
  	public boolean doDelSql(TMcCustomResourceProblem1Entity t){

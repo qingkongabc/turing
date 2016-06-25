@@ -21,7 +21,9 @@
 					</label>
 				</td>
 				<td class="value">
-					<input id="createMonth" name="createMonth" type="text" style="width: 150px"  class="Wdate" onClick="WdatePicker()" value='<fmt:formatDate value='${tMcCustomResourceProblem1Page.createMonth}' type="date" pattern="yyyy-MM"/>'>
+					<input id="createMonth" name="createMonth" type="text" style="width: 150px" readonly
+						   class="Wdate"
+						   value='<fmt:formatDate value='${tMcCustomResourceProblem1Page.createMonth}' type="date" pattern="yyyy-MM"/>'>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">月份</label>
 				</td>
@@ -29,13 +31,14 @@
 			<tr>
 				<td align="right">
 					<label class="Validform_label">
-						客户代码:
+						客户号:
 					</label>
 				</td>
 				<td class="value">
-					<input id="customCode" name="customCode" type="text" style="width: 150px" class="inputxt"  value='${tMcCustomResourceProblem1Page.customCode}'>
+					<input id="customCode" name="customCode" type="text" readonly
+						   style="width: 150px" class="inputxt" value='${tMcCustomResourceProblem1Page.customCode}'>
 					<span class="Validform_checktip"></span>
-					<label class="Validform_label" style="display: none;">客户代码</label>
+					<label class="Validform_label" style="display: none;">客户号</label>
 				</td>
 			</tr>
 			<tr>
@@ -45,7 +48,8 @@
 					</label>
 				</td>
 				<td class="value">
-					<input id="customName" name="customName" type="text" style="width: 150px" class="inputxt"  value='${tMcCustomResourceProblem1Page.customName}'>
+					<input id="customName" name="customName" type="text" readonly
+						   style="width: 150px" class="inputxt" value='${tMcCustomResourceProblem1Page.customName}'>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">客户姓名</label>
 				</td>
@@ -57,8 +61,8 @@
 					</label>
 				</td>
 				<td class="value">
-							<t:dictSelect field="problem" type="checkbox"
-								typeGroupCode="prob_type" defaultVal="${tMcCustomResourceProblem1Page.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>
+					<t:dictSelect field="problem" type="radio" readonly="readonly"
+								  typeGroupCode="prob_type" defaultVal="${tMcCustomResourceProblem1Page.problem}" hasLabel="false" title="资产存在问题"></t:dictSelect>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">资产存在问题</label>
 				</td>
@@ -70,7 +74,8 @@
 					</label>
 				</td>
 				<td class="value">
-						<textarea id="otherProblem" style="width:600px;" class="inputxt" rows="6" name="otherProblem">${tMcCustomResourceProblem1Page.otherProblem}</textarea>
+					<textarea name="otherProblem" maxlength="2000" style="width: 95%;height: 50px;" readonly
+							  type="text" class="inputxt">${tMcCustomResourceProblem1Page.otherProblem}</textarea>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">其他问题请填写</label>
 				</td>
@@ -82,7 +87,8 @@
 					</label>
 				</td>
 				<td class="value">
-						<textarea id="remark" style="width:600px;" class="inputxt" rows="6" name="remark">${tMcCustomResourceProblem1Page.remark}</textarea>
+					<textarea name="remark" maxlength="2000" style="width: 95%;height: 50px;" readonly
+							  type="text" class="inputxt">${tMcCustomResourceProblem1Page.remark}</textarea>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">备注</label>
 				</td>
@@ -94,8 +100,8 @@
 					</label>
 				</td>
 				<td class="value">
-							<t:dictSelect field="deal" type="checkbox"
-								typeGroupCode="deal_type" defaultVal="${tMcCustomResourceProblem1Page.deal}" hasLabel="false"  title="下一步处理流程"></t:dictSelect>
+					<t:dictSelect field="deal" type="radio" readonly="readonly"
+								  typeGroupCode="deal_type" defaultVal="${tMcCustomResourceProblem1Page.deal}" hasLabel="false" title="下一步处理流程"></t:dictSelect>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">下一步处理流程</label>
 				</td>
@@ -107,7 +113,21 @@
 					</label>
 				</td>
 				<td class="value">
-						<textarea id="otherDeal" style="width:600px;" class="inputxt" rows="6" name="otherDeal">${tMcCustomResourceProblem1Page.otherDeal}</textarea>
+					<textarea name="otherDeal" maxlength="2000" style="width: 95%;height: 50px;" readonly
+							  type="text" class="inputxt">${tMcCustomResourceProblem1Page.otherDeal}</textarea>
+					<span class="Validform_checktip"></span>
+					<label class="Validform_label" style="display: none;">其他处理请填写</label>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">
+					<label class="Validform_label">
+						情况说明:
+					</label>
+				</td>
+				<td class="value">
+					<textarea name="feedback" maxlength="2000" style="width: 95%;height: 50px;"
+							  type="text" class="inputxt">${tMcCustomResourceProblem1Page.feedback}</textarea>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">其他处理请填写</label>
 				</td>

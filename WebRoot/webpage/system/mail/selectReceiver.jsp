@@ -9,7 +9,7 @@
 <t:datagrid name="userList" title="" actionUrl="userController.do?datagrid" fit="true" checkbox="true" fitColumns="true" idField="id" queryMode="group" pagination="false"  onLoadSuccess="initCheck">
 	<t:dgCol title="编号" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="用户名" sortable="false" field="userName" query="true"></t:dgCol>
-	<t:dgCol title="部门" field="TSDepart_departname" query="true" queryMode="single" replace="${departsReplace}"></t:dgCol>
+	<t:dgCol title="部门" field="userOrgList.tsDepart.departname" query="true" queryMode="single"></t:dgCol>
 	<t:dgCol title="真实姓名" field="realName" query="true"></t:dgCol>
 	<t:dgCol title="状态" sortable="true" field="status" replace="正常_1,禁用_0,超级管理员_-1"></t:dgCol>
 </t:datagrid>

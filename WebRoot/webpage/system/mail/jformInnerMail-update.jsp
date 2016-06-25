@@ -160,7 +160,7 @@ String style = sysTheme.getStyle();
 						     	 <input name="receiverNames" class="inputxt" value="${realName }" id="realName" readonly="readonly" datatype="*" />
 							<t:choose hiddenName="pageReceiverIds" hiddenid="id" url="jformInnerMailController.do?receivers" name="userList"
 				                          icon="icon-search" title="选择收件人" textname="realName" isclear="true" isInit="true" width="800px"></t:choose>
-							
+
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">收件人列表</label>
 						</td>

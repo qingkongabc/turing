@@ -2,6 +2,7 @@ package com.jeecg.resource.service.impl;
 
 import com.jeecg.resource.service.TMcCustomResourceServiceI;
 import com.jeecg.workorder.entity.TMcWorkOrderEntity;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
 import com.jeecg.resource.entity.TMcCustomResourceEntity;
@@ -10,6 +11,8 @@ import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
 
 import org.jeecgframework.core.common.exception.BusinessException;
@@ -36,6 +39,7 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
     public void addMain(TMcCustomResourceEntity tMcCustomResource,
                         List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemList) {
         //保存主信息
+        tMcCustomResource.setBpmStatus("1");
         this.save(tMcCustomResource);
 
         /**保存-问题记录*/
@@ -75,6 +79,19 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
                     if (oldE.getId().equals(sendE.getId())) {
                         try {
                             MyBeanUtils.copyBeanNotNull2Bean(sendE, oldE);
+                            String deal = oldE.getDeal();
+                            if (StringUtils.equals(deal, "2")) {
+                                oldE.setBpmStatus("2");
+                                tMcCustomResource.setBpmStatus("2");
+                            }
+                            if (StringUtils.equals(deal, "1")) {
+                                oldE.setBpmStatus("4");
+                                tMcCustomResource.setBpmStatus("4");
+                            }
+                            if (StringUtils.equals(deal, "3")) {
+                                oldE.setBpmStatus("5");
+                                tMcCustomResource.setBpmStatus("5");
+                            }
                             this.saveOrUpdate(oldE);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -106,12 +123,49 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
                     tMcCustomResourceProblem.setCreateMonth(tMcCustomResource.getCreateMonth());
                     tMcCustomResourceProblem.setCustomCode(tMcCustomResource.getCustomCode());
                     tMcCustomResourceProblem.setCustomName(tMcCustomResource.getCustomName());
+                    tMcCustomResourceProblem.setCreateBy(tMcCustomResource.getCreateBy());
+                    tMcCustomResourceProblem.setCreateName(tMcCustomResource.getCreateName());
+                    tMcCustomResourceProblem.setSysOrgCode(tMcCustomResource.getSysOrgCode());
+                    tMcCustomResourceProblem.setSysCompanyCode(tMcCustomResource.getSysCompanyCode());
+                    tMcCustomResourceProblem.setBpmStatus("1");
+                    if (StringUtils.isNotBlank(deal)) {
+                        if (StringUtils.equals(deal, "2")) {
+                            tMcCustomResourceProblem.setBpmStatus("2");
+                            tMcCustomResource.setBpmStatus("2");
+                            addWorkOrder(tMcCustomResource);
+                        }
+                        if (StringUtils.equals(deal, "1")) {
+                            tMcCustomResourceProblem.setBpmStatus("4");
+                            tMcCustomResource.setBpmStatus("4");
+                        }
+                        if (StringUtils.equals(deal, "3")) {
+                            tMcCustomResourceProblem.setBpmStatus("5");
+                            tMcCustomResource.setBpmStatus("5");
+                        }
+                    }
                     this.save(tMcCustomResourceProblem);
                 }
             }
         }
         //执行更新操作配置的sql增强
         this.doUpdateSql(tMcCustomResource);
+    }
+
+    private void addWorkOrder(TMcCustomResourceEntity tMcCustomResource) {
+        try {
+            TMcWorkOrderEntity tMcWorkOrder = new TMcWorkOrderEntity();
+            BeanUtils.copyProperties(tMcWorkOrder, tMcCustomResource);
+            tMcWorkOrder.setCreateDate(new Date());
+            tMcWorkOrder.setWorkOrderType("1");
+            tMcWorkOrder.setCustomResourceId(tMcCustomResource.getId());
+            String sql = "select count(*) from t_mc_work_order where custom_resource_id = '" + tMcCustomResource.getId() + "'";
+            long count = this.getCountForJdbc(sql);
+            if (count == 0) {
+                this.save(tMcWorkOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

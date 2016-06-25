@@ -9,7 +9,7 @@
    <t:dgCol title="机构号"  field="branchCode"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="归属行部"  field="branchName"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="客户经理"  field="manager"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="客户代码"  field="customCode"   query="true" queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="客户号" field="customCode" query="true" queryMode="single" width="120"></t:dgCol>
    <t:dgCol title="客户姓名"  field="customName"   query="true" queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="身份证号码"  field="customIc"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="产品类型"  field="productType"    queryMode="single" dictionary="prod_type" width="120"></t:dgCol>
@@ -31,17 +31,20 @@
    <t:dgCol title="房产证号"  field="wifeHouseNo"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="创建人名称"  field="createName"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="创建日期"  field="createDate" formatter="yyyy-MM-dd" hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="更新人名称"  field="updateName"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="更新人登录名称"  field="updateBy"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="更新日期"  field="updateDate" formatter="yyyy-MM-dd" hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="流程状态"  field="bpmStatus"  hidden="true"  queryMode="single" dictionary="bpm_status" width="120"></t:dgCol>
-   <%--<t:dgCol title="操作" field="opt" width="100"></t:dgCol>
+   <t:dgCol title="流程状态" field="bpmStatus" queryMode="single" dictionary="bpm_status" query="true"
+            width="120"></t:dgCol>
+   <t:dgCol title="创建日期" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"
+            width="120"></t:dgCol>
+   <t:dgCol title="操作" field="opt" width="100" style="text-align:center"></t:dgCol>
+   <t:dgFunOpt title="编辑" funname="editoperation(id)" operationCode="update" exp="bpmStatus#eq#1"/>
    <t:dgDelOpt title="删除" url="tMcCustomResourceController.do?doDel&id={id}" />
-   <t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>--%>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="tMcCustomResourceController.do?goUpdate" funname="update" operationCode="update" width="100%" height="100%"></t:dgToolBar>
+   <%--<t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>
+   <t:dgToolBar title="编辑" icon="icon-edit" url="tMcCustomResourceController.do?goUpdate" funname="update" operationCode="update" width="100%" height="100%"></t:dgToolBar>--%>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="tMcCustomResourceController.do?doBatchDel" funname="deleteALLSelect" operationCode="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="tMcCustomResourceController.do?goUpdate" funname="detail" operationCode="detail" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls" operationCode="ImportXls"></t:dgToolBar>
@@ -53,9 +56,19 @@
  <script src = "webpage/com/jeecg/resource/tMcCustomResourceList.js"></script>		
  <script type="text/javascript">
  $(document).ready(function(){
- 		//给时间控件加上样式
- 			$("#tMcCustomResourceListtb").find("input[name='createMonth_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM'});});
- 			$("#tMcCustomResourceListtb").find("input[name='createMonth_end']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM'});});
+  //给时间控件加上样式
+  $("#tMcCustomResourceListtb").find("input[name='createMonth_begin']").attr("class", "Wdate").click(function () {
+   WdatePicker({dateFmt: 'yyyy-MM'});
+  });
+  $("#tMcCustomResourceListtb").find("input[name='createMonth_end']").attr("class", "Wdate").click(function () {
+   WdatePicker({dateFmt: 'yyyy-MM'});
+  });
+  $("#tMcCustomResourceListtb").find("input[name='createDate_begin']").attr("class", "Wdate").attr("style", "width:140px").click(function () {
+   WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'});
+  });
+  $("#tMcCustomResourceListtb").find("input[name='createDate_end']").attr("class", "Wdate").attr("style", "width:140px").click(function () {
+   WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'});
+  });
  });
  
 //导入
@@ -71,5 +84,9 @@ function ExportXls() {
 //模板下载
 function ExportXlsByT() {
 	JeecgExcelExport("tMcCustomResourceController.do?exportXlsByT","tMcCustomResourceList");
+}
+
+ function editoperation(operationId) {
+  createwindow("<t:mutiLang langKey="common.edit.param" langArg="common.operation"/>", "tMcCustomResourceController.do?goUpdate&id=" + operationId, "100%", "100%");
 }
  </script>

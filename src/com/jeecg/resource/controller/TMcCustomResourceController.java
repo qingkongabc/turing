@@ -13,6 +13,9 @@ import com.jeecg.workorder.entity.TMcWorkOrderEntity;
 import com.jeecg.workorder.service.TMcWorkOrderServiceI;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.Property;
+import org.jeecgframework.web.system.pojo.base.TSUser;
+import org.jeecgframework.web.system.pojo.base.TSUserOrg;
 import org.springframework.context.annotation.Scope;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,15 +115,23 @@ public class TMcCustomResourceController extends BaseController {
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResource);
 		try{
-		//自定义追加查询条件
-		String query_createMonth_begin = request.getParameter("createMonth_begin");
-		String query_createMonth_end = request.getParameter("createMonth_end");
-		if(StringUtil.isNotEmpty(query_createMonth_begin)){
-			cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
-		}
-		if(StringUtil.isNotEmpty(query_createMonth_end)){
-			cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
-		}
+			//自定义追加查询条件
+			String query_createMonth_begin = request.getParameter("createMonth_begin");
+			String query_createMonth_end = request.getParameter("createMonth_end");
+			String query_createDate_begin = request.getParameter("createDate_begin");
+			String query_createDate_end = request.getParameter("createDate_end");
+			if (StringUtil.isNotEmpty(query_createMonth_begin)) {
+				cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
+			}
+			if (StringUtil.isNotEmpty(query_createMonth_end)) {
+				cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
+			}
+			if (StringUtil.isNotEmpty(query_createDate_begin)) {
+				cq.ge("createDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(query_createDate_begin));
+			}
+			if (StringUtil.isNotEmpty(query_createDate_end)) {
+				cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(query_createDate_end));
+			}
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}
@@ -216,23 +227,6 @@ public class TMcCustomResourceController extends BaseController {
 		try{
 			tMcCustomResourceService.updateMain(tMcCustomResource, tMcCustomResourceProblemList);
 
-			TMcCustomResourceProblemEntity problem = tMcCustomResourceProblemList.get(0);
-			if(null != problem){
-				String deal = problem.getDeal();
-				if(StringUtils.isNotBlank(deal)){
-					TMcWorkOrderEntity tMcWorkOrder = new TMcWorkOrderEntity();
-					BeanUtils.copyProperties(tMcWorkOrder,tMcCustomResource);
-					tMcWorkOrder.setCreateDate(new Date());
-					tMcWorkOrder.setWorkOrderType("1");
-					tMcWorkOrder.setCustomResourceId(tMcCustomResource.getId());
-					String sql = "select count(*) from t_mc_work_order where custom_resource_id = '"+tMcCustomResource.getId()+"'";
-					long count = tMcWorkOrderService.getCountForJdbc(sql);
-					if(count == 0){
-						tMcWorkOrderService.save(tMcWorkOrder);
-					}
-				}
-			}
-
 			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -294,6 +288,32 @@ public class TMcCustomResourceController extends BaseController {
 			logger.info(e.getMessage());
 		}
 		return new ModelAndView("com/jeecg/resource/tMcCustomResourceProblemList");
+	}
+
+	@RequestMapping(params = "goAddUserToRole")
+	public ModelAndView goAddUserToOrg(HttpServletRequest req) {
+		req.setAttribute("orgId", req.getParameter("orgId"));
+		return new ModelAndView("com/jeecg/resource/noCurRoleUserList");
+	}
+
+	@RequestMapping(params = "addUserToOrgList")
+	public void addUserToOrgList(TSUser user, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+		String orgId = request.getParameter("orgId");
+
+		CriteriaQuery cq = new CriteriaQuery(TSUser.class, dataGrid);
+		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, user);
+
+		// 获取 当前组织机构的用户信息
+		/*CriteriaQuery subCq = new CriteriaQuery(TSUserOrg.class);
+        subCq.setProjection(Property.forName("tsUser.id"));
+        subCq.eq("tsDepart.id", orgId);
+        subCq.add();
+
+        cq.add(Property.forName("id").notIn(subCq.getDetachedCriteria()));
+        cq.add();*/
+
+		this.systemService.getDataGridReturn(cq, true);
+		TagUtil.datagrid(response, dataGrid);
 	}
 
     /**
@@ -369,8 +389,21 @@ public class TMcCustomResourceController extends BaseController {
 				}
 				j.setMsg("文件导入成功！");
 			} catch (Exception e) {
-				j.setMsg("文件导入失败！");
-				logger.error(ExceptionUtil.getExceptionMessage(e));
+				try {
+					params = new ImportParams();
+					List<TMcCustomResourcePage> list = ExcelImportUtil.importExcel(file.getInputStream(), TMcCustomResourcePage.class, params);
+					TMcCustomResourceEntity entity1 = null;
+					for (TMcCustomResourcePage page : list) {
+						entity1 = new TMcCustomResourceEntity();
+						MyBeanUtils.copyBeanNotNull2Bean(page, entity1);
+						entity1.setCreateMonth(new Date());
+						tMcCustomResourceService.addMain(entity1, new ArrayList<TMcCustomResourceProblemEntity>());
+					}
+					j.setMsg("文件导入成功！");
+				} catch (Exception e1) {
+					j.setMsg("文件导入失败！");
+					logger.error(ExceptionUtil.getExceptionMessage(e1));
+				}
 			}finally{
 				try {
 					file.getInputStream().close();

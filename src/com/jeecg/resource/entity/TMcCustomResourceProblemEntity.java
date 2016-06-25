@@ -53,7 +53,9 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	private java.lang.String otherDeal;
 	/**月份*/
 	private java.util.Date createMonth;
-	/**客户代码*/
+	/**
+	 * 客户号
+	 */
 	private java.lang.String customCode;
 	/**客户姓名*/
 	private java.lang.String customName;
@@ -75,9 +77,48 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
     private java.lang.String sysCompanyCode;
     /**流程状态*/
     private java.lang.String bpmStatus;
+	/**
+	 * 处理人姓名
+	 */
+	private java.lang.String dealName;
+	/**
+	 * 处理人id
+	 */
+	private java.lang.String dealBy;
+	/**
+	 * 情况说明
+	 */
+	private java.lang.String feedback;
 
-    /**
-     *方法: 取得java.lang.String
+	@Column(name = "feedback", nullable = true, length = 2000)
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+	@Column(name = "DEAL_NAME", nullable = true, length = 50)
+	public String getDealName() {
+		return dealName;
+	}
+
+	public void setDealName(String dealName) {
+		this.dealName = dealName;
+	}
+
+	@Column(name = "DEAL_BY", nullable = true, length = 50)
+	public String getDealBy() {
+		return dealBy;
+	}
+
+	public void setDealBy(String dealBy) {
+		this.dealBy = dealBy;
+	}
+
+	/**
+	 *方法: 取得java.lang.String
      *@return: java.lang.String  创建人名称
      */
     @Column(name ="CREATE_NAME",nullable=true,length=50)
@@ -352,9 +393,10 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	public void setCreateMonth(java.util.Date createMonth){
 		this.createMonth = createMonth;
 	}
+
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  客户代码
+	 *@return: java.lang.String  客户号
 	 */
 	@Column(name ="CUSTOM_CODE",nullable=true,length=200)
 	public java.lang.String getCustomCode(){
@@ -363,7 +405,7 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  客户代码
+	 *@param: java.lang.String  客户号
 	 */
 	public void setCustomCode(java.lang.String customCode){
 		this.customCode = customCode;

@@ -43,8 +43,10 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	/**客户经理*/
     @Excel(name="客户经理")
 	private java.lang.String manager;
-	/**客户代码*/
-    @Excel(name="客户代码")
+	/**
+	 * 客户号
+	 */
+	@Excel(name = "客户号")
 	private java.lang.String customCode;
 	/**客户姓名*/
     @Excel(name="客户姓名")
@@ -361,7 +363,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  客户代码
+	 *@return: java.lang.String  客户号
 	 */
 
 	@Column(name ="CUSTOM_CODE",nullable=true,length=200)
@@ -371,7 +373,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  客户代码
+	 *@param: java.lang.String  客户号
 	 */
 	public void setCustomCode(java.lang.String customCode){
 		this.customCode = customCode;

@@ -93,13 +93,13 @@
 				<tr>
 					<td align="right">
 						<label class="Validform_label">
-							客户代码:
+							客户号:
 						</label>
 					</td>
 					<td class="value">
 					     	 <input id="customCode" name="customCode" type="text" style="width: 150px" class="inputxt" >
 							<span class="Validform_checktip"></span>
-							<label class="Validform_label" style="display: none;">客户代码</label>
+						<label class="Validform_label" style="display: none;">客户号</label>
 						</td>
 				</tr>
 				<tr>

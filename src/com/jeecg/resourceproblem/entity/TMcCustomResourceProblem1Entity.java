@@ -32,8 +32,10 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 	/**月份*/
 	@Excel(name="月份",format = "yyyy-MM")
 	private java.util.Date createMonth;
-	/**客户代码*/
-	@Excel(name="客户代码")
+	/**
+	 * 客户号
+	 */
+	@Excel(name = "客户号")
 	private java.lang.String customCode;
 	/**客户姓名*/
 	@Excel(name="客户姓名")
@@ -73,6 +75,45 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 	private java.lang.String sysCompanyCode;
 	/**流程状态*/
 	private java.lang.String bpmStatus;
+	/**
+	 * 情况说明
+	 */
+	private java.lang.String feedback;
+	/**
+	 * 处理人姓名
+	 */
+	private java.lang.String dealName;
+	/**
+	 * 处理人id
+	 */
+	private java.lang.String dealBy;
+
+	@Column(name = "DEAL_NAME", nullable = true, length = 50)
+	public String getDealName() {
+		return dealName;
+	}
+
+	public void setDealName(String dealName) {
+		this.dealName = dealName;
+	}
+
+	@Column(name = "DEAL_BY", nullable = true, length = 50)
+	public String getDealBy() {
+		return dealBy;
+	}
+
+	public void setDealBy(String dealBy) {
+		this.dealBy = dealBy;
+	}
+
+	@Column(name = "feedback", nullable = true, length = 2000)
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
 
 	/**
 	 *方法: 取得java.lang.String
@@ -350,9 +391,10 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 	public void setCreateMonth(java.util.Date createMonth){
 		this.createMonth = createMonth;
 	}
+
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  客户代码
+	 *@return: java.lang.String  客户号
 	 */
 	@Column(name ="CUSTOM_CODE",nullable=true,length=200)
 	public java.lang.String getCustomCode(){
@@ -361,7 +403,7 @@ public class TMcCustomResourceProblem1Entity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  客户代码
+	 *@param: java.lang.String  客户号
 	 */
 	public void setCustomCode(java.lang.String customCode){
 		this.customCode = customCode;

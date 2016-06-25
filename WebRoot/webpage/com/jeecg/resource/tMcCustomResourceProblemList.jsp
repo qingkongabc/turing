@@ -2,12 +2,31 @@
 <%@include file="/context/mytags.jsp"%>
 <script type="text/javascript">
 $(document).ready(function(){
-    	if(location.href.indexOf("load=detail")!=-1){
+	if (location.href.indexOf("load=detail") != -1) {
 			$(":input").attr("disabled","true");
+		$("#cho").hide();
 		}
+
+	$("input[name$='deal']").click(function () {
+		val = $(this).val();
+		if (val == 2) {
+			$("#dealTr").show();
+			$("#realName").attr("datatype", "*");
+		} else {
+			$("#dealTr").hide();
+			$("#pageReceiverIds").val("");
+			$("#realName").val("");
+			$("#realName").removeAttr("datatype");
+		}
+	});
+
+	var deal = $("input[name$='deal']:checked").val();
+	if (2 != deal) {
+		$("#dealTr").hide();
+	}
     });
 </script>
-<div style="width: auto;height: 300px;overflow-y:auto;overflow-x:auto;">
+<div style="width: auto;height: 450px;overflow-y:auto;overflow-x:auto;">
 <table cellpadding="0" cellspacing="1" class="formtable" id="tMcCustomResourceProblem_table" >
 	<tbody id="add_tMcCustomResourceProblem_table" >	
 	<c:if test="${fn:length(tMcCustomResourceProblemList)  <= 0 }">
@@ -46,7 +65,8 @@ $(document).ready(function(){
 					</label>
 				  </td>
 				  <td class="value">
-					  <textarea name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000" style="width: 70%;height: 100px;"
+					  <textarea name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000"
+								style="width: 70%;height: 50px;"
 								type="text" class="inputxt"></textarea>
 					  <label class="Validform_label" style="display: none;">其他问题请填写</label>
 				  </td>
@@ -58,7 +78,8 @@ $(document).ready(function(){
 					</label>
 				  </td>
 				  <td class="value">
-					  <textarea name="tMcCustomResourceProblemList[0].remark" maxlength="2000" style="width: 70%;height: 100px;"
+					  <textarea name="tMcCustomResourceProblemList[0].remark" maxlength="2000"
+								style="width: 70%;height: 50px;"
 								type="text" class="inputxt"></textarea>
 					  <label class="Validform_label" style="display: none;">备注</label>
 				  </td>
@@ -75,6 +96,23 @@ $(document).ready(function(){
 					  <label class="Validform_label" style="display: none;">下一步处理流程</label>
 				  </td>
 				</tr>
+		<tr id="dealTr">
+			<td align="right">
+				<label class="Validform_label">
+					选择处理人:
+				</label>
+			</td>
+			<td class="value">
+				<input name="tMcCustomResourceProblemList[0].dealBy" type="hidden" value="${poVal.dealBy}"
+					   id="pageReceiverIds">
+				<input name="tMcCustomResourceProblemList[0].dealName" class="inputxt" value="${poVal.dealName}"
+					   id="realName" readonly="readonly"/>
+				<t:choose hiddenName="pageReceiverIds" hiddenid="userName"
+						  url="tMcCustomResourceController.do?goAddUserToRole" name="userList"
+						  icon="icon-search" title="选择处理人" textname="realName" inputTextname="realName" isclear="true"
+						  isInit="true" width="800px"></t:choose>
+			</td>
+		</tr>
 				<tr>
 				  <td align="right">
 					<label class="Validform_label">
@@ -82,7 +120,8 @@ $(document).ready(function(){
 					</label>
 				  </td>
 				  <td class="value">
-					  <textarea name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000" style="width: 70%;height: 100px;"
+					  <textarea name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000"
+								style="width: 70%;height: 50px;"
 								type="text" class="inputxt"></textarea>
 					  <label class="Validform_label" style="display: none;">其他处理请填写</label>
 				  </td>
@@ -125,7 +164,8 @@ $(document).ready(function(){
 				</label>
 			  </td>
 			  <td class="value">
-				  <textarea name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000" style="width: 70%;height: 100px;"
+				  <textarea name="tMcCustomResourceProblemList[0].otherProblem" maxlength="2000"
+							style="width: 70%;height: 50px;"
 							type="text" class="inputxt">${poVal.otherProblem}</textarea>
 				  <label class="Validform_label" style="display: none;">其他问题请填写</label>
 			  </td>
@@ -137,7 +177,8 @@ $(document).ready(function(){
 				</label>
 			  </td>
 			  <td class="value">
-				  <textarea name="tMcCustomResourceProblemList[0].remark" maxlength="2000" style="width: 70%;height: 100px;"
+				  <textarea name="tMcCustomResourceProblemList[0].remark" maxlength="2000"
+							style="width: 70%;height: 50px;"
 							type="text" class="inputxt">${poVal.remark }</textarea>
 				  <label class="Validform_label" style="display: none;">备注</label>
 			  </td>
@@ -154,6 +195,24 @@ $(document).ready(function(){
 				  <label class="Validform_label" style="display: none;">下一步处理流程</label>
 			  </td>
 			</tr>
+			<tr id="dealTr">
+				<td align="right">
+					<label class="Validform_label">
+						选择处理人:
+					</label>
+				</td>
+				<td class="value">
+					<input name="tMcCustomResourceProblemList[0].dealBy" type="hidden" value="${poVal.dealBy}"
+						   id="pageReceiverIds">
+					<input name="tMcCustomResourceProblemList[0].dealName" class="inputxt" value="${poVal.dealName}"
+						   id="realName" readonly="readonly"/>
+					<span id="cho"><t:choose hiddenName="pageReceiverIds" hiddenid="userName"
+											 url="tMcCustomResourceController.do?goAddUserToRole" name="userList"
+											 icon="icon-search" title="选择处理人" textname="realName"
+											 inputTextname="realName" isclear="true" isInit="true"
+											 width="800px"></t:choose></span>
+				</td>
+			</tr>
 			<tr>
 			  <td align="right">
 				<label class="Validform_label">
@@ -161,10 +220,22 @@ $(document).ready(function(){
 				</label>
 			  </td>
 			  <td class="value">
-				  <textarea name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000" style="width: 70%;height: 100px;"
+				  <textarea name="tMcCustomResourceProblemList[0].otherDeal" maxlength="2000"
+							style="width: 70%;height: 50px;"
 							type="text" class="inputxt">${poVal.otherDeal}</textarea>
 				  <label class="Validform_label" style="display: none;">其他处理请填写</label>
 			  </td>
+			</tr>
+			<tr>
+				<td align="right">
+					<label class="Validform_label">
+						情况说明:
+					</label>
+				</td>
+				<td class="value">
+				  <textarea style="width: 70%;height: 50px;" readonly
+							type="text" class="inputxt">${poVal.feedback}</textarea>
+				</td>
 			</tr>
 		</c:forEach>
 	</c:if>	

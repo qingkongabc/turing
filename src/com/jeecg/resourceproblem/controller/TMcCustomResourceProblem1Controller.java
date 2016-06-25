@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.web.system.pojo.base.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,24 +116,30 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
 	public void datagrid(TMcCustomResourceProblem1Entity tMcCustomResourceProblem1,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 		CriteriaQuery cq = new CriteriaQuery(TMcCustomResourceProblem1Entity.class, dataGrid);
 		//查询条件组装器
-		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResourceProblem1, request.getParameterMap());
-		try{
-		//自定义追加查询条件
-		String query_createMonth_begin = request.getParameter("createMonth_begin");
-		String query_createMonth_end = request.getParameter("createMonth_end");
-		if(StringUtil.isNotEmpty(query_createMonth_begin)){
-			cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
+		String flag = request.getParameter("flag");
+		if (StringUtils.isNotBlank(flag)) {
+			TSUser u = ResourceUtil.getSessionUserName();
+			tMcCustomResourceProblem1.setDealBy(u.getUserName());
+			org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHqlWithNoRule(cq, tMcCustomResourceProblem1, request.getParameterMap());
+		} else {
+			org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResourceProblem1, request.getParameterMap());
 		}
-		if(StringUtil.isNotEmpty(query_createMonth_end)){
-			cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
-		}
+		try {
+			//自定义追加查询条件
+			String query_createMonth_begin = request.getParameter("createMonth_begin");
+			String query_createMonth_end = request.getParameter("createMonth_end");
+			if (StringUtil.isNotEmpty(query_createMonth_begin)) {
+				cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
+			}
+			if (StringUtil.isNotEmpty(query_createMonth_end)) {
+				cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
+			}
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}
