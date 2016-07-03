@@ -297,6 +297,31 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 			, DataGrid dataGrid,ModelMap modelMap) {
 		CriteriaQuery cq = new CriteriaQuery(TMcCustomResourceProblem1Entity.class, dataGrid);
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResourceProblem1, request.getParameterMap());
+
+		//查询条件组装器
+		String flag = request.getParameter("flag");
+		if (StringUtils.isNotBlank(flag)) {
+			TSUser u = ResourceUtil.getSessionUserName();
+			tMcCustomResourceProblem1.setDealBy(u.getUserName());
+			org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHqlWithNoRule(cq, tMcCustomResourceProblem1, request.getParameterMap());
+		} else {
+			org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResourceProblem1, request.getParameterMap());
+		}
+		try {
+			//自定义追加查询条件
+			String query_createMonth_begin = request.getParameter("createMonth_begin");
+			String query_createMonth_end = request.getParameter("createMonth_end");
+			if (StringUtil.isNotEmpty(query_createMonth_begin)) {
+				cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
+			}
+			if (StringUtil.isNotEmpty(query_createMonth_end)) {
+				cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
+			}
+		} catch (Exception e) {
+			throw new BusinessException(e.getMessage());
+		}
+		cq.add();
+
 		List<TMcCustomResourceProblem1Entity> tMcCustomResourceProblem1s = this.tMcCustomResourceProblem1Service.getListByCriteriaQuery(cq,false);
 		for(TMcCustomResourceProblem1Entity resourceProblem1Entity : tMcCustomResourceProblem1s){
 			String problem = resourceProblem1Entity.getProblem()+"";

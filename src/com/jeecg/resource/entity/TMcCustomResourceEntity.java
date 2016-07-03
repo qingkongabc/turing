@@ -456,7 +456,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *@return: java.lang.String  房产地址
 	 */
 
-	@Column(name ="HOUSE_ADDRESS",nullable=true,length=200)
+	@Column(name = "HOUSE_ADDRESS", nullable = true, length = 8000)
 	public java.lang.String getHouseAddress(){
 		return this.houseAddress;
 	}
@@ -528,7 +528,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *@return: java.lang.String  若过户给他人请填姓名
 	 */
 
-	@Column(name ="OTHER_NAME",nullable=true,length=200)
+	@Column(name = "OTHER_NAME", nullable = true, length = 8000)
 	public java.lang.String getOtherName(){
 		return this.otherName;
 	}
@@ -546,7 +546,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *@return: java.lang.String  房产证号
 	 */
 
-	@Column(name ="HOUSE_NO",nullable=true,length=200)
+	@Column(name = "HOUSE_NO", nullable = true, length = 8000)
 	public java.lang.String getHouseNo(){
 		return this.houseNo;
 	}
@@ -618,7 +618,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *@return: java.lang.String  房产地址
 	 */
 
-	@Column(name ="WIFE_HOUSE_ADDRESS",nullable=true,length=200)
+	@Column(name = "WIFE_HOUSE_ADDRESS", nullable = true, length = 8000)
 	public java.lang.String getWifeHouseAddress(){
 		return this.wifeHouseAddress;
 	}
@@ -690,7 +690,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *@return: java.lang.String  若过户给他人请填姓名
 	 */
 
-	@Column(name ="WIFE_OTHER_NAME",nullable=true,length=200)
+	@Column(name = "WIFE_OTHER_NAME", nullable = true, length = 8000)
 	public java.lang.String getWifeOtherName(){
 		return this.wifeOtherName;
 	}
@@ -708,7 +708,7 @@ public class TMcCustomResourceEntity implements java.io.Serializable {
 	 *@return: java.lang.String  房产证号
 	 */
 
-	@Column(name ="WIFE_HOUSE_NO",nullable=true,length=200)
+	@Column(name = "WIFE_HOUSE_NO", nullable = true, length = 8000)
 	public java.lang.String getWifeHouseNo(){
 		return this.wifeHouseNo;
 	}

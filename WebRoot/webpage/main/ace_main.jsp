@@ -58,7 +58,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<img src="svg/ms-logo.svg" height="35" width="35" style="color: blue"/>
-							小微有贷客户电话回访系统
+							合肥分行"微贷宝"客户管理系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
