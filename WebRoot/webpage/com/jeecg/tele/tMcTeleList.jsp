@@ -45,19 +45,19 @@
             <%--<t:dgCol title="操作" field="opt" width="100"></t:dgCol>
             <t:dgDelOpt title="删除" url="tMcTeleController.do?doDel&id={id}" />
             <t:dgToolBar title="录入" icon="icon-add" url="tMcTeleController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>--%>
-            <t:dgToolBar title="编辑" icon="icon-edit" url="tMcTeleController.do?goUpdate" funname="update" width="100%"
+            <t:dgToolBar title="编辑" icon="icon-edit" url="tMcTeleController.do?goUpdate" funname="update" operationCode="update" width="100%"
                          height="100%"></t:dgToolBar>
-            <t:dgToolBar title="批量删除" icon="icon-remove" url="tMcTeleController.do?doBatchDel"
+            <t:dgToolBar title="批量删除" icon="icon-remove" url="tMcTeleController.do?doBatchDel" operationCode="deleteALLSelect"
                          funname="deleteALLSelect"></t:dgToolBar>
-            <t:dgToolBar title="批量退回" icon="icon-back" url="tMcTeleController.do?doBatchBack"
+            <t:dgToolBar title="批量退回" icon="icon-back" url="tMcTeleController.do?doBatchBack" operationCode="returnALLSelect"
                          funname="returnALLSelect"></t:dgToolBar>
-            <t:dgToolBar title="选择客服" icon="icon-add" url="tMcTeleController.do?chooseService" funname="chooseService"
+            <t:dgToolBar title="选择客服" icon="icon-add" url="tMcTeleController.do?chooseService" funname="chooseService" operationCode="chooseService"
                          width="100%" height="100%"></t:dgToolBar>
-            <t:dgToolBar title="查看" icon="icon-search" url="tMcTeleController.do?goUpdate" funname="detail" width="100%"
+            <t:dgToolBar title="查看" icon="icon-search" url="tMcTeleController.do?goUpdate" funname="detail" width="100%" operationCode="detail"
                          height="100%"></t:dgToolBar>
-            <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-            <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
-            <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
+            <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls" operationCode="ImportXls"></t:dgToolBar>
+            <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls" operationCode="ExportXls"></t:dgToolBar>
+            <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT" operationCode="ExportXlsByT"></t:dgToolBar>
         </t:datagrid>
     </div>
 </div>
