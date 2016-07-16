@@ -82,20 +82,30 @@ public class TMcTelePage implements java.io.Serializable {
     @Excel(name = "证件号")
     private java.lang.String credential;
     /**
-     * 法人
-     */
-    @Excel(name = "法人")
-    private java.lang.String manager;
-    /**
      * 企业名称
      */
     @Excel(name = "企业名称")
     private java.lang.String companyName;
     /**
+     * 法人
+     */
+    @Excel(name = "法人")
+    private java.lang.String manager;
+    /**
+     * 注册资本
+     */
+    @Excel(name = "注册资本")
+    private java.lang.String regCapital;
+    /**
      * 成立时间
      */
     @Excel(name = "成立时间", format = "yyyy-MM-dd")
     private java.util.Date buildDate;
+    /**
+     * 地址
+     */
+    @Excel(name = "地址范围")
+    private java.lang.String address;
     /**
      * 经营范围
      */
@@ -107,19 +117,21 @@ public class TMcTelePage implements java.io.Serializable {
     @Excel(name = "联系方式")
     private java.lang.String contract;
     /**
-     * 地址
-     */
-    @Excel(name = "地址")
-    private java.lang.String address;
-    /**
      * 客服人员
      */
     @Excel(name = "客服人员")
     private java.lang.String customerService;
     /**
+     * 营销时间
+     */
+    @Excel(name = "营销时间", format = "yyyy-MM-dd")
+    private java.util.Date disDate;
+
+    @Excel(name = "营销状态")
+    private java.lang.String marketingStatus;
+    /**
      * 客服人员id
      */
-    @Excel(name = "客服人员id")
     private java.lang.String customerServiceId;
     /**
      * 客户姓名
@@ -177,6 +189,30 @@ public class TMcTelePage implements java.io.Serializable {
      * 客户经理
      */
     private java.lang.String customManager;
+
+    public String getMarketingStatus() {
+        return marketingStatus;
+    }
+
+    public void setMarketingStatus(String marketingStatus) {
+        this.marketingStatus = marketingStatus;
+    }
+
+    public Date getDisDate() {
+        return disDate;
+    }
+
+    public void setDisDate(Date disDate) {
+        this.disDate = disDate;
+    }
+
+    public String getRegCapital() {
+        return regCapital;
+    }
+
+    public void setRegCapital(String regCapital) {
+        this.regCapital = regCapital;
+    }
 
     /**
      * 方法: 取得java.lang.String

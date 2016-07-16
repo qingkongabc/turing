@@ -18,13 +18,15 @@
             <t:dgCol title="所属公司" field="sysCompanyCode" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="数据来源" field="dataResource" query="true" queryMode="single" width="120"></t:dgCol>
             <t:dgCol title="证件号" field="credential" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="法人" field="manager" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="企业名称" field="companyName" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="法人" field="manager" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="成立时间" field="buildDate" formatter="yyyy-MM-dd" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="注册资本" field="regCapital" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="地址范围" field="address" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="经营范围" field="business" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="联系方式" field="contract" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="地址" field="address" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客服人员" field="customerService" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="营销时间" field="disDate" formatter="yyyy-MM-dd" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客服人员id" field="customerServiceId" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="流程状态" field="bpmStatus" query="true" queryMode="single" dictionary="tel_status"
                      width="120"></t:dgCol>

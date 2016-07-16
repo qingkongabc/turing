@@ -23,6 +23,7 @@
     <input id="createName" name="createName" type="hidden" value="${tMcTelePage.createName }">
     <input id="createBy" name="createBy" type="hidden" value="${tMcTelePage.createBy }">
     <input id="createDate" name="createDate" type="hidden" value="${tMcTelePage.createDate }">
+    <input id="disDate" name="disDate" type="hidden" value="${tMcTelePage.disDate }">
     <input id="updateName" name="updateName" type="hidden" value="${tMcTelePage.updateName }">
     <input id="updateBy" name="updateBy" type="hidden" value="${tMcTelePage.updateBy }">
     <input id="updateDate" name="updateDate" type="hidden" value="${tMcTelePage.updateDate }">
@@ -30,6 +31,7 @@
     <input id="sysCompanyCode" name="sysCompanyCode" type="hidden" value="${tMcTelePage.sysCompanyCode }">
     <input id="bpmStatus" name="bpmStatus" type="hidden" value="${tMcTelePage.bpmStatus }">
     <input id="customerServiceId" name="customerServiceId" type="hidden" value="${tMcTelePage.customerServiceId }">
+    <input id="marketingStatus" name="marketingStatus" type="hidden" value="${tMcTelePage.marketingStatus }">
     <table cellpadding="0" cellspacing="1" class="formtable">
         <tr>
             <td align="right">

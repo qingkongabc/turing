@@ -89,19 +89,6 @@
                             <tr>
                                 <td align="right">
                                     <label class="Validform_label">
-                                        营销时间:
-                                    </label>
-                                </td>
-                                <td class="value">
-                                    <input name="tMcTeleSubList[${index}].sellDate" maxlength="32"
-                                           type="text" class="Wdate" onClick="WdatePicker()" type="date"
-                                           pattern="yyyy-MM-dd"/>
-                                    <label class="Validform_label" style="display: none;">营销时间</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <label class="Validform_label">
                                         主营业务:
                                     </label>
                                 </td>
@@ -259,9 +246,8 @@
                                     </label>
                                 </td>
                                 <td class="value" colspan="7">
-                                    <input name="tMcTeleSubList[${stuts.index}].sellDate" maxlength="32"
-                                           type="text" class="Wdate" onClick="WdatePicker()"
-                                           value="<fmt:formatDate value='${poVal.sellDate}' type="date" pattern="yyyy-MM-dd"/>">
+                                    <input maxlength="32" type="text" class="Wdate" disabled
+                                           value="<fmt:formatDate value='${poVal.updateDate}' type="date" pattern="yyyy-MM-dd"/>">
                                     <label class="Validform_label" style="display: none;">营销时间</label>
                                 </td>
                             </tr>

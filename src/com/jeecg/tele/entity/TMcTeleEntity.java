@@ -83,20 +83,30 @@ public class TMcTeleEntity implements java.io.Serializable {
     @Excel(name = "证件号")
     private java.lang.String credential;
     /**
-     * 法人
-     */
-    @Excel(name = "法人")
-    private java.lang.String manager;
-    /**
      * 企业名称
      */
     @Excel(name = "企业名称")
     private java.lang.String companyName;
     /**
+     * 法人
+     */
+    @Excel(name = "法人")
+    private java.lang.String manager;
+    /**
+     * 注册资本
+     */
+    @Excel(name = "注册资本")
+    private java.lang.String regCapital;
+    /**
      * 成立时间
      */
     @Excel(name = "成立时间", format = "yyyy-MM-dd")
     private java.util.Date buildDate;
+    /**
+     * 地址
+     */
+    @Excel(name = "地址范围")
+    private java.lang.String address;
     /**
      * 经营范围
      */
@@ -107,20 +117,21 @@ public class TMcTeleEntity implements java.io.Serializable {
      */
     @Excel(name = "联系方式")
     private java.lang.String contract;
-    /**
-     * 地址
-     */
-    @Excel(name = "地址")
-    private java.lang.String address;
+
+    @Excel(name = "营销状态")
+    private java.lang.String marketingStatus;
     /**
      * 客服人员
      */
     @Excel(name = "客服人员")
     private java.lang.String customerService;
     /**
+     * 营销时间
+     */
+    private java.util.Date disDate;
+    /**
      * 客服人员id
      */
-    @Excel(name = "客服人员id")
     private java.lang.String customerServiceId;
     /**
      * 客户姓名
@@ -179,6 +190,24 @@ public class TMcTeleEntity implements java.io.Serializable {
      */
     private java.lang.String customManager;
 
+    @Column(name = "MARKETING_STATUS", nullable = true, length = 32)
+    public String getMarketingStatus() {
+        return marketingStatus;
+    }
+
+    public void setMarketingStatus(String marketingStatus) {
+        this.marketingStatus = marketingStatus;
+    }
+
+    @Column(name = "REG_CAPITAL", nullable = true, length = 32)
+    public String getRegCapital() {
+        return regCapital;
+    }
+
+    public void setRegCapital(String regCapital) {
+        this.regCapital = regCapital;
+    }
+
     /**
      * 方法: 取得java.lang.String
      *
@@ -187,6 +216,7 @@ public class TMcTeleEntity implements java.io.Serializable {
     @Id
     @GeneratedValue(generator = "paymentableGenerator")
     @GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
+
 
     @Column(name = "ID", nullable = false, length = 36)
     public java.lang.String getId() {
@@ -240,6 +270,15 @@ public class TMcTeleEntity implements java.io.Serializable {
      */
     public void setCreateBy(java.lang.String createBy) {
         this.createBy = createBy;
+    }
+
+    @Column(name = "DIS_DATE", nullable = true)
+    public Date getDisDate() {
+        return disDate;
+    }
+
+    public void setDisDate(Date disDate) {
+        this.disDate = disDate;
     }
 
     /**

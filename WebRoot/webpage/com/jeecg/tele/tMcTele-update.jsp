@@ -26,6 +26,7 @@
     <input id="updateName" name="updateName" type="hidden" value="${tMcTelePage.updateName }">
     <input id="updateBy" name="updateBy" type="hidden" value="${tMcTelePage.updateBy }">
     <input id="updateDate" name="updateDate" type="hidden" value="${tMcTelePage.updateDate }">
+    <input id="disDate" name="disDate" type="hidden" value="${tMcTelePage.disDate }">
     <input id="sysOrgCode" name="sysOrgCode" type="hidden" value="${tMcTelePage.sysOrgCode }">
     <input id="sysCompanyCode" name="sysCompanyCode" type="hidden" value="${tMcTelePage.sysCompanyCode }">
     <input id="bpmStatus" name="bpmStatus" type="hidden" value="${tMcTelePage.bpmStatus }">
@@ -44,6 +45,7 @@
     <input id="orgName" name="orgName" type="hidden" value="${tMcTelePage.orgName }">
     <input id="customManager" name="customManager" type="hidden" value="${tMcTelePage.customManager }">
     <input id="customerServiceId" name="customerServiceId" type="hidden" value="${tMcTelePage.customerServiceId }">
+    <input id="marketingStatus" name="marketingStatus" type="hidden" value="${tMcTelePage.marketingStatus }">
     <table cellpadding="0" cellspacing="1" class="formtable">
         <tr>
             <td align="right">
@@ -65,6 +67,26 @@
                 <label class="Validform_label" style="display: none;">证件号</label>
             </td>
             <td align="right">
+                <label class="Validform_label">企业名称:</label>
+            </td>
+            <td class="value">
+                <input id="companyName" name="companyName" type="text" style="width:90%" class="inputxt"
+                       value='${tMcTelePage.companyName}'>
+                <span class="Validform_checktip"></span>
+                <label class="Validform_label" style="display: none;">企业名称</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <label class="Validform_label">注册资本:</label>
+            </td>
+            <td class="value">
+                <input id="regCapital" name="regCapital" type="text" style="width: 150px" class="inputxt" datatype="*"
+                       value='${tMcTelePage.regCapital}'>
+                <span class="Validform_checktip"></span>
+                <label class="Validform_label" style="display: none;">注册资本</label>
+            </td>
+            <td align="right">
                 <label class="Validform_label">法人:</label>
             </td>
             <td class="value">
@@ -72,17 +94,6 @@
                        value='${tMcTelePage.manager}'>
                 <span class="Validform_checktip"></span>
                 <label class="Validform_label" style="display: none;">法人</label>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label class="Validform_label">企业名称:</label>
-            </td>
-            <td class="value" colspan="3">
-                <input id="companyName" name="companyName" type="text" style="width:90%" class="inputxt"
-                       value='${tMcTelePage.companyName}'>
-                <span class="Validform_checktip"></span>
-                <label class="Validform_label" style="display: none;">企业名称</label>
             </td>
             <td align="right">
                 <label class="Validform_label">成立时间:</label>
@@ -133,7 +144,7 @@
         </tr>
         <tr>
             <td align="right">
-                <label class="Validform_label">地址:</label>
+                <label class="Validform_label">地址范围:</label>
             </td>
             <td class="value" colspan="5">
                 <input id="address" name="address" type="text" style="width: 90%" class="inputxt" datatype="*"

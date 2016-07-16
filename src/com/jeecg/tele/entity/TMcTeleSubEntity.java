@@ -56,10 +56,7 @@ public class TMcTeleSubEntity implements java.io.Serializable {
      * 更新人登录名称
      */
     private java.lang.String updateBy;
-    /**
-     * 更新日期
-     */
-    private java.util.Date updateDate;
+
     /**
      * 所属部门
      */
@@ -122,9 +119,13 @@ public class TMcTeleSubEntity implements java.io.Serializable {
     @Excel(name = "结息情况")
     private java.lang.String interestStatus;
     /**
-     * 营销时间
+     * 更新日期
      */
     @Excel(name = "营销时间", format = "yyyy-MM-dd")
+    private java.util.Date updateDate;
+    /**
+     * 营销时间
+     */
     private java.util.Date sellDate;
     /**
      * 客服人员

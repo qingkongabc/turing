@@ -68,40 +68,50 @@ public class TMcTelePage2 implements java.io.Serializable {
     @Excel(name = "证件号")
     private String credential;
     /**
+     * 企业名称
+     */
+    @Excel(name = "企业名称")
+    private String companyName;
+    /**
      * 法人
      */
     @Excel(name = "法人")
     private String manager;
     /**
-     * 企业名称
+     * 注册资本
      */
-    @Excel(name = "企业名称")
-    private String companyName;
+    @Excel(name = "注册资本")
+    private java.lang.String regCapital;
     /**
      * 成立时间
      */
     @Excel(name = "成立时间", format = "yyyy-MM-dd")
     private Date buildDate;
     /**
+     * 地址
+     */
+    @Excel(name = "地址范围")
+    private java.lang.String address;
+    /**
      * 经营范围
      */
     @Excel(name = "经营范围")
-    private String business;
+    private java.lang.String business;
     /**
      * 联系方式
      */
     @Excel(name = "联系方式")
-    private String contract;
-    /**
-     * 地址
-     */
-    @Excel(name = "地址")
-    private String address;
+    private java.lang.String contract;
     /**
      * 客服人员
      */
     @Excel(name = "客服人员")
     private String customerService;
+    /**
+     * 营销时间
+     */
+    @Excel(name = "营销时间", format = "yyyy-MM-dd")
+    private java.util.Date disDate;
     /**
      * 客服人员id
      */
@@ -176,6 +186,22 @@ public class TMcTelePage2 implements java.io.Serializable {
      */
     @Excel(name = "客户经理")
     private String customManager;
+
+    public Date getDisDate() {
+        return disDate;
+    }
+
+    public void setDisDate(Date disDate) {
+        this.disDate = disDate;
+    }
+
+    public String getRegCapital() {
+        return regCapital;
+    }
+
+    public void setRegCapital(String regCapital) {
+        this.regCapital = regCapital;
+    }
 
     /**
      * 方法: 取得java.lang.String

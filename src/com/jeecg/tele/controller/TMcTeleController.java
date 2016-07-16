@@ -5,8 +5,8 @@ import com.jeecg.tele.service.TMcTeleServiceI;
 import com.jeecg.tele.page.TMcTelePage;
 import com.jeecg.tele.entity.TMcTeleSubEntity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +46,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -60,7 +59,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 
-import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.net.URI;
@@ -248,6 +246,8 @@ public class TMcTeleController extends BaseController {
                         id
                 );
                 tMcTele.setCustomerService(request.getParameter("realName"));
+                tMcTele.setBpmStatus("11");
+                tMcTele.setDisDate(new Date());
                 tMcTeleService.saveOrUpdate(tMcTele);
                 systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
             }
@@ -295,6 +295,21 @@ public class TMcTeleController extends BaseController {
         AjaxJson j = new AjaxJson();
         String message = "更新成功";
         try {
+            for (TMcTeleSubEntity tMcTeleSubEntity : tMcTeleSubList) {
+                Date updateDate = tMcTeleSubEntity.getUpdateDate();
+                if (null == updateDate) {
+                    tMcTeleSubEntity.setUpdateDate(new Date());
+                }
+                if (StringUtils.isNotBlank(tMcTeleSubEntity.getMarketingStatus())) {
+                    tMcTele.setMarketingStatus(tMcTeleSubEntity.getMarketingStatus());
+                }
+            }
+            String marketingStatus1 = tMcTeleSubList.get(0).getMarketingStatus();
+            String marketingStatus2 = tMcTeleSubList.get(1).getMarketingStatus();
+            if (StringUtils.isBlank(marketingStatus1) && StringUtils.isBlank(marketingStatus2)) {
+                tMcTele.setMarketingStatus(null);
+            }
+
             tMcTeleService.updateMain(tMcTele, tMcTeleSubList);
             systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
         } catch (Exception e) {
@@ -368,9 +383,24 @@ public class TMcTeleController extends BaseController {
     public String exportXls(TMcTeleEntity tMcTele, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid, ModelMap map) {
         CriteriaQuery cq = new CriteriaQuery(TMcTeleEntity.class, dataGrid);
         //查询条件组装器
+        String status = tMcTele.getMarketingStatus();
+        try {
+            status = new String(status.getBytes("iso8859-1"), "utf-8");
+            tMcTele.setMarketingStatus(status);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
         try {
             //自定义追加查询条件
+            String query_createDate_begin = request.getParameter("createDate_begin");
+            String query_createDate_end = request.getParameter("createDate_end");
+            if (StringUtil.isNotEmpty(query_createDate_begin)) {
+                cq.ge("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_begin));
+            }
+            if (StringUtil.isNotEmpty(query_createDate_end)) {
+                cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
+            }
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
@@ -385,7 +415,7 @@ public class TMcTeleController extends BaseController {
                     Object id0 = entity.getId();
                     String hql0 = "from TMcTeleSubEntity where 1 = 1 AND tELE_ID_FK = ? ";
                     List<TMcTeleSubEntity> tMcTeleSubEntityList = systemService.findHql(hql0, id0);
-                    page.setTMcTeleSubList(new ArrayList<TMcTeleSubEntity>());
+                    page.setTMcTeleSubList(tMcTeleSubEntityList);
                     pageList.add(page);
                 } catch (Exception e) {
                     logger.info(e.getMessage());
@@ -431,6 +461,7 @@ public class TMcTeleController extends BaseController {
                     List<TMcTeleEntity> tMcTeleEntityList = systemService.findHql(hql, contract);
                     if (tMcTeleEntityList.size() == 0) {
                         if (StringUtils.isNotBlank(entity1.getCustomerService())) {
+                            entity1.setDisDate(new Date());
                             entity1.setBpmStatus("11");
                         } else {
                             entity1.setBpmStatus("10");

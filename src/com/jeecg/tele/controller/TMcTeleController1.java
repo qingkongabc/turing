@@ -92,7 +92,6 @@ public class TMcTeleController1 extends BaseController {
      * @param request
      * @param response
      * @param dataGrid
-     * @param user
      */
 
     @RequestMapping(params = "datagrid")
@@ -110,7 +109,7 @@ public class TMcTeleController1 extends BaseController {
             if (StringUtil.isNotEmpty(query_createDate_end)) {
                 cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
             }
-            cq.isNotNull("idCard");
+            //cq.isNotNull("idCard");
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
@@ -243,7 +242,7 @@ public class TMcTeleController1 extends BaseController {
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
         try {
             //自定义追加查询条件
-            cq.isNotNull("customName");
+            //cq.isNotNull("customName");
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
