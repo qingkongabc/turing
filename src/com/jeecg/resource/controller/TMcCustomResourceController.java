@@ -190,6 +190,51 @@ public class TMcCustomResourceController extends BaseController {
 		return j;
 	}
 
+	@RequestMapping(params = "doBatchDelByCond")
+	@ResponseBody
+	public AjaxJson doBatchDelByCond(TMcCustomResourceEntity tMcCustomResource,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid,ModelMap map) {
+		CriteriaQuery cq = new CriteriaQuery(TMcCustomResourceEntity.class, dataGrid);
+		//查询条件组装器
+		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcCustomResource);
+		AjaxJson j = new AjaxJson();
+		String message = "客户资产删除成功";
+		try {
+			//自定义追加查询条件
+			String query_createMonth_begin = request.getParameter("createMonth_begin");
+			String query_createMonth_end = request.getParameter("createMonth_end");
+			String query_createDate_begin = request.getParameter("createDate_begin");
+			String query_createDate_end = request.getParameter("createDate_end");
+			if(StringUtils.isBlank(query_createMonth_begin) || StringUtils.isBlank(query_createMonth_end)){
+				j.setMsg("请选择开始和结束月份!");
+				return j;
+			}
+			if (StringUtil.isNotEmpty(query_createMonth_begin)) {
+				cq.ge("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_begin));
+			}
+			if (StringUtil.isNotEmpty(query_createMonth_end)) {
+				cq.le("createMonth", new SimpleDateFormat("yyyy-MM").parse(query_createMonth_end));
+			}
+			if (StringUtil.isNotEmpty(query_createDate_begin)) {
+				cq.ge("createDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(query_createDate_begin));
+			}
+			if (StringUtil.isNotEmpty(query_createDate_end)) {
+				cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(query_createDate_end));
+			}
+			cq.add();
+			List<TMcCustomResourceEntity> list=this.tMcCustomResourceService.getListByCriteriaQuery(cq, false);
+			for (TMcCustomResourceEntity resourceEntity : list) {
+				tMcCustomResourceService.delMain(resourceEntity);
+				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+			}
+			message += ",共删除"+list.size()+"条!";
+		} catch (Exception e) {
+			message = "客户资产删除失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+
 	/**
 	 * 添加客户资产
 	 * 
@@ -298,19 +343,30 @@ public class TMcCustomResourceController extends BaseController {
 
 	@RequestMapping(params = "addUserToOrgList")
 	public void addUserToOrgList(TSUser user, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-		String orgId = request.getParameter("orgId");
+		String departname = request.getParameter("userOrgList.tsDepart.departname");
+
+        List<TSDepart> tsDeparts = null;
+        if(StringUtils.isNotBlank(departname)){
+            tsDeparts = systemService.findHql("from TSDepart where departname like '%"+departname+"%'");
+        }
 
 		CriteriaQuery cq = new CriteriaQuery(TSUser.class, dataGrid);
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, user);
 
-		// 获取 当前组织机构的用户信息
-		/*CriteriaQuery subCq = new CriteriaQuery(TSUserOrg.class);
-        subCq.setProjection(Property.forName("tsUser.id"));
-        subCq.eq("tsDepart.id", orgId);
-        subCq.add();
+        if(tsDeparts != null && tsDeparts.size() > 0){
+            List<String> list = new ArrayList<>();
+            for (TSDepart tsDepart : tsDeparts) {
+                list.add(tsDepart.getId());
+            }
+            // 获取 当前组织机构的用户信息
+            CriteriaQuery subCq = new CriteriaQuery(TSUserOrg.class);
+            subCq.setProjection(Property.forName("tsUser.id"));
+            subCq.in("tsDepart.id", list.toArray());
+            subCq.add();
 
-        cq.add(Property.forName("id").notIn(subCq.getDetachedCriteria()));
-        cq.add();*/
+            cq.add(Property.forName("id").in(subCq.getDetachedCriteria()));
+            cq.add();
+        }
 
 		this.systemService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);

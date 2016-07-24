@@ -1062,3 +1062,40 @@ function jeecgAutoParse(data){
 }
 
 
+function JeecgDelByCond(url,datagridId){
+	var queryParams = $('#'+datagridId).datagrid('options').queryParams;
+	$('#'+datagridId+'tb').find('*').each(function() {
+		queryParams[$(this).attr('name')] = $(this).val();
+	});
+	var params = '&';
+	$.each(queryParams, function(key, val){
+		params+='&'+key+'='+val;
+	});
+	var fields = '&field=';
+	$.each($('#'+ datagridId).datagrid('options').columns[0], function(i, val){
+		if(val.field != 'opt'){
+			fields+=val.field+',';
+		}
+	});
+
+	$.dialog.setting.zIndex = getzIndex(true);
+	$.dialog.confirm('你确定永久删除该数据吗?', function(r) {
+		if (r) {
+			$.ajax({
+				url : url + encodeURI(fields+params),
+				type : 'post',
+				cache : false,
+				success : function(data) {
+					var d = $.parseJSON(data);
+					if (d.success) {
+						var msg = d.msg;
+						tip(msg);
+						reloadTable();
+					}
+				}
+			});
+		}
+	});
+
+}
+

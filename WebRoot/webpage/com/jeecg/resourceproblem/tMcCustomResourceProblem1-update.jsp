@@ -7,6 +7,9 @@
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
   <script type="text/javascript">
   //编写自定义JS代码
+  function viewoperation(operationId) {
+	  createwindow("<t:mutiLang langKey="资产详情" langArg="common.operation"/>", "tMcCustomResourceController.do?goUpdate&load=detail&id=" + operationId, "100%", "100%");
+  }
   </script>
  </head>
  <body>
@@ -24,6 +27,9 @@
 					<input id="createMonth" name="createMonth" type="text" style="width: 150px" readonly
 						   class="Wdate"
 						   value='<fmt:formatDate value='${tMcCustomResourceProblem1Page.createMonth}' type="date" pattern="yyyy-MM"/>'>
+                    <a href="#" class="easyui-linkbutton l-btn l-btn-plain" plain="true" icon="icon-search" onclick="viewoperation('${tMcCustomResourceProblem1Page.customResourceId }')" id="">
+                        <span>资产详情</span>
+                    </a>
 					<span class="Validform_checktip"></span>
 					<label class="Validform_label" style="display: none;">月份</label>
 				</td>
@@ -135,4 +141,4 @@
 			</table>
 		</t:formvalid>
  </body>
-  <script src = "webpage/com/jeecg/resourceproblem/tMcCustomResourceProblem1.js"></script>		
+  <script src = "webpage/com/jeecg/resourceproblem/tMcCustomResourceProblem1.js"></script>

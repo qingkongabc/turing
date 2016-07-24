@@ -46,6 +46,7 @@
    <t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="tMcCustomResourceController.do?goUpdate" funname="update" operationCode="update" width="100%" height="100%"></t:dgToolBar>--%>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="tMcCustomResourceController.do?doBatchDel" funname="deleteALLSelect" operationCode="deleteALLSelect"></t:dgToolBar>
+   <t:dgToolBar title="按条件删除" icon="icon-remove" funname="doBatchDelByCond" operationCode="doBatchDelByCond"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="tMcCustomResourceController.do?goUpdate" funname="detail" operationCode="detail" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls" operationCode="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls" operationCode="ExportXls"></t:dgToolBar>
@@ -79,6 +80,11 @@ function ImportXls() {
 //导出
 function ExportXls() {
 	JeecgExcelExport("tMcCustomResourceController.do?exportXls","tMcCustomResourceList");
+}
+
+ //批量按条件删除
+function doBatchDelByCond() {
+ JeecgDelByCond("tMcCustomResourceController.do?doBatchDelByCond","tMcCustomResourceList");
 }
 
 //模板下载

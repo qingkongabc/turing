@@ -34,11 +34,9 @@
      <t:dgToolBar title="反馈" icon="icon-edit" url="tMcCustomResourceProblem1Controller.do?goUpdate" funname="update"
                   operationCode="update"></t:dgToolBar>
     </c:if>
-    <c:if test="${empty param.flag}">
      <t:dgToolBar title="查看" icon="icon-search" url="tMcCustomResourceProblem1Controller.do?goUpdate" funname="detail"
                   operationCode="detail"></t:dgToolBar>
      <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls" operationCode="ExportXls"></t:dgToolBar>
-    </c:if>
    <%--<t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>--%>
   </t:datagrid>
