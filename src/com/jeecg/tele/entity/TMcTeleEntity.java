@@ -72,6 +72,15 @@ public class TMcTeleEntity implements java.io.Serializable {
      * 流程状态
      */
     private java.lang.String bpmStatus;
+    /**机构号*/
+    @Excel(name="机构号")
+    private java.lang.String branchCode;
+    /**归属行部*/
+    @Excel(name="归属行部")
+    private java.lang.String branchName;
+    /**客户经理*/
+    @Excel(name="客户经理")
+    private java.lang.String telManager;
     /**
      * 数据来源
      */
@@ -125,6 +134,16 @@ public class TMcTeleEntity implements java.io.Serializable {
      */
     @Excel(name = "客服人员")
     private java.lang.String customerService;
+    @Excel(name = "营销状态1")
+    private java.lang.String status1;
+    @Excel(name = "营销状态2")
+    private java.lang.String status2;
+    @Excel(name = "营销状态3")
+    private java.lang.String status3;
+    @Excel(name = "产品")
+    private java.lang.String product;
+    @Excel(name = "备注")
+    private java.lang.String remark;
     /**
      * 营销时间
      */
@@ -230,6 +249,56 @@ public class TMcTeleEntity implements java.io.Serializable {
      */
     public void setId(java.lang.String id) {
         this.id = id;
+    }
+
+
+    @Column(name ="BRANCH_CODE",nullable=true,length=200)
+    public java.lang.String getBranchCode(){
+        return this.branchCode;
+    }
+
+    /**
+     *方法: 设置java.lang.String
+     *@param: java.lang.String  机构号
+     */
+    public void setBranchCode(java.lang.String branchCode){
+        this.branchCode = branchCode;
+    }
+
+    /**
+     *方法: 取得java.lang.String
+     *@return: java.lang.String  归属行部
+     */
+
+    @Column(name ="BRANCH_NAME",nullable=true,length=200)
+    public java.lang.String getBranchName(){
+        return this.branchName;
+    }
+
+    /**
+     *方法: 设置java.lang.String
+     *@param: java.lang.String  归属行部
+     */
+    public void setBranchName(java.lang.String branchName){
+        this.branchName = branchName;
+    }
+
+    /**
+     *方法: 取得java.lang.String
+     *@return: java.lang.String  客户经理
+     */
+
+    @Column(name ="TEL_MANAGER",nullable=true,length=200)
+    public java.lang.String getTelManager(){
+        return this.telManager;
+    }
+
+    /**
+     *方法: 设置java.lang.String
+     *@param: java.lang.String  客户经理
+     */
+    public void setTelManager(java.lang.String telManager){
+        this.telManager = telManager;
     }
 
     /**
@@ -901,4 +970,48 @@ public class TMcTeleEntity implements java.io.Serializable {
         this.customManager = customManager;
     }
 
+    @Column(name = "STATUS1", nullable = true, length = 200)
+    public String getStatus1() {
+        return status1;
+    }
+
+    public void setStatus1(String status1) {
+        this.status1 = status1;
+    }
+
+    @Column(name = "STATUS2", nullable = true, length = 200)
+    public String getStatus2() {
+        return status2;
+    }
+
+    public void setStatus2(String status2) {
+        this.status2 = status2;
+    }
+
+    @Column(name = "STATUS3", nullable = true, length = 200)
+    public String getStatus3() {
+        return status3;
+    }
+
+    public void setStatus3(String status3) {
+        this.status3 = status3;
+    }
+
+    @Column(name = "PRODUCT", nullable = true, length = 2000)
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    @Column(name = "REMARK", nullable = true, length = 2000)
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

@@ -251,7 +251,6 @@ public class TMcTeleController1 extends BaseController {
         List<TMcTelePage2> pageList = new ArrayList<TMcTelePage2>();
         if (list != null && list.size() > 0) {
             for (TMcTeleEntity entity : list) {
-                System.out.printf("=======================" + entity.getCustomName() + "======" + StringUtils.isBlank(entity.getCustomName()));
                 try {
                     TMcTelePage2 page = new TMcTelePage2();
                     MyBeanUtils.copyBeanNotNull2Bean(entity, page);

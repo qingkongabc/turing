@@ -51,6 +51,7 @@ public class TMcTeleSubEntity implements java.io.Serializable {
     /**
      * 更新人名称
      */
+    @Excel(name = "客服人员")
     private java.lang.String updateName;
     /**
      * 更新人登录名称
@@ -130,7 +131,7 @@ public class TMcTeleSubEntity implements java.io.Serializable {
     /**
      * 客服人员
      */
-    @Excel(name = "客服人员")
+
     private java.lang.String customerService;
     /**
      * 备注

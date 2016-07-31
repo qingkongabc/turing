@@ -71,6 +71,15 @@ public class TMcTelePage implements java.io.Serializable {
      * 流程状态
      */
     private java.lang.String bpmStatus;
+    /**机构号*/
+    @Excel(name="机构号")
+    private java.lang.String branchCode;
+    /**归属行部*/
+    @Excel(name="归属行部")
+    private java.lang.String branchName;
+    /**客户经理*/
+    @Excel(name="客户经理")
+    private java.lang.String telManager;
     /**
      * 数据来源
      */
@@ -129,6 +138,81 @@ public class TMcTelePage implements java.io.Serializable {
 
     @Excel(name = "营销状态")
     private java.lang.String marketingStatus;
+    @Excel(name = "营销状态1")
+    private java.lang.String status1;
+    @Excel(name = "营销状态2")
+    private java.lang.String status2;
+    @Excel(name = "营销状态3")
+    private java.lang.String status3;
+    @Excel(name = "产品")
+    private java.lang.String product;
+    @Excel(name = "备注")
+    private java.lang.String remark;
+
+    public String getBranchCode() {
+        return branchCode;
+    }
+
+    public void setBranchCode(String branchCode) {
+        this.branchCode = branchCode;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getTelManager() {
+        return telManager;
+    }
+
+    public void setTelManager(String telManager) {
+        this.telManager = telManager;
+    }
+
+    public String getStatus1() {
+        return status1;
+    }
+
+    public void setStatus1(String status1) {
+        this.status1 = status1;
+    }
+
+    public String getStatus2() {
+        return status2;
+    }
+
+    public void setStatus2(String status2) {
+        this.status2 = status2;
+    }
+
+    public String getStatus3() {
+        return status3;
+    }
+
+    public void setStatus3(String status3) {
+        this.status3 = status3;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     /**
      * 客服人员id
      */

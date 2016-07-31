@@ -94,6 +94,28 @@ public boolean onSave(Object entity, Serializable id, Object[] state,
 		    	 }
 		         continue;
 		     }
+			 /*找到名为"修改时间"的属性*/
+			 else if (DataBaseConstant.UPDATE_DATE.equals(propertyNames[index])
+					 ||DataBaseConstant.UPDATE_TIME.equals(propertyNames[index]))
+			 {
+             /*使用拦截器将对象的"修改时间"属性赋上值*/
+				 state[index] = new Date();
+				 continue;
+			 }
+         	/*找到名为"修改人"的属性*/
+			 else if (DataBaseConstant.UPDATE_BY.equals(propertyNames[index]))
+			 {
+             /*使用拦截器将对象的"修改人"属性赋上值*/
+				 state[index] = ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_CODE);
+				 continue;
+			 }
+         	/*找到名为"修改人名称"的属性*/
+			 else if (DataBaseConstant.UPDATE_NAME.equals(propertyNames[index]))
+			 {
+             /*使用拦截器将对象的"修改人名称"属性赋上值*/
+				 state[index] = ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_NAME);
+				 continue;
+			 }
 		 }
 	} catch (RuntimeException e) {
 		e.printStackTrace();

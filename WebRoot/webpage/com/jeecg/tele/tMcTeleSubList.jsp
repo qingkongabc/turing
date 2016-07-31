@@ -326,7 +326,7 @@
                                 </td>
                                 <td class="value" colspan="7">
 						<textarea name="tMcTeleSubList[${stuts.index}].remark" maxlength="2000" style="width: 90%"
-                                  type="text" class="inputxt" value="${poVal.remark }"/>
+                                  type="text" class="inputxt">${poVal.remark}</textarea>
                                     <label class="Validform_label" style="display: none;">备注</label>
                                 </td>
                             </tr>

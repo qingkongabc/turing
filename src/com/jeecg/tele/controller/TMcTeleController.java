@@ -105,7 +105,6 @@ public class TMcTeleController extends BaseController {
      * @param request
      * @param response
      * @param dataGrid
-     * @param user
      */
 
     @RequestMapping(params = "datagrid")
@@ -296,10 +295,6 @@ public class TMcTeleController extends BaseController {
         String message = "更新成功";
         try {
             for (TMcTeleSubEntity tMcTeleSubEntity : tMcTeleSubList) {
-                Date updateDate = tMcTeleSubEntity.getUpdateDate();
-                if (null == updateDate) {
-                    tMcTeleSubEntity.setUpdateDate(new Date());
-                }
                 if (StringUtils.isNotBlank(tMcTeleSubEntity.getMarketingStatus())) {
                     tMcTele.setMarketingStatus(tMcTeleSubEntity.getMarketingStatus());
                 }
@@ -308,6 +303,42 @@ public class TMcTeleController extends BaseController {
             String marketingStatus2 = tMcTeleSubList.get(1).getMarketingStatus();
             if (StringUtils.isBlank(marketingStatus1) && StringUtils.isBlank(marketingStatus2)) {
                 tMcTele.setMarketingStatus(null);
+            }
+
+            String marketingStatus = tMcTeleSubList.get(1).getMarketingStatus();
+            String produceService = tMcTeleSubList.get(1).getProduceService();
+            String business = tMcTeleSubList.get(1).getBusiness();
+            String resourceStatus = tMcTeleSubList.get(1).getResourceStatus();
+            String contract = tMcTeleSubList.get(1).getContract();
+            String cardStatus = tMcTeleSubList.get(1).getCardStatus();
+            String ownStatus = tMcTeleSubList.get(1).getOwnStatus();
+            String creditStatus = tMcTeleSubList.get(1).getCreditStatus();
+            String interestStatus = tMcTeleSubList.get(1).getInterestStatus();
+            String remark = tMcTeleSubList.get(1).getRemark();
+            if(StringUtils.isBlank(marketingStatus) && StringUtils.isBlank(produceService) &&  StringUtils.isBlank(business) && StringUtils.isBlank(resourceStatus) &&
+                    StringUtils.isBlank(contract) && StringUtils.isBlank(cardStatus) && StringUtils.isBlank(ownStatus) && StringUtils.isBlank(creditStatus) &&
+                    StringUtils.isBlank(interestStatus) && StringUtils.isBlank(remark)){
+                tMcTeleSubList.remove(1);
+            }
+
+            marketingStatus = tMcTeleSubList.get(0).getMarketingStatus();
+            produceService = tMcTeleSubList.get(0).getProduceService();
+            business = tMcTeleSubList.get(0).getBusiness();
+            resourceStatus = tMcTeleSubList.get(0).getResourceStatus();
+            contract = tMcTeleSubList.get(0).getContract();
+            cardStatus = tMcTeleSubList.get(0).getCardStatus();
+            ownStatus = tMcTeleSubList.get(0).getOwnStatus();
+            creditStatus = tMcTeleSubList.get(0).getCreditStatus();
+            interestStatus = tMcTeleSubList.get(0).getInterestStatus();
+            remark = tMcTeleSubList.get(0).getRemark();
+            if(StringUtils.isBlank(marketingStatus) && StringUtils.isBlank(produceService) &&  StringUtils.isBlank(business) && StringUtils.isBlank(resourceStatus) &&
+                    StringUtils.isBlank(contract) && StringUtils.isBlank(cardStatus) && StringUtils.isBlank(ownStatus) && StringUtils.isBlank(creditStatus) &&
+                    StringUtils.isBlank(interestStatus) && StringUtils.isBlank(remark)){
+                tMcTeleSubList.remove(0);
+            }
+
+            if(tMcTeleSubList.size()>0){
+                tMcTele.setBpmStatus("13");
             }
 
             tMcTeleService.updateMain(tMcTele, tMcTeleSubList);
@@ -366,6 +397,9 @@ public class TMcTeleController extends BaseController {
         String hql0 = "from TMcTeleSubEntity where 1 = 1 AND tELE_ID_FK = ? ";
         try {
             List<TMcTeleSubEntity> tMcTeleSubEntityList = systemService.findHql(hql0, id0);
+            if(tMcTeleSubEntityList.size() == 1){
+                tMcTeleSubEntityList.add(new TMcTeleSubEntity());
+            }
             req.setAttribute("tMcTeleSubList", tMcTeleSubEntityList);
         } catch (Exception e) {
             logger.info(e.getMessage());

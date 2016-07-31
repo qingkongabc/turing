@@ -16,6 +16,9 @@
                      width="120"></t:dgCol>
             <t:dgCol title="所属部门" field="sysOrgCode" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="所属公司" field="sysCompanyCode" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="机构号"  field="branchCode"    queryMode="single"  width="120"></t:dgCol>
+            <t:dgCol title="归属行部"  field="branchName"    queryMode="single"  width="120"></t:dgCol>
+            <t:dgCol title="客户经理"  field="telManager"    queryMode="single"  width="120"></t:dgCol>
             <t:dgCol title="数据来源" field="dataResource" query="true" queryMode="single" width="120"></t:dgCol>
             <t:dgCol title="证件号" field="credential" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="企业名称" field="companyName" queryMode="group" width="120"></t:dgCol>
@@ -29,6 +32,9 @@
             <t:dgCol title="营销时间" field="disDate" formatter="yyyy-MM-dd" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="营销状态" field="marketingStatus" query="true" queryMode="single" width="120"
                      dictionary="mk_status"></t:dgCol>
+            <t:dgCol title="营销状态1" field="status1" query="true" queryMode="single" width="120"></t:dgCol>
+            <t:dgCol title="营销状态2" field="status2" query="true" queryMode="single" width="120"></t:dgCol>
+            <t:dgCol title="营销状态3" field="status3" query="true" queryMode="single" width="120"></t:dgCol>
             <t:dgCol title="客服人员id" field="customerServiceId" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="流程状态" field="bpmStatus" query="true" queryMode="single" dictionary="tel_status"
                      width="120"></t:dgCol>
