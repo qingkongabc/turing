@@ -29,7 +29,7 @@
             <t:dgCol title="经营范围" field="business" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="联系方式" field="contract" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客服人员" field="customerService" query="true" queryMode="single" width="120"></t:dgCol>
-            <t:dgCol title="营销时间" field="disDate" formatter="yyyy-MM-dd" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="营销时间" field="disDate" formatter="yyyy-MM-dd" query="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="营销状态" field="marketingStatus" query="true" queryMode="single" width="120"
                      dictionary="mk_status"></t:dgCol>
             <t:dgCol title="营销状态1" field="status1" query="true" queryMode="single" width="120"></t:dgCol>
@@ -91,6 +91,12 @@
             WdatePicker({dateFmt: 'yyyy-MM-dd'});
         });
         $("#tMcTeleListtb").find("input[name='buildDate_end']").attr("class", "Wdate").click(function () {
+            WdatePicker({dateFmt: 'yyyy-MM-dd'});
+        });
+        $("#tMcTeleListtb").find("input[name='disDate_begin']").attr("class", "Wdate").click(function () {
+            WdatePicker({dateFmt: 'yyyy-MM-dd'});
+        });
+        $("#tMcTeleListtb").find("input[name='disDate_end']").attr("class", "Wdate").click(function () {
             WdatePicker({dateFmt: 'yyyy-MM-dd'});
         });
     });

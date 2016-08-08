@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.Property;
 import org.jeecgframework.web.system.pojo.base.TSUser;
@@ -121,6 +122,14 @@ public class TMcTeleController extends BaseController {
             }
             if (StringUtil.isNotEmpty(query_createDate_end)) {
                 cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
+            }
+            String query_disDate_begin = request.getParameter("disDate_begin");
+            String query_disDate_end = request.getParameter("disDate_end");
+            if (StringUtil.isNotEmpty(query_disDate_begin)) {
+                cq.ge("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_begin));
+            }
+            if (StringUtil.isNotEmpty(query_disDate_end)) {
+                cq.le("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_end));
             }
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
@@ -246,7 +255,6 @@ public class TMcTeleController extends BaseController {
                 );
                 tMcTele.setCustomerService(request.getParameter("realName"));
                 tMcTele.setBpmStatus("11");
-                tMcTele.setDisDate(new Date());
                 tMcTeleService.saveOrUpdate(tMcTele);
                 systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
             }
@@ -339,6 +347,26 @@ public class TMcTeleController extends BaseController {
 
             if(tMcTeleSubList.size()>0){
                 tMcTele.setBpmStatus("13");
+                String hql0 = "from TMcTeleSubEntity where 1 = 1 AND tELE_ID_FK = ? ";
+                List<TMcTeleSubEntity> tMcTeleSubOldList = systemService.findHql(hql0, tMcTele.getId());
+                BeanComparator beanComparator = new BeanComparator();
+                if(tMcTeleSubOldList.size()==0){
+                    tMcTele.setDisDate(new Date());
+                }else if(tMcTeleSubOldList.size()==1 && tMcTeleSubList.size()==1){
+                    int flag = beanComparator.compare(tMcTeleSubOldList.get(0),tMcTeleSubList.get(0));
+                    if(flag==1){
+                        tMcTele.setDisDate(new Date());
+                    }
+                }else if(tMcTeleSubOldList.size()==1 && tMcTeleSubList.size()==2){
+                    tMcTele.setDisDate(new Date());
+                }else{
+                    int flag = beanComparator.compare(tMcTeleSubOldList.get(0),tMcTeleSubList.get(0));
+                    flag += beanComparator.compare(tMcTeleSubOldList.get(1),tMcTeleSubList.get(1));
+                    if(flag>0){
+                        tMcTele.setDisDate(new Date());
+                    }
+                }
+
             }
 
             tMcTeleService.updateMain(tMcTele, tMcTeleSubList);
@@ -435,6 +463,14 @@ public class TMcTeleController extends BaseController {
             if (StringUtil.isNotEmpty(query_createDate_end)) {
                 cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
             }
+            String query_disDate_begin = request.getParameter("disDate_begin");
+            String query_disDate_end = request.getParameter("disDate_end");
+            if (StringUtil.isNotEmpty(query_disDate_begin)) {
+                cq.ge("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_begin));
+            }
+            if (StringUtil.isNotEmpty(query_disDate_end)) {
+                cq.le("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_end));
+            }
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
@@ -495,7 +531,6 @@ public class TMcTeleController extends BaseController {
                     List<TMcTeleEntity> tMcTeleEntityList = systemService.findHql(hql, contract);
                     if (tMcTeleEntityList.size() == 0) {
                         if (StringUtils.isNotBlank(entity1.getCustomerService())) {
-                            entity1.setDisDate(new Date());
                             entity1.setBpmStatus("11");
                         } else {
                             entity1.setBpmStatus("10");

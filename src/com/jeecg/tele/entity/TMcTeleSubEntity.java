@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.SequenceGenerator;
@@ -31,7 +32,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @Entity
 @Table(name = "t_mc_tele_sub", schema = "")
 @SuppressWarnings("serial")
-public class TMcTeleSubEntity implements java.io.Serializable {
+public class TMcTeleSubEntity implements java.io.Serializable,java.lang.Comparable<TMcTeleSubEntity> {
     /**
      * 主键
      */
@@ -577,5 +578,22 @@ public class TMcTeleSubEntity implements java.io.Serializable {
      */
     public void setRemark(java.lang.String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public int compareTo(TMcTeleSubEntity o) {
+        if(StringUtils.equals(marketingStatus,o.marketingStatus)&&
+        StringUtils.equals(produceService,o.produceService)&&
+        StringUtils.equals(business,o.business)&&
+        StringUtils.equals(resourceStatus,o.resourceStatus)&&
+        StringUtils.equals(contract,o.contract)&&
+        StringUtils.equals(cardStatus,o.cardStatus)&&
+        StringUtils.equals(ownStatus,o.ownStatus)&&
+        StringUtils.equals(creditStatus,o.creditStatus)&&
+        StringUtils.equals(interestStatus,o.interestStatus)&&
+        StringUtils.equals(remark,o.remark)){
+            return 0;
+        }
+        return 1;
     }
 }
