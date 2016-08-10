@@ -244,21 +244,21 @@
         </tr>
         <tr>
             <td align="right">
-                <label class="Validform_label">金融资产:</label>
+                <label class="Validform_label">产品名称1:</label>
             </td>
             <td class="value">
                 <input id="resource" name="resource" type="text" style="width: 90%" class="inputxt"
                        value='${tMcTelePage.resource}'>
             </td>
             <td align="right">
-                <label class="Validform_label">贷款余额:</label>
+                <label class="Validform_label">产品名称2:</label>
             </td>
             <td class="value">
                 <input id="loanBalance" name="loanBalance" type="text" style="width: 90%" class="inputxt"
                        value='${tMcTelePage.loanBalance}'>
             </td>
             <td align="right">
-                <label class="Validform_label">存储余额:</label>
+                <label class="Validform_label">金额1:</label>
             </td>
             <td class="value">
                 <input id="depositBalance" name="depositBalance" type="text" style="width: 90%" class="inputxt"
@@ -267,21 +267,21 @@
         </tr>
         <tr>
             <td align="right">
-                <label class="Validform_label">信用卡:</label>
+                <label class="Validform_label">金额2:</label>
             </td>
             <td class="value">
                 <input id="creditCard" name="creditCard" type="text" style="width: 90%" class="inputxt"
                        value='${tMcTelePage.creditCard}'>
             </td>
             <td align="right">
-                <label class="Validform_label">手机银行:</label>
+                <label class="Validform_label">存款日均:</label>
             </td>
             <td class="value">
                 <input id="mobileBank" name="mobileBank" type="text" style="width: 90%" class="inputxt"
                        value='${tMcTelePage.mobileBank}'>
             </td>
             <td align="right">
-                <label class="Validform_label">财神卡:</label>
+                <label class="Validform_label">金融资产日均:</label>
             </td>
             <td class="value">
                 <input id="card" name="card" type="text" style="width: 90%" class="inputxt"
@@ -304,7 +304,7 @@
                        value='${tMcTelePage.ddBalance}'>
             </td>
             <td align="right">
-                <label class="Validform_label">资金留存率:</label>
+                <label class="Validform_label">客服人员:</label>
             </td>
             <td class="value">
                 <input id="fundsRate" name="fundsRate" type="text" style="width: 90%" class="inputxt"

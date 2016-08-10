@@ -155,34 +155,34 @@ public class TMcTelePage2 implements java.io.Serializable {
     @Excel(name = "客户号")
     private String customId;
     /**
-     * 金融资产
+     * 产品名称1
      */
-    @Excel(name = "金融资产")
+    @Excel(name = "产品名称1")
     private String resource;
     /**
-     * 贷款余额
+     * 产品名称2
      */
-    @Excel(name = "贷款余额")
+    @Excel(name = "产品名称2")
     private String loanBalance;
     /**
-     * 存储余额
+     * 金额1
      */
-    @Excel(name = "存储余额")
+    @Excel(name = "金额1")
     private String depositBalance;
     /**
-     * 信用卡
+     * 金额2
      */
-    @Excel(name = "信用卡")
+    @Excel(name = "金额2")
     private String creditCard;
     /**
-     * 手机银行
+     * 存款日均
      */
-    @Excel(name = "手机银行")
+    @Excel(name = "存款日均")
     private String mobileBank;
     /**
-     * 财神卡
+     * 金融资产日均
      */
-    @Excel(name = "财神卡")
+    @Excel(name = "金融资产日均")
     private String card;
     /**
      * 保险销售
@@ -195,9 +195,9 @@ public class TMcTelePage2 implements java.io.Serializable {
     @Excel(name = "活期存款余额")
     private String ddBalance;
     /**
-     * 资金留存率
+     * 客服人员
      */
-    @Excel(name = "资金留存率")
+    @Excel(name = "客服人员")
     private String fundsRate;
     /**
      * 机构
@@ -715,7 +715,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  金融资产
+     * @return: java.lang.String  产品名称1
      */
     public String getResource() {
         return this.resource;
@@ -724,7 +724,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  金融资产
+     * @param: java.lang.String  产品名称1
      */
     public void setResource(String resource) {
         this.resource = resource;
@@ -733,7 +733,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  贷款余额
+     * @return: java.lang.String  产品名称2
      */
     public String getLoanBalance() {
         return this.loanBalance;
@@ -742,7 +742,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  贷款余额
+     * @param: java.lang.String  产品名称2
      */
     public void setLoanBalance(String loanBalance) {
         this.loanBalance = loanBalance;
@@ -751,7 +751,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  存储余额
+     * @return: java.lang.String  金额1
      */
     public String getDepositBalance() {
         return this.depositBalance;
@@ -760,7 +760,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  存储余额
+     * @param: java.lang.String  金额1
      */
     public void setDepositBalance(String depositBalance) {
         this.depositBalance = depositBalance;
@@ -769,7 +769,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  信用卡
+     * @return: java.lang.String  金额2
      */
     public String getCreditCard() {
         return this.creditCard;
@@ -778,7 +778,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  信用卡
+     * @param: java.lang.String  金额2
      */
     public void setCreditCard(String creditCard) {
         this.creditCard = creditCard;
@@ -787,7 +787,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  手机银行
+     * @return: java.lang.String  存款日均
      */
     public String getMobileBank() {
         return this.mobileBank;
@@ -796,7 +796,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  手机银行
+     * @param: java.lang.String  存款日均
      */
     public void setMobileBank(String mobileBank) {
         this.mobileBank = mobileBank;
@@ -805,7 +805,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  财神卡
+     * @return: java.lang.String  金融资产日均
      */
     public String getCard() {
         return this.card;
@@ -814,7 +814,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  财神卡
+     * @param: java.lang.String  金融资产日均
      */
     public void setCard(String card) {
         this.card = card;
@@ -859,7 +859,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 取得java.lang.String
      *
-     * @return: java.lang.String  资金留存率
+     * @return: java.lang.String  客服人员
      */
     public String getFundsRate() {
         return this.fundsRate;
@@ -868,7 +868,7 @@ public class TMcTelePage2 implements java.io.Serializable {
     /**
      * 方法: 设置java.lang.String
      *
-     * @param: java.lang.String  资金留存率
+     * @param: java.lang.String  客服人员
      */
     public void setFundsRate(String fundsRate) {
         this.fundsRate = fundsRate;

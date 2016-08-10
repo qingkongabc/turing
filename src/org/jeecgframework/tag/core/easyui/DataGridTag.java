@@ -360,7 +360,7 @@ public class DataGridTag extends TagSupport {
 				String[] dic = dictionary.split(",");
 				String text = "";
 				String value = "";
-				String sql = "select " + dic[1] + " as field," + dic[2]
+				String sql = "select distinct " + dic[1] + " as field," + dic[2]
 						+ " as text from " + dic[0];
 				systemService = ApplicationContextUtil.getContext().getBean(
 						SystemService.class);
@@ -779,14 +779,14 @@ public class DataGridTag extends TagSupport {
 							}else if(!StringUtil.isEmpty(col.getDictionary())){
 								if(col.getDictionary().contains(",")&&col.isPopup()){
 									String[] dic = col.getDictionary().split(",");
-									String sql = "select " + dic[1] + " as field," + dic[2]
+									String sql = "select distinct " + dic[1] + " as field," + dic[2]
 											+ " as text from " + dic[0];
 									System.out.println(dic[0]+"--"+dic[1]+"--"+dic[2]);
 								//	<input type="text" name="order_code"  style="width: 100px"  class="searchbox-inputtext" value="" onClick="inputClick(this,'account','user_msg');" />
 									sb.append("<input type=\"text\" name=\""+col.getField().replaceAll("_","\\.")+"\" style=\"width: 100px\" class=\"searchbox-inputtext\" value=\"\" onClick=\"inputClick(this,'"+dic[1]+"','"+dic[0]+"');\" /> ");
 								}else if(col.getDictionary().contains(",")&&(!col.isPopup())){
 									String[] dic = col.getDictionary().split(",");
-									String sql = "select " + dic[1] + " as field," + dic[2]
+									String sql = "select distinct " + dic[1] + " as field," + dic[2]
 											+ " as text from " + dic[0];
 									systemService = ApplicationContextUtil.getContext().getBean(
 											SystemService.class);
@@ -1681,7 +1681,7 @@ public class DataGridTag extends TagSupport {
 							}else if(!StringUtil.isEmpty(col.getDictionary())){
 								if(col.getDictionary().contains(",")){
 									String[] dic = col.getDictionary().split(",");
-									String sql = "select " + dic[1] + " as field," + dic[2]
+									String sql = "select distinct " + dic[1] + " as field," + dic[2]
 											+ " as text from " + dic[0];
 									systemService = ApplicationContextUtil.getContext().getBean(
 											SystemService.class);

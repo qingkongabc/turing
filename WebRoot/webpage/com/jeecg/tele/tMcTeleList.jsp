@@ -28,7 +28,7 @@
             <t:dgCol title="地址范围" field="address" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="经营范围" field="business" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="联系方式" field="contract" query="true" width="120"></t:dgCol>
-            <t:dgCol title="客服人员" field="customerService" query="true" queryMode="single" width="120" extend="{type:select};value:'小王';datatype:'*';}"></t:dgCol>
+            <t:dgCol title="客服人员" field="customerService" query="true" queryMode="single" width="120" dictionary="t_mc_tele,customer_service,customer_service"></t:dgCol>
             <t:dgCol title="营销时间" field="disDate" formatter="yyyy-MM-dd" query="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="营销状态" field="marketingStatus" query="true" queryMode="single" width="120"
                      dictionary="mk_status"></t:dgCol>
@@ -41,15 +41,15 @@
             <t:dgCol title="客户姓名" field="customName" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="身份证号" field="idCard" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客户号" field="customId" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="金融资产" field="resource" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="贷款余额" field="loanBalance" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="存储余额" field="depositBalance" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="信用卡" field="creditCard" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="手机银行" field="mobileBank" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="财神卡" field="card" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="产品名称1" field="resource" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="产品名称2" field="loanBalance" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="金额1" field="depositBalance" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="金额2" field="creditCard" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="存款日均" field="mobileBank" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="金融资产日均" field="card" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="保险销售" field="insurance" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="活期存款余额" field="ddBalance" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="资金留存率" field="fundsRate" hidden="true" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="客服人员" field="fundsRate" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="机构" field="orgName" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客户经理" field="customManager" hidden="true" queryMode="group" width="120"></t:dgCol>
             <%--<t:dgCol title="操作" field="opt" width="100"></t:dgCol>

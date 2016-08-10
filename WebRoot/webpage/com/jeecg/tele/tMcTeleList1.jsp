@@ -41,17 +41,19 @@
             <t:dgCol title="客户姓名" field="customName" query="true" queryMode="single" width="120"></t:dgCol>
             <t:dgCol title="身份证号" field="idCard" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客户号" field="customId" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="金融资产" field="resource" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="贷款余额" field="loanBalance" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="存储余额" field="depositBalance" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="信用卡" field="creditCard" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="手机银行" field="mobileBank" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="财神卡" field="card" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="产品名称1" field="resource" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="产品名称2" field="loanBalance" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="金额1" field="depositBalance" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="金额2" field="creditCard" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="存款日均" field="mobileBank" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="金融资产日均" field="card" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="保险销售" field="insurance" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="活期存款余额" field="ddBalance" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="资金留存率" field="fundsRate" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="客服人员" field="fundsRate" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="机构" field="orgName" query="true" queryMode="single" width="120"></t:dgCol>
             <t:dgCol title="客户经理" field="customManager" queryMode="group" width="120"></t:dgCol>
+            <t:dgToolBar title="编辑" icon="icon-edit" url="tMcTeleController1.do?goUpdate" funname="update" operationCode="update" width="100%"
+                         height="100%"></t:dgToolBar>
             <t:dgToolBar title="查看" icon="icon-search" url="tMcTeleController1.do?goUpdate" funname="detail" operationCode="detail"
                          width="100%" height="100%"></t:dgToolBar>
             <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls" operationCode="ImportXls"></t:dgToolBar>
