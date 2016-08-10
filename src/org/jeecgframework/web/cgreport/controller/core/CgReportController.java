@@ -272,6 +272,18 @@ public class CgReportController extends BaseController {
 		List<Map<String,Object>> items = (List<Map<String, Object>>) cgReportMap.get(CgReportConstant.ITEMS);
 		List<String> paramList = (List<String>) cgReportMap.get(CgReportConstant.PARAMS);
 		Map queryparams =  new LinkedHashMap<String,Object>();
+		if(querySql.indexOf("${dis_date}") > -1){
+			String dis_date_begin = request.getParameter("dis_date_begin");
+			String dis_date_end = request.getParameter("dis_date_end");
+			String sql = "";
+			if(StringUtils.isNotBlank(dis_date_begin)){
+				sql += " and date_format(dis_date,'%Y-%m-%d')>='"+dis_date_begin+"' ";
+			}
+			if(StringUtils.isNotBlank(dis_date_end)){
+				sql += " and date_format(dis_date,'%Y-%m-%d')<='"+dis_date_end+"' ";
+			}
+			querySql = querySql.replace("${dis_date}", sql);
+		}
 		if(paramList!=null&&paramList.size()>0){
 			for(String param :paramList){
 				String value = request.getParameter(param);
@@ -280,6 +292,9 @@ public class CgReportController extends BaseController {
 			}
 		}else{
 			for(Map<String,Object> item:items){
+				if(item.get("field_name").equals("dis_date")){
+					continue;
+				}
 				String isQuery = (String) item.get(CgReportConstant.ITEM_ISQUERY);
 				if(CgReportConstant.BOOL_TRUE.equalsIgnoreCase(isQuery)){
 					//step.3 装载查询条件

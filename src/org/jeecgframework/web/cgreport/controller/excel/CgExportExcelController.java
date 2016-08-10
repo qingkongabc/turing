@@ -76,6 +76,18 @@ public class CgExportExcelController extends BaseController {
             //update-begin--Author:张忠亮  Date:20150608 for：多数据源支持
             String dbKey=(String)configM.get("db_source");
             List<Map<String, Object>> result=null;
+			if(querySql.indexOf("${dis_date}") > -1){
+				String dis_date_begin = request.getParameter("dis_date_begin");
+				String dis_date_end = request.getParameter("dis_date_end");
+				String sql = "";
+				if(StringUtils.isNotBlank(dis_date_begin)){
+					sql += " and date_format(dis_date,'%Y-%m-%d')>='"+dis_date_begin+"' ";
+				}
+				if(StringUtils.isNotBlank(dis_date_end)){
+					sql += " and date_format(dis_date,'%Y-%m-%d')<='"+dis_date_end+"' ";
+				}
+				querySql = querySql.replace("${dis_date}", sql);
+			}
             if(StringUtils.isNotBlank(dbKey)){
                 result= DynamicDBUtil.findList(dbKey, SqlUtil.getFullSql(querySql,queryparams));
             }else{

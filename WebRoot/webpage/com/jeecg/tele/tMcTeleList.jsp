@@ -16,19 +16,19 @@
                      width="120"></t:dgCol>
             <t:dgCol title="所属部门" field="sysOrgCode" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="所属公司" field="sysCompanyCode" hidden="true" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="机构号"  field="branchCode"    queryMode="single"  width="120"></t:dgCol>
-            <t:dgCol title="归属行部"  field="branchName"    queryMode="single"  width="120"></t:dgCol>
-            <t:dgCol title="客户经理"  field="telManager"    queryMode="single"  width="120"></t:dgCol>
+            <t:dgCol title="机构号"  field="branchCode" queryMode="single"  width="120"></t:dgCol>
+            <t:dgCol title="归属行部"  field="branchName" queryMode="single"  width="120"></t:dgCol>
+            <t:dgCol title="客户经理"  field="telManager" queryMode="single"  width="120"></t:dgCol>
             <t:dgCol title="数据来源" field="dataResource" query="true" queryMode="single" width="120"></t:dgCol>
             <t:dgCol title="证件号" field="credential" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="企业名称" field="companyName" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="法人" field="manager" queryMode="group" width="120"></t:dgCol>
+            <t:dgCol title="法人" field="manager" query="true" width="120"></t:dgCol>
             <t:dgCol title="成立时间" field="buildDate" formatter="yyyy-MM-dd" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="注册资本" field="regCapital" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="地址范围" field="address" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="经营范围" field="business" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="联系方式" field="contract" queryMode="group" width="120"></t:dgCol>
-            <t:dgCol title="客服人员" field="customerService" query="true" queryMode="single" width="120"></t:dgCol>
+            <t:dgCol title="联系方式" field="contract" query="true" width="120"></t:dgCol>
+            <t:dgCol title="客服人员" field="customerService" query="true" queryMode="single" width="120" extend="{type:select};value:'小王';datatype:'*';}"></t:dgCol>
             <t:dgCol title="营销时间" field="disDate" formatter="yyyy-MM-dd" query="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="营销状态" field="marketingStatus" query="true" queryMode="single" width="120"
                      dictionary="mk_status"></t:dgCol>

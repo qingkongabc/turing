@@ -270,6 +270,10 @@ public class TMcCustomResourceController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		String message = "更新成功";
 		try{
+			for (TMcCustomResourceProblemEntity tMcCustomResourceProblemEntity : tMcCustomResourceProblemList) {
+				tMcCustomResourceProblemEntity.setCreateName(tMcCustomResource.getManager());
+				tMcCustomResourceProblemEntity.setSysOrgCode(tMcCustomResource.getBranchCode());
+			}
 			tMcCustomResourceService.updateMain(tMcCustomResource, tMcCustomResourceProblemList);
 
 			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
