@@ -80,6 +80,7 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	/**
 	 * 处理人姓名
 	 */
+	@Excel(name="处理人姓名")
 	private java.lang.String dealName;
 	/**
 	 * 处理人id
@@ -88,6 +89,7 @@ public class TMcCustomResourceProblemEntity implements java.io.Serializable {
 	/**
 	 * 情况说明
 	 */
+	@Excel(name="情况说明")
 	private java.lang.String feedback;
 
 	@Column(name = "feedback", nullable = true, length = 2000)

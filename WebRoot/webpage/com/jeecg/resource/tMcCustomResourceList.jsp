@@ -7,8 +7,8 @@
    <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="月份"  field="createMonth" formatter="yyyy-MM"  query="true" queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="机构号"  field="branchCode"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="归属行部"  field="branchName"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="客户经理"  field="manager"    queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="归属行部"  field="branchName"  query="true"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="客户经理"  field="manager"  query="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="客户号" field="customCode" query="true" queryMode="single" width="120"></t:dgCol>
    <t:dgCol title="客户姓名"  field="customName"   query="true" queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="身份证号码"  field="customIc"    queryMode="single"  width="120"></t:dgCol>

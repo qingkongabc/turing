@@ -53,7 +53,7 @@ $(document).ready(function(){
 					</label>
 				  </td>
 				  <td class="value">
-					<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="radio"
+					<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="checkbox"
 								typeGroupCode="prob_type" defaultVal="${tMcCustomResourceProblemPage.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">资产存在问题</label>
 				  </td>
@@ -152,7 +152,7 @@ $(document).ready(function(){
 				</label>
 			  </td>
 			  <td class="value">
-						<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="radio"
+						<t:dictSelect field="tMcCustomResourceProblemList[0].problem" type="checkbox"
 									typeGroupCode="prob_type" defaultVal="${poVal.problem}" hasLabel="false"  title="资产存在问题"></t:dictSelect>
 				  <label class="Validform_label" style="display: none;">资产存在问题</label>
 			  </td>
