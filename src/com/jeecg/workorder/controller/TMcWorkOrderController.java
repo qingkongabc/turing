@@ -1,4 +1,5 @@
 package com.jeecg.workorder.controller;
+import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
 import com.jeecg.resourceproblem.entity.TMcCustomResourceProblem1Entity;
 import com.jeecg.workorder.entity.TMcWorkOrderEntity;
 import com.jeecg.workorder.service.TMcWorkOrderServiceI;
@@ -118,7 +119,6 @@ public class TMcWorkOrderController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
@@ -149,6 +149,12 @@ public class TMcWorkOrderController extends BaseController {
 		}
 		cq.add();
 		this.tMcWorkOrderService.getDataGridReturn(cq, true);
+		List<TMcWorkOrderEntity> workOrderEntities = dataGrid.getResults();
+		for (TMcWorkOrderEntity workOrderEntity : workOrderEntities) {
+			String id = workOrderEntity.getCustomResourceId();
+			TMcCustomResourceProblemEntity entity = systemService.findUniqueByProperty(TMcCustomResourceProblemEntity.class,"customResourceId",id);
+            workOrderEntity.setProblem(entity.getProblemStr());
+		}
 		TagUtil.datagrid(response, dataGrid);
 	}
 
@@ -206,7 +212,6 @@ public class TMcWorkOrderController extends BaseController {
 	/**
 	 * 添加现场派单
 	 * 
-	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -229,7 +234,6 @@ public class TMcWorkOrderController extends BaseController {
 	/**
 	 * 更新现场派单
 	 * 
-	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")
@@ -335,6 +339,10 @@ public class TMcWorkOrderController extends BaseController {
 				}
 			}
 			workOrderEntity.setWorkOrderTypeStr(typeVal);
+
+            String id = workOrderEntity.getCustomResourceId();
+            TMcCustomResourceProblemEntity entity = systemService.findUniqueByProperty(TMcCustomResourceProblemEntity.class,"customResourceId",id);
+            workOrderEntity.setProblem(entity.getProblemStr());
 		}
 		modelMap.put(NormalExcelConstants.FILE_NAME,"现场派单");
 		modelMap.put(NormalExcelConstants.CLASS,TMcWorkOrderEntity.class);

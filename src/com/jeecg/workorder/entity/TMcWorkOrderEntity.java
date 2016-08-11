@@ -6,16 +6,11 @@ import java.lang.String;
 import java.lang.Double;
 import java.lang.Integer;
 import java.math.BigDecimal;
+import javax.persistence.*;
 import javax.xml.soap.Text;
 import java.sql.Blob;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 /**   
@@ -56,6 +51,8 @@ public class TMcWorkOrderEntity implements java.io.Serializable {
 	/**是否有房产*/
 	@Excel(name="是否有房产")
 	private java.lang.String ownHouse;
+    @Excel(name="资产存在问题")
+    private String problem;
 	/**派单类型*/
 	private java.lang.String workOrderType;
 	@Excel(name="派单类型")
@@ -81,7 +78,16 @@ public class TMcWorkOrderEntity implements java.io.Serializable {
 	/**流程状态*/
 	private java.lang.String bpmStatus;
 
-	/**
+    @Transient
+    public String getProblem() {
+        return problem;
+    }
+
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
+
+    /**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  创建人名称
 	 */

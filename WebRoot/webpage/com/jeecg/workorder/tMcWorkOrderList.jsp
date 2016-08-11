@@ -13,6 +13,7 @@
    <t:dgCol title="客户姓名"  field="customName"   query="true" queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="身份证号码"  field="customIc"    queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="是否有房产"  field="ownHouse"    queryMode="single" dictionary="sf_yn" width="120"></t:dgCol>
+   <t:dgCol title="资产存在问题"  field="problem" queryMode="single" width="120"></t:dgCol>
    <t:dgCol title="派单类型"  field="workOrderType"    queryMode="single" dictionary="wo_option" width="240"></t:dgCol>
    <t:dgCol title="机构号"  field="branchCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="客户资产id"  field="customResourceId"  hidden="true"  queryMode="single"  width="120"></t:dgCol>

@@ -9,13 +9,13 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jeecg.resourceproblem.entity.TMcCustomResourceProblem1Entity;
 import com.jeecg.workorder.entity.TMcWorkOrderEntity;
 import com.jeecg.workorder.service.TMcWorkOrderServiceI;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.Property;
-import org.jeecgframework.web.system.pojo.base.TSUser;
-import org.jeecgframework.web.system.pojo.base.TSUserOrg;
+import org.jeecgframework.web.system.pojo.base.*;
 import org.springframework.context.annotation.Scope;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,6 @@ import org.jeecgframework.core.util.ExceptionUtil;
 import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.tag.core.easyui.TagUtil;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.core.util.MyBeanUtils;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -273,6 +272,28 @@ public class TMcCustomResourceController extends BaseController {
 			for (TMcCustomResourceProblemEntity tMcCustomResourceProblemEntity : tMcCustomResourceProblemList) {
 				tMcCustomResourceProblemEntity.setCreateName(tMcCustomResource.getManager());
 				tMcCustomResourceProblemEntity.setSysOrgCode(tMcCustomResource.getBranchCode());
+
+				String problem = tMcCustomResourceProblemEntity.getProblem()+"";
+				String problemVal = "";
+				TSTypegroup tsTypegroup = systemService.getTypeGroupByCode("prob_type");
+				List<TSType> tsTypeList = tsTypegroup.getTSTypes();
+				for (TSType tsType : tsTypeList) {
+					if (problem.contains(tsType.getTypecode())){
+						problemVal += tsType.getTypename()+",";
+					}
+				}
+				tMcCustomResourceProblemEntity.setProblemStr(problemVal);
+
+				String deal = tMcCustomResourceProblemEntity.getDeal()+"";
+				String dealVal = "";
+				tsTypegroup = systemService.getTypeGroupByCode("deal_type");
+				tsTypeList = tsTypegroup.getTSTypes();
+				for (TSType tsType : tsTypeList) {
+					if (deal.contains(tsType.getTypecode())){
+						dealVal += tsType.getTypename()+",";
+					}
+				}
+				tMcCustomResourceProblemEntity.setDealStr(dealVal);
 			}
 			tMcCustomResourceService.updateMain(tMcCustomResource, tMcCustomResourceProblemList);
 
