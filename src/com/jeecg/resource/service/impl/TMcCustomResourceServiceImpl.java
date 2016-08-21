@@ -8,6 +8,9 @@ import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
 import com.jeecg.resource.entity.TMcCustomResourceEntity;
 import com.jeecg.resource.entity.TMcCustomResourceProblemEntity;
 
+import org.jeecgframework.web.system.pojo.base.JformInnerMailAttach;
+import org.jeecgframework.web.system.service.JformInnerMailServiceI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +32,9 @@ import java.io.Serializable;
 @Service("tMcCustomResourceService")
 @Transactional
 public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements TMcCustomResourceServiceI {
+
+    @Autowired
+    private JformInnerMailServiceI jformInnerMailService;
 
     public <T> void delete(T entity) {
         super.delete(entity);
@@ -180,6 +186,14 @@ public class TMcCustomResourceServiceImpl extends CommonServiceImpl implements T
         String hql0 = "from TMcCustomResourceProblemEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?";
         List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemOldList = this.findHql(hql0, id0);
         this.deleteAllEntitie(tMcCustomResourceProblemOldList);
+        //删除附件
+        if(tMcCustomResourceProblemOldList != null && tMcCustomResourceProblemOldList.size()>0){
+            List<JformInnerMailAttach> documents = this.findByProperty(JformInnerMailAttach.class, "mailid", tMcCustomResourceProblemOldList.get(0).getId());
+            for (JformInnerMailAttach document : documents) {
+                jformInnerMailService.deleteFile(document);
+            }
+        }
+
         //删除-现场派单
         String hql1 = "from TMcWorkOrderEntity where 1 = 1 AND cUSTOM_RESOURCE_ID = ?";
         List<TMcWorkOrderEntity> tMcWorkOrderEntityList = this.findHql(hql1, id0);

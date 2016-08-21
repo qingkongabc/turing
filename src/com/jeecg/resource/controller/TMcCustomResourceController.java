@@ -354,6 +354,11 @@ public class TMcCustomResourceController extends BaseController {
 	    try{
 	    	List<TMcCustomResourceProblemEntity> tMcCustomResourceProblemEntityList = systemService.findHql(hql0,id0);
 			req.setAttribute("tMcCustomResourceProblemList", tMcCustomResourceProblemEntityList);
+
+			if(tMcCustomResourceProblemEntityList != null && tMcCustomResourceProblemEntityList.size()>0){
+				List<JformInnerMailAttach> documents = systemService.findByProperty(JformInnerMailAttach.class, "mailid", tMcCustomResourceProblemEntityList.get(0).getId());
+				req.setAttribute("documents", documents);
+			}
 		}catch(Exception e){
 			logger.info(e.getMessage());
 		}

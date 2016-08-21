@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.Property;
+import org.jeecgframework.core.constant.DataBaseConstant;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.pojo.base.TSUserOrg;
 import org.springframework.context.annotation.Scope;
@@ -327,6 +328,9 @@ public class TMcTeleController extends BaseController {
                     StringUtils.isBlank(contract) && StringUtils.isBlank(cardStatus) && StringUtils.isBlank(ownStatus) && StringUtils.isBlank(creditStatus) &&
                     StringUtils.isBlank(interestStatus) && StringUtils.isBlank(remark)){
                 tMcTeleSubList.remove(1);
+            }else{
+                tMcTeleSubList.get(1).setUpdateDate(new Date());
+                tMcTeleSubList.get(1).setUpdateName(ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_NAME));
             }
 
             marketingStatus = tMcTeleSubList.get(0).getMarketingStatus();
@@ -343,6 +347,9 @@ public class TMcTeleController extends BaseController {
                     StringUtils.isBlank(contract) && StringUtils.isBlank(cardStatus) && StringUtils.isBlank(ownStatus) && StringUtils.isBlank(creditStatus) &&
                     StringUtils.isBlank(interestStatus) && StringUtils.isBlank(remark)){
                 tMcTeleSubList.remove(0);
+            }else{
+                tMcTeleSubList.get(0).setUpdateDate(new Date());
+                tMcTeleSubList.get(0).setUpdateName(ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_NAME));
             }
 
             if(tMcTeleSubList.size()>0){
@@ -535,8 +542,8 @@ public class TMcTeleController extends BaseController {
                         } else {
                             entity1.setBpmStatus("10");
                         }
-                        ;
-                        tMcTeleService.addMain(entity1, new ArrayList<TMcTeleSubEntity>());
+
+                        tMcTeleService.addMain(entity1, page.getTMcTeleSubList());
                     } else {
                         count++;
                     }

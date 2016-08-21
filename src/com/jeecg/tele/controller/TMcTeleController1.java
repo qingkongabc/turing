@@ -109,7 +109,8 @@ public class TMcTeleController1 extends BaseController {
             if (StringUtil.isNotEmpty(query_createDate_end)) {
                 cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
             }
-            //cq.isNotNull("idCard");
+            cq.isNotNull("customName");
+            cq.notEq("customName","");
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
@@ -242,7 +243,16 @@ public class TMcTeleController1 extends BaseController {
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
         try {
             //自定义追加查询条件
-            //cq.isNotNull("customName");
+            String query_createDate_begin = request.getParameter("createDate_begin");
+            String query_createDate_end = request.getParameter("createDate_end");
+            if (StringUtil.isNotEmpty(query_createDate_begin)) {
+                cq.ge("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_begin));
+            }
+            if (StringUtil.isNotEmpty(query_createDate_end)) {
+                cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
+            }
+            cq.isNotNull("customName");
+            cq.notEq("customName","");
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }

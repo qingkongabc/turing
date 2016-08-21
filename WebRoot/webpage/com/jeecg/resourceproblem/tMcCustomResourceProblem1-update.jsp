@@ -10,10 +10,15 @@
   function viewoperation(operationId) {
 	  createwindow("<t:mutiLang langKey="资产详情" langArg="common.operation"/>", "tMcCustomResourceController.do?goUpdate&load=detail&id=" + operationId, "100%", "100%");
   }
+  function uploadFile(data){
+      if($(".uploadify-queue-item").length>0){
+          upload();
+      }
+  }
   </script>
  </head>
  <body>
-		<t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="tMcCustomResourceProblem1Controller.do?doUpdate" tiptype="1" >
+		<t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="tMcCustomResourceProblem1Controller.do?doUpdate" callback="@Override uploadFile" tiptype="1" >
 					<input id="id" name="id" type="hidden" value="${tMcCustomResourceProblem1Page.id }">
 					<input id="customResourceId" name="customResourceId" type="hidden" value="${tMcCustomResourceProblem1Page.customResourceId }">
 		<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
@@ -138,7 +143,67 @@
 					<label class="Validform_label" style="display: none;">其他处理请填写</label>
 				</td>
 			</tr>
+			<tr>
+				<td align="right">
+					<label class="Validform_label"> 附件
+					</label>
+				</td>
+				<td>
+					<table>
+						<tr style="height: 34px;">
+							<c:forEach items="${documents}" var="vdocument">
+								<td>
+                                    <a href="commonController.do?viewFile&fileid=${vdocument.id}&subclassname=org.jeecgframework.web.system.pojo.base.JformInnerMailAttach" title="下载">${vdocument.attachmenttitle}.${vdocument.extend}</a>
+                                    <c:if test="${param.load ne 'detail'}">
+                                        (<a href="javascript:void(0)" class="jeecgDetail" onclick="del('jformInnerMailController.do?delFile&id=${vdocument.id}',this)">删除</a>)
+                                    </c:if>
+                                </td>
+							</c:forEach>
+						</tr>
+                        <c:if test="${param.load ne 'detail'}">
+                            <tr>
+                                <td colspan="3">
+                                    <div class="form" id="filediv"></div>
+                                    <div class="form jeecgDetail">
+                                        <t:upload name="fiels" id="file_upload"
+                                                  extend="pic"
+                                                  buttonText="添加文件" formId="uploadForm"
+                                                  uploader="jformInnerMailController.do?saveFile" ></t:upload>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:if>
+					</table>
+				</td>
+			</tr>
 			</table>
 		</t:formvalid>
+		<form id="uploadForm">
+			<input id="mailId" name="mailId" type="hidden" value="${tMcCustomResourceProblem1Page.id }">
+		</form>
  </body>
-  <script src = "webpage/com/jeecg/resourceproblem/tMcCustomResourceProblem1.js"></script>
+<script src = "webpage/com/jeecg/resourceproblem/tMcCustomResourceProblem1.js"></script>
+ <script type="text/javascript">
+     $.dialog.setting.zIndex =1990;
+     function del(url,obj){
+         $.dialog.confirm("确认删除该条记录?", function(){
+             $.ajax({
+                 async : false,
+                 cache : false,
+                 type : 'POST',
+                 url : url,// 请求的action路径
+                 error : function() {// 请求失败处理函数
+                 },
+                 success : function(data) {
+                     var d = $.parseJSON(data);
+                     if (d.success) {
+                         var msg = d.msg;
+                         tip(msg);
+                         $(obj).closest("td").hide("slow");
+                     }
+                 }
+             });
+         }, function(){
+         });
+     }
+ </script>

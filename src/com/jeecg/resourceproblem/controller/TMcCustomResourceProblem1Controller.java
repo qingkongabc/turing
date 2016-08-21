@@ -270,6 +270,10 @@ public class TMcCustomResourceProblem1Controller extends BaseController {
 	public ModelAndView goUpdate(TMcCustomResourceProblem1Entity tMcCustomResourceProblem1, HttpServletRequest req) {
 		if (StringUtil.isNotEmpty(tMcCustomResourceProblem1.getId())) {
 			tMcCustomResourceProblem1 = tMcCustomResourceProblem1Service.getEntity(TMcCustomResourceProblem1Entity.class, tMcCustomResourceProblem1.getId());
+
+			List<JformInnerMailAttach> documents = systemService.findByProperty(JformInnerMailAttach.class, "mailid", tMcCustomResourceProblem1.getId());
+			req.setAttribute("documents", documents);
+
 			req.setAttribute("tMcCustomResourceProblem1Page", tMcCustomResourceProblem1);
 		}
 		return new ModelAndView("com/jeecg/resourceproblem/tMcCustomResourceProblem1-update");

@@ -89,7 +89,7 @@ public class UploadTag extends TagSupport {
 		StringBuffer sb = new StringBuffer();
 		if("pic".equals(extend))
 		{
-			extend="*.jpg;*,jpeg;*.png;*.gif;*.bmp;*.ico;*.tif";
+			extend="*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.ico;*.tif";
 		}
 		if(extend.equals("office"))
 		{

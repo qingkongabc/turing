@@ -432,7 +432,7 @@ public class CriteriaQuery implements Serializable {
 	 * @param keyvalue2
 	 */
 	public void notEq(String keyname, Object keyvalue) {
-		if (keyvalue != null && keyvalue != "") {
+		if (keyvalue != null) {
 			criterionList.addPara(Restrictions.ne(keyname, keyvalue));
 			if (flag) {
 				this.put(keyname, keyvalue);
