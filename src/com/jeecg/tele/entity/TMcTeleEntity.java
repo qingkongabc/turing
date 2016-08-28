@@ -144,6 +144,8 @@ public class TMcTeleEntity implements java.io.Serializable {
     private java.lang.String product;
     @Excel(name = "备注")
     private java.lang.String remark;
+    @Excel(name = "反馈信息")
+    private java.lang.String feedback;
     /**
      * 营销时间
      */
@@ -208,6 +210,15 @@ public class TMcTeleEntity implements java.io.Serializable {
      * 客户经理
      */
     private java.lang.String customManager;
+
+    @Column(name = "FEEDBACK", nullable = true, length = 8000)
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
 
     @Column(name = "MARKETING_STATUS", nullable = true, length = 32)
     public String getMarketingStatus() {

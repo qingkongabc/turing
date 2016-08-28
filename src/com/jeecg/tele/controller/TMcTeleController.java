@@ -373,7 +373,12 @@ public class TMcTeleController extends BaseController {
                         tMcTele.setDisDate(new Date());
                     }
                 }
+            }
 
+            String telManager = tMcTele.getTelManager();
+            String bpmStatus = tMcTele.getBpmStatus();
+            if(StringUtils.isNotBlank(telManager) && (!StringUtils.equals(bpmStatus,"15"))){
+                tMcTele.setBpmStatus("14");
             }
 
             tMcTeleService.updateMain(tMcTele, tMcTeleSubList);

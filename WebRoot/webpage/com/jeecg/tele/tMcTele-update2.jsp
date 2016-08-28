@@ -18,18 +18,32 @@
 </head>
 <body style="overflow-x: hidden;">
 <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" tiptype="1"
-             action="tMcTeleController.do?doUpdate">
+             action="tMcTeleController2.do?doUpdate">
     <input id="id" name="id" type="hidden" value="${tMcTelePage.id }">
     <input id="createName" name="createName" type="hidden" value="${tMcTelePage.createName }">
     <input id="createBy" name="createBy" type="hidden" value="${tMcTelePage.createBy }">
     <input id="createDate" name="createDate" type="hidden" value="${tMcTelePage.createDate }">
-    <input id="disDate" name="disDate" type="hidden" value="${tMcTelePage.disDate }">
     <input id="updateName" name="updateName" type="hidden" value="${tMcTelePage.updateName }">
     <input id="updateBy" name="updateBy" type="hidden" value="${tMcTelePage.updateBy }">
     <input id="updateDate" name="updateDate" type="hidden" value="${tMcTelePage.updateDate }">
+    <input id="disDate" name="disDate" type="hidden" value="${tMcTelePage.disDate }">
     <input id="sysOrgCode" name="sysOrgCode" type="hidden" value="${tMcTelePage.sysOrgCode }">
     <input id="sysCompanyCode" name="sysCompanyCode" type="hidden" value="${tMcTelePage.sysCompanyCode }">
     <input id="bpmStatus" name="bpmStatus" type="hidden" value="${tMcTelePage.bpmStatus }">
+    <input id="customName" name="customName" type="hidden" value="${tMcTelePage.customName }">
+    <input id="idCard" name="idCard" type="hidden" value="${tMcTelePage.idCard }">
+    <input id="customId" name="customId" type="hidden" value="${tMcTelePage.customId }">
+    <input id="resource" name="resource" type="hidden" value="${tMcTelePage.resource }">
+    <input id="loanBalance" name="loanBalance" type="hidden" value="${tMcTelePage.loanBalance }">
+    <input id="depositBalance" name="depositBalance" type="hidden" value="${tMcTelePage.depositBalance }">
+    <input id="creditCard" name="creditCard" type="hidden" value="${tMcTelePage.creditCard }">
+    <input id="mobileBank" name="mobileBank" type="hidden" value="${tMcTelePage.mobileBank }">
+    <input id="card" name="card" type="hidden" value="${tMcTelePage.card }">
+    <input id="insurance" name="insurance" type="hidden" value="${tMcTelePage.insurance }">
+    <input id="ddBalance" name="ddBalance" type="hidden" value="${tMcTelePage.ddBalance }">
+    <input id="fundsRate" name="fundsRate" type="hidden" value="${tMcTelePage.fundsRate }">
+    <input id="orgName" name="orgName" type="hidden" value="${tMcTelePage.orgName }">
+    <input id="customManager" name="customManager" type="hidden" value="${tMcTelePage.customManager }">
     <input id="customerServiceId" name="customerServiceId" type="hidden" value="${tMcTelePage.customerServiceId }">
     <input id="marketingStatus" name="marketingStatus" type="hidden" value="${tMcTelePage.marketingStatus }">
     <table cellpadding="0" cellspacing="1" class="formtable">
@@ -56,10 +70,9 @@
                 <label class="Validform_label">客户经理:</label>
             </td>
             <td class="value">
-                <input id="telManager" name="telManager" type="text" style="width:90%" class="inputxt" readonly
+                <input id="telManagerId" name="telManagerId" type="hidden" style="width:90%" class="inputxt" />
+                <input id="telManager" name="telManager" type="text" style="width:60%" class="inputxt" readonly
                        value='${tMcTelePage.telManager}'>
-                <span class="Validform_checktip"></span>
-                <label class="Validform_label" style="display: none;">客户经理</label>
             </td>
         </tr>
         <tr>
@@ -115,7 +128,7 @@
             </td>
             <td class="value">
                 <input id="buildDate" name="buildDate" type="text" style="width:90%"
-                       class="Wdate" onClick="WdatePicker()" datatype="*"
+                       class="Wdate" datatype="*"
                        value='<fmt:formatDate value='${tMcTelePage.buildDate}' type="date" pattern="yyyy-MM-dd"/>'>
                 <span class="Validform_checktip"></span>
                 <label class="Validform_label" style="display: none;">成立时间</label>
@@ -224,122 +237,10 @@
                 <label class="Validform_label">反馈信息:</label>
             </td>
             <td class="value" colspan="5">
-                <textarea name="remark" maxlength="8000" style="width: 90%;height: 100%" readonly
-                          type="text" rows="7" class="inputxt">${tMcTelePage.remark}</textarea>
+                <textarea id="feedback" name="feedback" maxlength="8000" style="width: 90%;height: 100%"
+                          type="text" rows="7" class="inputxt">${tMcTelePage.feedback}</textarea>
                 <span class="Validform_checktip"></span>
                 <label class="Validform_label" style="display: none;">备注</label>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label class="Validform_label">客户姓名:</label>
-            </td>
-            <td class="value">
-                <input id="customName" name="customName" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.customName}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">身份证号:</label>
-            </td>
-            <td class="value">
-                <input id="idCard" name="idCard" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.idCard}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">客户号:</label>
-            </td>
-            <td class="value">
-                <input id="customId" name="customId" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.customId}'>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label class="Validform_label">产品名称1:</label>
-            </td>
-            <td class="value">
-                <input id="resource" name="resource" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.resource}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">产品名称2:</label>
-            </td>
-            <td class="value">
-                <input id="loanBalance" name="loanBalance" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.loanBalance}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">金额1:</label>
-            </td>
-            <td class="value">
-                <input id="depositBalance" name="depositBalance" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.depositBalance}'>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label class="Validform_label">金额2:</label>
-            </td>
-            <td class="value">
-                <input id="creditCard" name="creditCard" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.creditCard}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">存款日均:</label>
-            </td>
-            <td class="value">
-                <input id="mobileBank" name="mobileBank" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.mobileBank}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">金融资产日均:</label>
-            </td>
-            <td class="value">
-                <input id="card" name="card" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.card}'>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label class="Validform_label">保险销售:</label>
-            </td>
-            <td class="value">
-                <input id="insurance" name="insurance" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.insurance}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">活期存款余额:</label>
-            </td>
-            <td class="value">
-                <input id="ddBalance" name="ddBalance" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.ddBalance}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">客服人员:</label>
-            </td>
-            <td class="value">
-                <input id="fundsRate" name="fundsRate" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.fundsRate}'>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-                <label class="Validform_label">机构:</label>
-            </td>
-            <td class="value">
-                <input id="orgName" name="orgName" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.orgName}'>
-            </td>
-            <td align="right">
-                <label class="Validform_label">客户经理:</label>
-            </td>
-            <td class="value">
-                <input id="customManager" name="customManager" type="text" style="width: 90%" class="inputxt"
-                       value='${tMcTelePage.customManager}'>
-            </td>
-            <td align="right">
-            </td>
-            <td class="value">
             </td>
         </tr>
     </table>
@@ -347,10 +248,11 @@
             <%-- 增加一个div，用于调节页面大小，否则默认太小 --%>
         <div style="width:800px;height:1px;"></div>
         <t:tabs id="tt" iframe="false" tabPosition="top" fit="false">
-            <t:tab href="tMcTeleController.do?tMcTeleSubList&id=${tMcTelePage.id}" icon="icon-search" title="信息补录"
+            <t:tab href="tMcTeleController2.do?tMcTeleSubList&load=detail&id=${tMcTelePage.id}" icon="icon-search" title="信息补录"
                    id="tMcTeleSub"></t:tab>
         </t:tabs>
     </div>
 </t:formvalid>
 </body>
 <script src="webpage/com/jeecg/tele/tMcTele.js"></script>
+<t:authFilter></t:authFilter>

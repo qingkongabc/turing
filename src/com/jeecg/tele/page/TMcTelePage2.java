@@ -134,6 +134,16 @@ public class TMcTelePage2 implements java.io.Serializable {
     private java.lang.String product;
     @Excel(name = "备注")
     private java.lang.String remark;
+    @Excel(name = "反馈信息")
+    private java.lang.String feedback;
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
 
     /**
      * 客服人员id

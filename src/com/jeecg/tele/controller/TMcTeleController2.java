@@ -3,10 +3,8 @@ package com.jeecg.tele.controller;
 import com.jeecg.tele.entity.TMcTeleEntity;
 import com.jeecg.tele.entity.TMcTeleSubEntity;
 import com.jeecg.tele.page.TMcTelePage;
-import com.jeecg.tele.page.TMcTelePage1;
-import com.jeecg.tele.page.TMcTelePage2;
 import com.jeecg.tele.service.TMcTeleServiceI;
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
@@ -15,6 +13,7 @@ import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.constant.DataBaseConstant;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.ExceptionUtil;
 import org.jeecgframework.core.util.MyBeanUtils;
@@ -49,10 +48,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author onlineGenerator
@@ -63,12 +59,12 @@ import java.util.Set;
  */
 @Scope("prototype")
 @Controller
-@RequestMapping("/tMcTeleController1")
-public class TMcTeleController1 extends BaseController {
+@RequestMapping("/tMcTeleController2")
+public class TMcTeleController2 extends BaseController {
     /**
      * Logger for this class
      */
-    private static final Logger logger = Logger.getLogger(TMcTeleController1.class);
+    private static final Logger logger = Logger.getLogger(TMcTeleController2.class);
 
     @Autowired
     private TMcTeleServiceI tMcTeleService;
@@ -84,7 +80,7 @@ public class TMcTeleController1 extends BaseController {
      */
     @RequestMapping(params = "list")
     public ModelAndView list(HttpServletRequest request) {
-        return new ModelAndView("com/jeecg/tele/tMcTeleList1");
+        return new ModelAndView("com/jeecg/tele/tMcTeleList2");
     }
 
     /**
@@ -99,6 +95,8 @@ public class TMcTeleController1 extends BaseController {
     public void datagrid(TMcTeleEntity tMcTele, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
         CriteriaQuery cq = new CriteriaQuery(TMcTeleEntity.class, dataGrid);
         //查询条件组装器
+        TSUser u = ResourceUtil.getSessionUserName();
+        tMcTele.setTelManager(u.getRealName());
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
         try {
             //自定义追加查询条件
@@ -110,8 +108,14 @@ public class TMcTeleController1 extends BaseController {
             if (StringUtil.isNotEmpty(query_createDate_end)) {
                 cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
             }
-            cq.isNotNull("customName");
-            cq.notEq("customName","");
+            String query_disDate_begin = request.getParameter("disDate_begin");
+            String query_disDate_end = request.getParameter("disDate_end");
+            if (StringUtil.isNotEmpty(query_disDate_begin)) {
+                cq.ge("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_begin));
+            }
+            if (StringUtil.isNotEmpty(query_disDate_end)) {
+                cq.le("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_end));
+            }
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
@@ -135,7 +139,7 @@ public class TMcTeleController1 extends BaseController {
             tMcTeleService.delMain(tMcTele);
             systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("",e);
             message = "客群信息删除失败";
             throw new BusinessException(e.getMessage());
         }
@@ -155,13 +159,66 @@ public class TMcTeleController1 extends BaseController {
         String message = "客群信息删除成功";
         try {
             for (String id : ids.split(",")) {
-                TMcTeleEntity tMcTele = systemService.getEntity(TMcTeleEntity.class,id);
+                TMcTeleEntity tMcTele = systemService.getEntity(TMcTeleEntity.class,
+                        id
+                );
                 tMcTeleService.delMain(tMcTele);
                 systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("",e);
             message = "客群信息删除失败";
+            throw new BusinessException(e.getMessage());
+        }
+        j.setMsg(message);
+        return j;
+    }
+
+    /**
+     * 批量删除客群信息
+     *
+     * @return
+     */
+    @RequestMapping(params = "doBatchBack")
+    @ResponseBody
+    public AjaxJson doBatchBack(String ids, HttpServletRequest request) {
+        AjaxJson j = new AjaxJson();
+        String message = "客群信息退回成功";
+        try {
+            for (String id : ids.split(",")) {
+                TMcTeleEntity tMcTele = systemService.getEntity(TMcTeleEntity.class,
+                        id
+                );
+                tMcTele.setBpmStatus("12");
+                tMcTeleService.saveOrUpdate(tMcTele);
+                systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
+            }
+        } catch (Exception e) {
+            logger.warn("",e);
+            message = "客群信息退回失败";
+            throw new BusinessException(e.getMessage());
+        }
+        j.setMsg(message);
+        return j;
+    }
+
+    /**
+     * 添加客群信息
+     *
+     * @return
+     */
+    @RequestMapping(params = "doAdd")
+    @ResponseBody
+    public AjaxJson doAdd(TMcTeleEntity tMcTele, TMcTelePage tMcTelePage, HttpServletRequest request) {
+        List<TMcTeleSubEntity> tMcTeleSubList = tMcTelePage.getTMcTeleSubList();
+        AjaxJson j = new AjaxJson();
+        String message = "添加成功";
+        try {
+            tMcTeleService.addMain(tMcTele, tMcTeleSubList);
+            systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+        } catch (Exception e) {
+            logger.warn("",e);
+            message = "客群信息添加失败";
             throw new BusinessException(e.getMessage());
         }
         j.setMsg(message);
@@ -176,19 +233,36 @@ public class TMcTeleController1 extends BaseController {
     @RequestMapping(params = "doUpdate")
     @ResponseBody
     public AjaxJson doUpdate(TMcTeleEntity tMcTele, TMcTelePage tMcTelePage, HttpServletRequest request) {
-        List<TMcTeleSubEntity> tMcTeleSubList = tMcTelePage.getTMcTeleSubList();
         AjaxJson j = new AjaxJson();
         String message = "更新成功";
         try {
-            tMcTeleService.updateMain(tMcTele, tMcTeleSubList);
+            String feedback = tMcTele.getFeedback();
+            if(StringUtils.isNotBlank(feedback)){
+                tMcTele.setBpmStatus("15");
+            }
+            tMcTeleService.saveOrUpdate(tMcTele);
             systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("",e);
             message = "更新客群信息失败";
             throw new BusinessException(e.getMessage());
         }
         j.setMsg(message);
         return j;
+    }
+
+    /**
+     * 客群信息新增页面跳转
+     *
+     * @return
+     */
+    @RequestMapping(params = "goAdd")
+    public ModelAndView goAdd(TMcTeleEntity tMcTele, HttpServletRequest req) {
+        if (StringUtil.isNotEmpty(tMcTele.getId())) {
+            tMcTele = tMcTeleService.getEntity(TMcTeleEntity.class, tMcTele.getId());
+            req.setAttribute("tMcTelePage", tMcTele);
+        }
+        return new ModelAndView("com/jeecg/tele/tMcTele-add");
     }
 
     /**
@@ -202,7 +276,7 @@ public class TMcTeleController1 extends BaseController {
             tMcTele = tMcTeleService.getEntity(TMcTeleEntity.class, tMcTele.getId());
             req.setAttribute("tMcTelePage", tMcTele);
         }
-        return new ModelAndView("com/jeecg/tele/tMcTele-update1");
+        return new ModelAndView("com/jeecg/tele/tMcTele-update2");
     }
 
 
@@ -222,11 +296,14 @@ public class TMcTeleController1 extends BaseController {
         String hql0 = "from TMcTeleSubEntity where 1 = 1 AND tELE_ID_FK = ? ";
         try {
             List<TMcTeleSubEntity> tMcTeleSubEntityList = systemService.findHql(hql0, id0);
+            if(tMcTeleSubEntityList.size() == 1){
+                tMcTeleSubEntityList.add(new TMcTeleSubEntity());
+            }
             req.setAttribute("tMcTeleSubList", tMcTeleSubEntityList);
         } catch (Exception e) {
             logger.info(e.getMessage());
         }
-        return new ModelAndView("com/jeecg/tele/tMcTeleSubList1");
+        return new ModelAndView("com/jeecg/tele/tMcTeleSubList2");
     }
 
     /**
@@ -246,6 +323,8 @@ public class TMcTeleController1 extends BaseController {
         } catch (UnsupportedEncodingException e) {
             logger.warn("",e);
         }
+        TSUser u = ResourceUtil.getSessionUserName();
+        tMcTele.setTelManager(u.getRealName());
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
         try {
             //自定义追加查询条件
@@ -257,18 +336,24 @@ public class TMcTeleController1 extends BaseController {
             if (StringUtil.isNotEmpty(query_createDate_end)) {
                 cq.le("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_createDate_end));
             }
-            cq.isNotNull("customName");
-            cq.notEq("customName","");
+            String query_disDate_begin = request.getParameter("disDate_begin");
+            String query_disDate_end = request.getParameter("disDate_end");
+            if (StringUtil.isNotEmpty(query_disDate_begin)) {
+                cq.ge("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_begin));
+            }
+            if (StringUtil.isNotEmpty(query_disDate_end)) {
+                cq.le("disDate", new SimpleDateFormat("yyyy-MM-dd").parse(query_disDate_end));
+            }
         } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
         cq.add();
         List<TMcTeleEntity> list = this.tMcTeleService.getListByCriteriaQuery(cq, false);
-        List<TMcTelePage2> pageList = new ArrayList<TMcTelePage2>();
+        List<TMcTelePage> pageList = new ArrayList<TMcTelePage>();
         if (list != null && list.size() > 0) {
             for (TMcTeleEntity entity : list) {
                 try {
-                    TMcTelePage2 page = new TMcTelePage2();
+                    TMcTelePage page = new TMcTelePage();
                     MyBeanUtils.copyBeanNotNull2Bean(entity, page);
                     Object id0 = entity.getId();
                     String hql0 = "from TMcTeleSubEntity where 1 = 1 AND tELE_ID_FK = ? ";
@@ -280,9 +365,9 @@ public class TMcTeleController1 extends BaseController {
                 }
             }
         }
-        map.put(NormalExcelConstants.FILE_NAME, "客户价值");
-        map.put(NormalExcelConstants.CLASS, TMcTelePage2.class);
-        map.put(NormalExcelConstants.PARAMS, new ExportParams("客户价值列表", "导出人:" + ResourceUtil.getSessionUserName().getRealName(),
+        map.put(NormalExcelConstants.FILE_NAME, "客群信息");
+        map.put(NormalExcelConstants.CLASS, TMcTelePage.class);
+        map.put(NormalExcelConstants.PARAMS, new ExportParams("客群信息列表", "导出人:" + ResourceUtil.getSessionUserName().getRealName(),
                 "导出信息"));
         map.put(NormalExcelConstants.DATA_LIST, pageList);
         return NormalExcelConstants.JEECG_EXCEL_VIEW;
@@ -305,30 +390,34 @@ public class TMcTeleController1 extends BaseController {
             MultipartFile file = entity.getValue();// 获取上传文件对象
             ImportParams params = new ImportParams();
             params.setTitleRows(2);
-            params.setHeadRows(1);
+            params.setHeadRows(2);
             params.setNeedSave(true);
             try {
-                List<TMcTelePage1> list = ExcelImportUtil.importExcel(file.getInputStream(), TMcTelePage1.class, params);
+                List<TMcTelePage> list = ExcelImportUtil.importExcel(file.getInputStream(), TMcTelePage.class, params);
                 TMcTeleEntity entity1 = null;
                 int count = 0;
-                for (TMcTelePage1 page : list) {
+                for (TMcTelePage page : list) {
                     entity1 = new TMcTeleEntity();
                     MyBeanUtils.copyBeanNotNull2Bean(page, entity1);
                     String contract = page.getContract();
                     String hql = "from TMcTeleEntity where 1 = 1 AND contract = ? ";
                     List<TMcTeleEntity> tMcTeleEntityList = systemService.findHql(hql, contract);
-                    if (tMcTeleEntityList.size() > 0) {
-                        TMcTeleEntity tMcTeleEntity = tMcTeleEntityList.get(0);
-                        MyBeanUtils.copyBeanNotNull2Bean(entity1, tMcTeleEntity);
-                        tMcTeleService.saveOrUpdate(tMcTeleEntity);
+                    if (tMcTeleEntityList.size() == 0) {
+                        if (StringUtils.isNotBlank(entity1.getCustomerService())) {
+                            entity1.setBpmStatus("11");
+                        } else {
+                            entity1.setBpmStatus("10");
+                        }
+
+                        tMcTeleService.addMain(entity1, page.getTMcTeleSubList());
                     } else {
                         count++;
                     }
                 }
                 if (list.size() != count) {
-                    j.setMsg("文件导入成功,有" + count + "条记录未匹配!");
+                    j.setMsg("文件导入成功,有" + count + "条记录重复!");
                 } else {
-                    j.setMsg("文件导入失败,记录全部无法匹配!");
+                    j.setMsg("文件导入失败,记录全部重复!");
                 }
             } catch (Exception e) {
                 j.setMsg("文件导入失败！");
@@ -337,7 +426,7 @@ public class TMcTeleController1 extends BaseController {
                 try {
                     file.getInputStream().close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.warn("",e);
                 }
             }
         }
@@ -349,9 +438,9 @@ public class TMcTeleController1 extends BaseController {
      */
     @RequestMapping(params = "exportXlsByT")
     public String exportXlsByT(ModelMap map) {
-        map.put(NormalExcelConstants.FILE_NAME, "客户价值");
-        map.put(NormalExcelConstants.CLASS, TMcTelePage1.class);
-        map.put(NormalExcelConstants.PARAMS, new ExportParams("客户价值列表", "导出人:" + ResourceUtil.getSessionUserName().getRealName(),
+        map.put(NormalExcelConstants.FILE_NAME, "客群信息");
+        map.put(NormalExcelConstants.CLASS, TMcTelePage.class);
+        map.put(NormalExcelConstants.PARAMS, new ExportParams("客群信息列表", "导出人:" + ResourceUtil.getSessionUserName().getRealName(),
                 "导出信息"));
         map.put(NormalExcelConstants.DATA_LIST, new ArrayList());
         return NormalExcelConstants.JEECG_EXCEL_VIEW;
@@ -364,7 +453,7 @@ public class TMcTeleController1 extends BaseController {
      */
     @RequestMapping(params = "upload")
     public ModelAndView upload(HttpServletRequest req) {
-        req.setAttribute("controller_name", "tMcTeleController1");
+        req.setAttribute("controller_name", "tMcTeleController");
         return new ModelAndView("common/upload/pub_excel_upload");
     }
 

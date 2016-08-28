@@ -26,7 +26,7 @@ $(document).ready(function(){
 	}
     });
 </script>
-<div style="width: auto;height: 480px;overflow-y:auto;overflow-x:auto;">
+<div style="width: auto;height: 450px;overflow-y:auto;overflow-x:auto;">
 <table cellpadding="0" cellspacing="1" class="formtable" id="tMcCustomResourceProblem_table" >
 	<tbody id="add_tMcCustomResourceProblem_table" >	
 	<c:if test="${fn:length(tMcCustomResourceProblemList)  <= 0 }">
@@ -235,23 +235,6 @@ $(document).ready(function(){
 				<td class="value">
 				  <textarea style="width: 70%;height: 50px;" readonly
 							type="text" class="inputxt">${poVal.feedback}</textarea>
-				</td>
-			</tr>
-			<tr>
-				<td align="right">
-					<label class="Validform_label"> 附件
-					</label>
-				</td>
-				<td>
-					<table>
-						<tr style="height: 34px;">
-							<c:forEach items="${documents}" var="vdocument">
-								<td>
-									<a href="commonController.do?viewFile&fileid=${vdocument.id}&subclassname=org.jeecgframework.web.system.pojo.base.JformInnerMailAttach" title="下载">${vdocument.attachmenttitle}.${vdocument.extend}</a>
-								</td>
-							</c:forEach>
-						</tr>
-					</table>
 				</td>
 			</tr>
 		</c:forEach>

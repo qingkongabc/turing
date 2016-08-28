@@ -70,10 +70,18 @@
                 <label class="Validform_label">客户经理:</label>
             </td>
             <td class="value">
-                <input id="telManager" name="telManager" type="text" style="width:90%" class="inputxt"
+                <input id="telManagerId" name="telManagerId" type="hidden" style="width:90%" class="inputxt" />
+                <input id="telManager" name="telManager" type="text" style="width:60%" class="inputxt" readonly
                        value='${tMcTelePage.telManager}'>
-                <span class="Validform_checktip"></span>
-                <label class="Validform_label" style="display: none;">客户经理</label>
+                <c:if test="${(param.load ne 'detail') && (tMcTelePage.bpmStatus ne '15')}">
+                    <span id="chooseTr">
+                        <t:choose hiddenName="telManagerId" hiddenid="userName"
+                                  url="tMcCustomResourceController.do?goAddUserToRole" name="userList"
+                                  icon="icon-search" title="选择处理人" textname="realName"
+                                  inputTextname="telManager" isclear="true" isInit="true"
+                                  width="800px"/>
+                    </span>
+                </c:if>
             </td>
         </tr>
         <tr>
@@ -233,6 +241,17 @@
                 <label class="Validform_label" style="display: none;">备注</label>
             </td>
         </tr>
+        <tr>
+            <td align="right">
+                <label class="Validform_label">反馈信息:</label>
+            </td>
+            <td class="value" colspan="5">
+                <textarea name="feedback" maxlength="8000" style="width: 90%;height: 100%" readonly
+                          type="text" rows="7" class="inputxt">${tMcTelePage.feedback}</textarea>
+                <span class="Validform_checktip"></span>
+                <label class="Validform_label" style="display: none;">备注</label>
+            </td>
+        </tr>
     </table>
     <div style="width: auto;height: 200px;">
             <%-- 增加一个div，用于调节页面大小，否则默认太小 --%>
@@ -245,3 +264,4 @@
 </t:formvalid>
 </body>
 <script src="webpage/com/jeecg/tele/tMcTele.js"></script>
+<t:authFilter></t:authFilter>
