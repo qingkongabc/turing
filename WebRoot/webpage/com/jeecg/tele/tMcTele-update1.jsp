@@ -221,6 +221,17 @@
         </tr>
         <tr>
             <td align="right">
+                <label class="Validform_label">反馈状态:</label>
+            </td>
+            <td class="value" colspan="5">
+                <t:dictSelect field="feedbackStatus" type="radio" readonly="readonly"
+                              typeGroupCode="fb_status" defaultVal="${tMcTelePage.feedbackStatus}" hasLabel="false"></t:dictSelect>
+                <span class="Validform_checktip"></span>
+                <label class="Validform_label" style="display: none;">反馈状态</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
                 <label class="Validform_label">反馈信息:</label>
             </td>
             <td class="value" colspan="5">

@@ -67,7 +67,8 @@ public class CgExportExcelController extends BaseController {
 			Map queryparams =  new LinkedHashMap<String,Object>();
 			for(Map<String,Object> item:items){
 				String isQuery = (String) item.get(CgReportConstant.ITEM_ISQUERY);
-				if(CgReportConstant.BOOL_TRUE.equalsIgnoreCase(isQuery)){
+				String fieldName = (String) item.get(CgReportConstant.ITEM_FIELDNAME);
+				if(CgReportConstant.BOOL_TRUE.equalsIgnoreCase(isQuery) && (!StringUtils.equals(fieldName,"dis_date"))){
 					//step.2 装载查询条件
 					CgReportQueryParamUtil.loadQueryParams(request, item, queryparams);
 				}

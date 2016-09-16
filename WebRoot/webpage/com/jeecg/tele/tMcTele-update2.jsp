@@ -234,6 +234,23 @@
         </tr>
         <tr>
             <td align="right">
+                <label class="Validform_label">反馈状态:</label>
+            </td>
+            <td class="value" colspan="5">
+                <c:if test="${param.load ne 'detail'}">
+                    <t:dictSelect field="feedbackStatus" type="radio" typeGroupCode="fb_status"
+                              defaultVal="${(empty tMcTelePage.feedbackStatus) ? '跟进中':tMcTelePage.feedbackStatus}" hasLabel="false"></t:dictSelect>
+                </c:if>
+                <c:if test="${param.load eq 'detail'}">
+                    <t:dictSelect field="feedbackStatus" type="radio" typeGroupCode="fb_status"
+                                  defaultVal="${tMcTelePage.feedbackStatus}" hasLabel="false"></t:dictSelect>
+                </c:if>
+                <span class="Validform_checktip"></span>
+                <label class="Validform_label" style="display: none;">反馈状态</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
                 <label class="Validform_label">反馈信息:</label>
             </td>
             <td class="value" colspan="5">

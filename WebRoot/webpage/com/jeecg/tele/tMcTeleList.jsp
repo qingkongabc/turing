@@ -38,6 +38,8 @@
             <t:dgCol title="客服人员id" field="customerServiceId" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="流程状态" field="bpmStatus" query="true" queryMode="single" dictionary="tel_status"
                      width="120"></t:dgCol>
+            <t:dgCol title="反馈状态" field="feedbackStatus" query="true" queryMode="single" dictionary="fb_status"
+                     width="120"></t:dgCol>
             <t:dgCol title="客户姓名" field="customName" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="身份证号" field="idCard" hidden="true" queryMode="group" width="120"></t:dgCol>
             <t:dgCol title="客户号" field="customId" hidden="true" queryMode="group" width="120"></t:dgCol>

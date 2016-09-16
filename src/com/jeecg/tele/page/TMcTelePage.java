@@ -148,8 +148,18 @@ public class TMcTelePage implements java.io.Serializable {
     private java.lang.String product;
     @Excel(name = "备注")
     private java.lang.String remark;
+    @Excel(name = "反馈状态")
+    private java.lang.String feedbackStatus;
     @Excel(name = "反馈信息")
     private java.lang.String feedback;
+
+    public String getFeedbackStatus() {
+        return feedbackStatus;
+    }
+
+    public void setFeedbackStatus(String feedbackStatus) {
+        this.feedbackStatus = feedbackStatus;
+    }
 
     public String getFeedback() {
         return feedback;

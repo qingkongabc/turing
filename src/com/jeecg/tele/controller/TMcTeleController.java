@@ -457,13 +457,6 @@ public class TMcTeleController extends BaseController {
     public String exportXls(TMcTeleEntity tMcTele, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid, ModelMap map) {
         CriteriaQuery cq = new CriteriaQuery(TMcTeleEntity.class, dataGrid);
         //查询条件组装器
-        String status = tMcTele.getMarketingStatus();
-        try {
-            status = new String(status.getBytes("iso8859-1"), "utf-8");
-            tMcTele.setMarketingStatus(status);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
         try {
             //自定义追加查询条件
@@ -547,7 +540,7 @@ public class TMcTeleController extends BaseController {
                         } else {
                             entity1.setBpmStatus("10");
                         }
-
+                        entity1.setCustomerService(StringUtils.trim(entity1.getCustomerService()));
                         tMcTeleService.addMain(entity1, page.getTMcTeleSubList());
                     } else {
                         count++;

@@ -237,7 +237,8 @@ public class TMcTeleController2 extends BaseController {
         String message = "更新成功";
         try {
             String feedback = tMcTele.getFeedback();
-            if(StringUtils.isNotBlank(feedback)){
+            String feedbackStatus = tMcTele.getFeedbackStatus();
+            if(StringUtils.isNotBlank(feedback)||StringUtils.isNotBlank(feedbackStatus)){
                 tMcTele.setBpmStatus("15");
             }
             tMcTeleService.saveOrUpdate(tMcTele);
@@ -316,13 +317,6 @@ public class TMcTeleController2 extends BaseController {
     public String exportXls(TMcTeleEntity tMcTele, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid, ModelMap map) {
         CriteriaQuery cq = new CriteriaQuery(TMcTeleEntity.class, dataGrid);
         //查询条件组装器
-        String status = tMcTele.getMarketingStatus();
-        try {
-            status = new String(status.getBytes("iso8859-1"), "utf-8");
-            tMcTele.setMarketingStatus(status);
-        } catch (UnsupportedEncodingException e) {
-            logger.warn("",e);
-        }
         TSUser u = ResourceUtil.getSessionUserName();
         tMcTele.setTelManager(u.getRealName());
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, tMcTele);
