@@ -13,7 +13,9 @@
   function uploadFile(data){
       if($(".uploadify-queue-item").length>0){
           upload();
-      }
+      }else{
+          frameElement.api.close();
+	  }
   }
   </script>
  </head>

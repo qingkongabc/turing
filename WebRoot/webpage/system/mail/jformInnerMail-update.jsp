@@ -117,7 +117,7 @@ String style = sysTheme.getStyle();
 				function(r) {
 		  			self.location="jformInnerMailController.do?goAddOrUpdate";},
 		  		function(r){
-		  			var style="<%=style%>";	
+		  			var style="<%=style%>";
 		  			if(style=="ace"||style=="acele"){
 		  				try{
 		  					window.top.closeTab("tab_${clickFunctionId }");
