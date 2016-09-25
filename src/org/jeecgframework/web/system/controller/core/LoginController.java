@@ -120,7 +120,7 @@ public class LoginController extends BaseController{
         }
 		// update-end--Author:ken  Date:20140629 for：添加语言选择
 //        update-begin--Author:zhangguoming  Date:20140226 for：添加验证码
-        /*String randCode = req.getParameter("randCode");
+        String randCode = req.getParameter("randCode");
         if (StringUtils.isEmpty(randCode)) {
             j.setMsg(mutiLangService.getLang("common.enter.verifycode"));
             j.setSuccess(false);
@@ -128,7 +128,7 @@ public class LoginController extends BaseController{
             // todo "randCode"和验证码servlet中该变量一样，通过统一的系统常量配置比较好，暂时不知道系统常量放在什么地方合适
             j.setMsg(mutiLangService.getLang("common.verifycode.error"));
             j.setSuccess(false);
-        } else {*/
+        } else {
 //            update-end--Author:zhangguoming  Date:20140226 for：添加验证码
             int users = userService.getList(TSUser.class).size();
             
@@ -181,7 +181,7 @@ public class LoginController extends BaseController{
                 }
             }
 //            update-begin--Author:zhangguoming  Date:20140226 for：添加验证码
-        //}
+        }
 //        update-end--Author:zhangguoming  Date:20140226 for：添加验证码
 		return j;
 	}
