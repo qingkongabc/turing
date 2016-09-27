@@ -41,8 +41,9 @@
    <t:dgCol title="创建日期" field="createDate" formatter="yyyy-MM-dd hh:mm:ss" query="true" queryMode="group"
             width="120"></t:dgCol>
    <t:dgCol title="操作" field="opt" width="100" style="text-align:center"></t:dgCol>
-   <t:dgFunOpt title="编辑" funname="editoperation(id)" operationCode="update" exp="bpmStatus#eq#1"/>
-   <%--<t:dgDelOpt title="删除" url="tMcCustomResourceController.do?doDel&id={id}" />
+   <t:dgFunOpt title="编辑" funname="editoperation(id)" operationCode="update"/>
+   <%--<t:dgFunOpt title="编辑" funname="editoperation(id)" operationCode="update" exp="bpmStatus#eq#1"/>
+   <t:dgDelOpt title="删除" url="tMcCustomResourceController.do?doDel&id={id}" />
    <t:dgToolBar title="录入" icon="icon-add" url="tMcCustomResourceController.do?goAdd" funname="add" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="tMcCustomResourceController.do?goUpdate" funname="update" operationCode="update" width="100%" height="100%"></t:dgToolBar>--%>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="tMcCustomResourceController.do?doBatchDel" funname="deleteALLSelect" operationCode="deleteALLSelect"></t:dgToolBar>

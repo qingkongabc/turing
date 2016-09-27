@@ -237,6 +237,23 @@ $(document).ready(function(){
 							type="text" class="inputxt">${poVal.feedback}</textarea>
 				</td>
 			</tr>
+			<tr>
+				<td align="right">
+					<label class="Validform_label"> 附件
+					</label>
+				</td>
+				<td>
+					<table>
+						<tr style="height: 34px;">
+							<c:forEach items="${documents}" var="vdocument">
+								<td>
+									<a href="commonController.do?viewFile&fileid=${vdocument.id}&subclassname=org.jeecgframework.web.system.pojo.base.JformInnerMailAttach" title="下载">${vdocument.attachmenttitle}.${vdocument.extend}</a>
+								</td>
+							</c:forEach>
+						</tr>
+					</table>
+				</td>
+			</tr>
 		</c:forEach>
 	</c:if>	
 	</tbody>
