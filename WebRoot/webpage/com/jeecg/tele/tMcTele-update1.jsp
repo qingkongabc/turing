@@ -221,6 +221,15 @@
         </tr>
         <tr>
             <td align="right">
+                <label class="Validform_label">落地状态:</label>
+            </td>
+            <td class="value">
+                <t:dictSelect field="signStatus" type="radio"
+                              typeGroupCode="sg_status" defaultVal="${tMcTelePage.signStatus}" hasLabel="false"></t:dictSelect>
+                <span class="Validform_checktip"></span>
+                <label class="Validform_label" style="display: none;">落地状态</label>
+            </td>
+            <td align="right">
                 <label class="Validform_label">反馈状态:</label>
             </td>
             <td class="value" colspan="5">

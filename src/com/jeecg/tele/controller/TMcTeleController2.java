@@ -390,6 +390,7 @@ public class TMcTeleController2 extends BaseController {
                 List<TMcTelePage> list = ExcelImportUtil.importExcel(file.getInputStream(), TMcTelePage.class, params);
                 TMcTeleEntity entity1 = null;
                 int count = 0;
+                String repeatContract = "以下联系方式重复:<br/>";
                 for (TMcTelePage page : list) {
                     entity1 = new TMcTeleEntity();
                     MyBeanUtils.copyBeanNotNull2Bean(page, entity1);
@@ -402,14 +403,21 @@ public class TMcTeleController2 extends BaseController {
                         } else {
                             entity1.setBpmStatus("10");
                         }
-
+                        entity1.setCustomerService(StringUtils.trim(entity1.getCustomerService()));
                         tMcTeleService.addMain(entity1, page.getTMcTeleSubList());
                     } else {
                         count++;
+                        repeatContract+=contract+",";
+                        if(count%3==0){
+                            repeatContract+="<br/>";
+                        }
                     }
                 }
                 if (list.size() != count) {
                     j.setMsg("文件导入成功,有" + count + "条记录重复!");
+                    if(count!=0){
+                        j.setObj(repeatContract.substring(0,repeatContract.length()-1));
+                    }
                 } else {
                     j.setMsg("文件导入失败,记录全部重复!");
                 }

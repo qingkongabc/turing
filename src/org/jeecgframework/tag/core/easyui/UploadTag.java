@@ -187,7 +187,9 @@ public class UploadTag extends TagSupport {
 				}
 				sb.append("if(d.success){");
 				sb.append("var win = frameElement.api.opener;");
-//				sb.append("win.tip(d.msg);");
+				if (uploader.startsWith("tMcTeleController")){
+					sb.append("if (d.obj){win.alertTip(d.obj)};");
+				}
 				sb.append("serverMsg = d.msg;");
 				sb.append("}");
 				sb.append("},");

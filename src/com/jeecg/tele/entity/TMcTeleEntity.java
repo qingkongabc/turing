@@ -144,6 +144,8 @@ public class TMcTeleEntity implements java.io.Serializable {
     private java.lang.String product;
     @Excel(name = "备注")
     private java.lang.String remark;
+    @Excel(name = "落地状态")
+    private java.lang.String signStatus;
     @Excel(name = "反馈状态")
     private java.lang.String feedbackStatus;
     @Excel(name = "反馈信息")
@@ -220,6 +222,15 @@ public class TMcTeleEntity implements java.io.Serializable {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+    @Column(name = "SIGN_STATUS", nullable = true, length = 32)
+    public String getSignStatus() {
+        return signStatus;
+    }
+
+    public void setSignStatus(String signStatus) {
+        this.signStatus = signStatus;
     }
 
     @Column(name = "FEEDBACK_STATUS", nullable = true, length = 100)
