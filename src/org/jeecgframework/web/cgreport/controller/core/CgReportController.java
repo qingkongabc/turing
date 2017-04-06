@@ -277,10 +277,10 @@ public class CgReportController extends BaseController {
 			String dis_date_end = request.getParameter("dis_date_end");
 			String sql = "";
 			if(StringUtils.isNotBlank(dis_date_begin)){
-				sql += " and date_format(dis_date,'%Y-%m-%d')>='"+dis_date_begin+"' ";
+				sql += " and date_format(tele_sub.create_date,'%Y-%m-%d')>='"+dis_date_begin+"' ";
 			}
 			if(StringUtils.isNotBlank(dis_date_end)){
-				sql += " and date_format(dis_date,'%Y-%m-%d')<='"+dis_date_end+"' ";
+				sql += " and date_format(tele_sub.create_date,'%Y-%m-%d')<='"+dis_date_end+"' ";
 			}
 			querySql = querySql.replace("${dis_date}", sql);
 		}

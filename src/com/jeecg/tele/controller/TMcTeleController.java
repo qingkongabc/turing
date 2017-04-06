@@ -314,6 +314,8 @@ public class TMcTeleController extends BaseController {
                 tMcTele.setMarketingStatus(null);
             }
 
+            boolean needAddUpdateTime = true;
+
             String marketingStatus = tMcTeleSubList.get(1).getMarketingStatus();
             String produceService = tMcTeleSubList.get(1).getProduceService();
             String business = tMcTeleSubList.get(1).getBusiness();
@@ -329,6 +331,8 @@ public class TMcTeleController extends BaseController {
                     StringUtils.isBlank(interestStatus) && StringUtils.isBlank(remark)){
                 tMcTeleSubList.remove(1);
             }else{
+                //新增的时候设置更新时间
+                needAddUpdateTime = false;
                 tMcTeleSubList.get(1).setUpdateDate(new Date());
                 tMcTeleSubList.get(1).setUpdateName(ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_NAME));
             }
@@ -348,8 +352,10 @@ public class TMcTeleController extends BaseController {
                     StringUtils.isBlank(interestStatus) && StringUtils.isBlank(remark)){
                 tMcTeleSubList.remove(0);
             }else{
-                tMcTeleSubList.get(0).setUpdateDate(new Date());
-                tMcTeleSubList.get(0).setUpdateName(ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_NAME));
+                if (needAddUpdateTime){
+                    tMcTeleSubList.get(0).setUpdateDate(new Date());
+                    tMcTeleSubList.get(0).setUpdateName(ResourceUtil.getUserSystemData(DataBaseConstant.SYS_USER_NAME));
+                }
             }
 
             if(tMcTeleSubList.size()>0){
@@ -552,12 +558,9 @@ public class TMcTeleController extends BaseController {
                     }
                 }
                 if (list.size() != count) {
-                    j.setMsg("文件导入成功,有" + count + "条记录重复!");
-                    if(count!=0){
-                        j.setObj(repeatContract.substring(0,repeatContract.length()-1));
-                    }
+                    j.setMsg("文件导入成功,有" + count + "条记录重复,已覆盖!");
                 } else {
-                    j.setMsg("文件导入失败,记录全部重复!");
+                    j.setMsg("文件导入成功,记录全部重复，已覆盖!");
                 }
             } catch (Exception e) {
                 j.setMsg("文件导入失败！");
