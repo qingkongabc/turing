@@ -374,6 +374,9 @@ public class TMcTeleController extends BaseController {
                     tMcTele.setDisDate(new Date());
                 }else{
                     int flag = beanComparator.compare(tMcTeleSubOldList.get(0),tMcTeleSubList.get(0));
+                    if(flag>0){
+                        tMcTeleSubList.get(1).setUpdateDate(null);
+                    }
                     flag += beanComparator.compare(tMcTeleSubOldList.get(1),tMcTeleSubList.get(1));
                     if(flag>0){
                         tMcTele.setDisDate(new Date());
@@ -569,7 +572,7 @@ public class TMcTeleController extends BaseController {
                 try {
                     file.getInputStream().close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("关闭异常！",e);
                 }
             }
         }
