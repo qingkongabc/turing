@@ -369,6 +369,8 @@ public class TMcTeleController extends BaseController {
                     int flag = beanComparator.compare(tMcTeleSubOldList.get(0),tMcTeleSubList.get(0));
                     if(flag==1){
                         tMcTele.setDisDate(new Date());
+                    }else{
+                        tMcTeleSubList.get(0).setUpdateDate(null);
                     }
                 }else if(tMcTeleSubOldList.size()==1 && tMcTeleSubList.size()==2){
                     tMcTele.setDisDate(new Date());
@@ -380,6 +382,9 @@ public class TMcTeleController extends BaseController {
                     flag += beanComparator.compare(tMcTeleSubOldList.get(1),tMcTeleSubList.get(1));
                     if(flag>0){
                         tMcTele.setDisDate(new Date());
+                    }else{
+                        //如果补录没有更新，则清空更新时间
+                        tMcTeleSubList.get(1).setUpdateDate(null);
                     }
                 }
             }
@@ -537,7 +542,6 @@ public class TMcTeleController extends BaseController {
                 List<TMcTelePage> list = ExcelImportUtil.importExcel(file.getInputStream(), TMcTelePage.class, params);
                 TMcTeleEntity entity1 = null;
                 int count = 0;
-                String repeatContract = "以下联系方式重复:<br/>";
                 for (TMcTelePage page : list) {
                     entity1 = new TMcTeleEntity();
                     MyBeanUtils.copyBeanNotNull2Bean(page, entity1);
@@ -554,16 +558,12 @@ public class TMcTeleController extends BaseController {
                         tMcTeleService.addMain(entity1, page.getTMcTeleSubList());
                     } else {
                         count++;
-                        repeatContract+=contract+",";
-                        if(count%3==0){
-                            repeatContract+="<br/>";
-                        }
                     }
                 }
                 if (list.size() != count) {
-                    j.setMsg("文件导入成功,有" + count + "条记录重复,已覆盖!");
+                    j.setMsg("文件导入成功,有" + count + "条记录重复!");
                 } else {
-                    j.setMsg("文件导入成功,记录全部重复，已覆盖!");
+                    j.setMsg("文件导入失败,记录全部重复!");
                 }
             } catch (Exception e) {
                 j.setMsg("文件导入失败！");
